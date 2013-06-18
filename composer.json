@@ -1,0 +1,34 @@
+{
+	"name": "orchestra/story",
+	"description": "CMS Extension for Orchestra Platform 2",
+	"license": "MIT",
+	"keywords": ["orchestra-platform", "orchestral", "laravel", "cms"],
+	"authors": [
+		{
+			"name": "Mior Muhammad Zaki",
+			"email": "crynobone@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-0": { 
+			"Orchestra\\Story" : "src/" 
+		},
+		"classmap": [
+			"src/controllers",
+			"src/services"
+		]
+	},
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"require-dev": {
+		"mockery/mockery": "0.8.0",
+		"orchestra/support": "2.0.*"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.0.x-dev"
+		}
+	},
+	"minimum-stability": "dev"
+}
