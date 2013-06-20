@@ -9,7 +9,13 @@ class StoryServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function register() {}
+	public function register() 
+	{
+		$this->app['orchestra.story'] = $this->app->share(function ($app)
+		{
+			return new Storyteller($this->app);
+		});
+	}
 
 	/**
 	 * Boot the service provider
@@ -19,5 +25,7 @@ class StoryServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('orchestra/story', 'orchestra/story');
+
+		include __DIR__.'/../../routes.php';
 	}
 }

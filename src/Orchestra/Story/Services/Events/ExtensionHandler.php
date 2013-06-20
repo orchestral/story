@@ -21,9 +21,13 @@ class ExtensionHandler {
 			{
 				$fieldset->control('select', 'default_page', function ($control)
 				{
+					$pages = array('_posts_' => 'Display Posts') + Content::page()->publish()->lists('title', 'slug');
 					$control->label('Default Page');
-					$control->options(Content::page()->publish()->lists('title', 'id'));
+					$control->options($pages);
 				});
+
+				$fieldset->control('text', 'Page Permalink', 'page_permalink');
+				$fieldset->control('text', 'Post Permalink', 'post_permalink');
 			});
 		});
 	}

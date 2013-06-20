@@ -28,7 +28,17 @@ class Content extends Eloquent {
 	 * Available type.
 	 */
 	const POST = 'post';
-	const PAGE = 'page'; 
+	const PAGE = 'page';
+
+	/**
+	 * Get the attributes that should be converted to dates.
+	 *
+	 * @return array
+	 */
+	public function getDates()
+	{
+		return array(static::CREATED_AT, static::UPDATED_AT, static::DELETED_AT, 'published_at');
+	} 
 
 	/**
 	 * Query scope for pages.
@@ -61,5 +71,18 @@ class Content extends Eloquent {
 	public function scopePublish($query)
 	{
 		$query->where('status', '=', self::STATUS_PUBLISH);
+	}
+
+	/**
+	 * Query scope for published.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function scopeLatest($query, $take)
+	{
+		if (is_int($take) and $take > 0) $query->take($take);
+
+		//$query->orderBy('published_at', 'DESC');
 	}
 }
