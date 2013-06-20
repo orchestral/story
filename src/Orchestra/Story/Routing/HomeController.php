@@ -13,7 +13,7 @@ class HomeController extends Controller {
 	 * @access public
 	 * @return Response
 	 */
-	public function getIndex()
+	public function index()
 	{
 		$page = Extension::option('orchestra/story', 'default_page', '_posts_');
 

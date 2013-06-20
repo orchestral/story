@@ -10,7 +10,7 @@
 				<i class="icon-calendar"></i><?php echo $post->published_at->format('M d, Y'); ?>
 			</span>&nbsp;
 			<strong>
-				<a href="#"><?php echo $post['title']; ?></a>
+				<a href="<?php echo $post->link; ?>"><?php echo $post->title; ?></a>
 			</strong>
 		</li>
 	@endforeach

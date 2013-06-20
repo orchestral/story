@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\Facades\Config;
 
 class Content extends Eloquent {
 
@@ -83,6 +84,26 @@ class Content extends Eloquent {
 	{
 		if (is_int($take) and $take > 0) $query->take($take);
 
-		//$query->orderBy('published_at', 'DESC');
+		$query->orderBy('published_at', 'DESC');
+	}
+
+	/**
+	 * Accessor for link.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function getLinkAttribute($value)
+	{
+		$id   = $this->attributes['id'];
+		$slug = $this->attributes['slug'];
+		$type = $this->attributes['type'];
+
+		if ($permalink = Config::get("orchestra/story::permalink.{$type}", false))
+		{
+			$string  = array('{id}', '{slug}');
+			$replace = array($id, $slug); 
+			return handles(str_replace($string, $replace, "orchestra/story::{$permalink}"));
+		}
 	}
 }

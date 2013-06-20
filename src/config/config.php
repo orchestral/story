@@ -9,14 +9,11 @@ return array(
 		|------------------------------------------------------------------
 		|
 		| Define Page URI references to (:handle).
-		| - :slug
-		| - :id
-		| - :year
-		| - :month
-		| - :date
+		| - {slug}
+		| - {id}
 		|
 		*/
-		'page' => ':slug',
+		'page' => '{slug}',
 
 		/*
 		|------------------------------------------------------------------
@@ -24,14 +21,11 @@ return array(
 		|------------------------------------------------------------------
 		|
 		| Define Post permalink format:
-		| - :slug
-		| - :id
-		| - :year
-		| - :month
-		| - :date
+		| - {slug}
+		| - {id}
 		|
 		*/
 
-		'post' => 'posts/:slug',
+		'post' => 'posts/{slug}',
 	),
 );
