@@ -6,20 +6,18 @@
 	"authors": [
 		{
 			"name": "Mior Muhammad Zaki",
-			"email": "crynobone@gmail.com"
+			"email": "crynobone@gmail.com",
+			"homepage": "https://github.com/crynobone"
 		}
 	],
 	"autoload": {
 		"psr-0": { 
 			"Orchestra\\Story" : "src/" 
-		},
-		"classmap": [
-			"src/controllers",
-			"src/services"
-		]
+		}
 	},
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"daylerees/kurenai": "v1.0.0"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
