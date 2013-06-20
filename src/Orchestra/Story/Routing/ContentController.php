@@ -21,7 +21,27 @@ abstract class ContentController extends Controller {
 		return $this->getResponse($page, $id, $slug);
 	}
 
+	/**
+	 * Return the response, this method allow each content type to be group 
+	 * via different set of view.
+	 *
+	 * @abstract
+	 * @access protected
+	 * @param  \Orchestra\Story\Model\Content   $page
+	 * @param  integer                          $id
+	 * @param  string                           $slug
+	 * @return Response
+	 */
 	protected abstract function getResponse($page, $id, $slug);
 
+	/**
+	 * Get the requested page/content from Model.
+	 *
+	 * @abstract
+	 * @access protected
+	 * @param  integer  $id
+	 * @param  string   $slug
+	 * @return \Orchestra\Story\Model\Content
+	 */
 	protected abstract function getRequestedContent($id, $slug);
 }

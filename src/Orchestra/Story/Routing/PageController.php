@@ -5,6 +5,16 @@ use Orchestra\Story\Model\Content;
 
 class PageController extends ContentController {
 
+	/**
+	 * Return the response, this method allow each content type to be group 
+	 * via different set of view.
+	 *
+	 * @access protected
+	 * @param  \Orchestra\Story\Model\Content   $page
+	 * @param  integer                          $id
+	 * @param  string                           $slug
+	 * @return Response
+	 */
 	protected function getResponse($page, $id, $slug)
 	{
 		if ( ! View::exists($view = "orchestra/story::pages.{$slug}"))
@@ -15,6 +25,14 @@ class PageController extends ContentController {
 		return View::make($view, compact('page'));
 	}
 
+	/**
+	 * Get the requested page/content from Model.
+	 *
+	 * @access protected
+	 * @param  integer  $id
+	 * @param  string   $slug
+	 * @return \Orchestra\Story\Model\Content
+	 */
 	protected function getRequestedContent($id, $slug)
 	{
 		switch (true)
