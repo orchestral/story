@@ -8,6 +8,8 @@ use Orchestra\Support\Facades\Config;
 Acl::make('orchestra/story')->attach(App::memory());
 
 Config::map('orchestra/story', array(
+	'default_page'   => 'orchestra/story::default_page',
+	'per_page'       => 'orchestra/story::per_page',
 	'page_permalink' => 'orchestra/story::permalink.page',
 	'post_permalink' => 'orchestra/story::permalink.post',
 ));

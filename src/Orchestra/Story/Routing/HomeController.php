@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Story\Routing;
 
 use Illuminate\Routing\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
-use Orchestra\Support\Facades\Extension;
 use Orchestra\Story\Model\Content;
 
 class HomeController extends Controller {
@@ -15,7 +15,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$page = Extension::option('orchestra/story', 'default_page', '_posts_');
+		$page = Config::get('orchestra/story::default_page', '_posts_');
 
 		if ($page === '_posts_') return $this->showPosts();
 
@@ -25,10 +25,10 @@ class HomeController extends Controller {
 	/**
 	 * Show posts.
 	 *
-	 * @access protected
+	 * @access public
 	 * @return Response
 	 */
-	protected function showPosts()
+	public function showPosts()
 	{
 		$posts = Content::post()->publish()->paginate(10);
 
@@ -39,13 +39,18 @@ class HomeController extends Controller {
 	 * Show default page.
 	 * 
 	 * @access protected
-	 * @param  string   $page
+	 * @param  string   $slug
 	 * @return Response
 	 */
-	protected function showDefaultPage($page)
+	protected function showDefaultPage($slug)
 	{
-		$page = Content::page()->publish()->where('slug', '=', $page)->firstOrFail();
+		$page = Content::page()->publish()->where('slug', '=', $slug)->firstOrFail();
+		
+		if ( ! View::exists($view = "orchestra/story::pages.{$slug}"))
+		{
+			$view = 'orchestra/story::page';
+		}
 
-		return View::make('orchestra/story::pages', compact('page'));
+		return View::make($view, compact('page'));
 	}
 }

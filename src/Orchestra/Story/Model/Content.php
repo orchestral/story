@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Config;
+use dflydev\markdown\MarkdownExtraParser;
 
 class Content extends Eloquent {
 
@@ -85,6 +86,36 @@ class Content extends Eloquent {
 		if (is_int($take) and $take > 0) $query->take($take);
 
 		$query->orderBy('published_at', 'DESC');
+	}
+	
+	/**
+	 * Accessor for raw content.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function getRawContentAttribute($value)
+	{
+		return $this->attributes['content'];
+	}
+
+	/**
+	 * Accessor for content.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function getContentAttribute($value)
+	{
+		$markdown = new MarkdownExtraParser;
+
+		switch ($this->attributes['format'])
+		{
+			case 'markdown' :
+				return $markdown->transformMarkdown($value);
+			default :
+				return $value;
+		}
 	}
 
 	/**
