@@ -16,3 +16,9 @@ Config::map('orchestra/story', array(
 
 Event::listen('orchestra.ready: admin', 'Orchestra\Story\Services\Events\DashboardHandler@onDashboardView');
 Event::listen('orchestra.form: extension.orchestra/story', 'Orchestra\Story\Services\Events\ExtensionHandler@onFormView');
+Event::listen('orchestra.validate: extension.orchestra/story', function (& $rules)
+{
+	$rules['page_permalink'] = array('required');
+});
+
+include __DIR__.'/routes.php';

@@ -9,13 +9,11 @@ Route::group(array('prefix' => App::route('orchestra/story', 'cms')), function (
 	$post = Config::get('orchestra/story::permalink.post');
 
 	Route::get($post, 'Orchestra\Story\Routing\PostController@show')
-		->where('{id}', '[0-9]+')
 		->where('{slug}', '(^[posts|rss])');
 
 	Route::get('posts', 'Orchestra\Story\Routing\HomeController@showPosts');
-	
+
 	Route::get($page, 'Orchestra\Story\Routing\PageController@show')
-		->where('{id}', '[0-9]+')
 		->where('{slug}', '(^[posts|rss])');
 
 	Route::get('/', 'Orchestra\Story\Routing\HomeController@index');
