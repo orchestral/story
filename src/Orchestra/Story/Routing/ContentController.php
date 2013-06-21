@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Controllers\Controller;
 use Orchestra\Support\Facades\App;
+use Orchestra\Support\Facades\Site;
 
 abstract class ContentController extends Controller {
 	
@@ -17,6 +18,8 @@ abstract class ContentController extends Controller {
 		$id     = isset($params['id']) ? $params['id'] : null;
 		$slug   = isset($params['slug']) ? $params['slug'] : null;
 		$page   = $this->getRequestedContent($id, $slug);
+
+		Site::set('title', $page->title);
 
 		return $this->getResponse($page, $id, $slug);
 	}
