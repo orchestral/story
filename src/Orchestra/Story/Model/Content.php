@@ -34,13 +34,18 @@ class Content extends Eloquent {
 	const PAGE = 'page';
 
 	/**
+	 * Dates constant.
+	 */
+	const PUBLISHED_AT = 'published_at';
+
+	/**
 	 * Get the attributes that should be converted to dates.
 	 *
 	 * @return array
 	 */
 	public function getDates()
 	{
-		return array(static::CREATED_AT, static::UPDATED_AT, static::DELETED_AT, 'published_at');
+		return array(static::CREATED_AT, static::UPDATED_AT, static::DELETED_AT, static::PUBLISHED_AT);
 	} 
 
 	/**
@@ -86,7 +91,7 @@ class Content extends Eloquent {
 	{
 		if (is_int($take) and $take > 0) $query->take($take);
 
-		$query->orderBy('published_at', 'DESC');
+		$query->orderBy(static::PUBLISHED_AT, 'DESC');
 	}
 	
 	/**
