@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Facades\Config;
+use Orchestra\Story\Facades\Story;
 use dflydev\markdown\MarkdownExtraParser;
 
 class Content extends Eloquent {
@@ -126,15 +127,8 @@ class Content extends Eloquent {
 	 */
 	public function getLinkAttribute($value)
 	{
-		$id   = $this->attributes['id'];
-		$slug = $this->attributes['slug'];
 		$type = $this->attributes['type'];
-
-		if ($permalink = Config::get("orchestra/story::permalink.{$type}", false))
-		{
-			$string  = array('{id}', '{slug}');
-			$replace = array($id, $slug); 
-			return handles(str_replace($string, $replace, "orchestra/story::{$permalink}"));
-		}
+		
+		return Story::content($type, $this);
 	}
 }
