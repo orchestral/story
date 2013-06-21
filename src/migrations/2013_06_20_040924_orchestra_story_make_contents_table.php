@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Model\Content;
 
 class OrchestraStoryMakeContentsTable extends Migration {
@@ -12,14 +13,16 @@ class OrchestraStoryMakeContentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('story_contents', function ($table)
+		$format = Config::get('orchestra/story::format', 'markdown');
+
+		Schema::create('story_contents', function ($table) use ($format)
 		{
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 			$table->string('slug');
 			$table->string('title');
 			$table->text('content');
-			$table->string('format')->default(Content::FORMAT_MARKDOWN);
+			$table->string('format')->default($format);
 			$table->string('type')->default(Content::POST);
 			$table->string('status')->default(Content::STATUS_DRAFT);
 

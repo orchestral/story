@@ -11,9 +11,33 @@ class StoryServiceProvider extends ServiceProvider {
 	 */
 	public function register() 
 	{
+		$this->registerStoryTeller();
+		$this->registerFormatManager();
+	}
+
+	/**
+	 * Register service provider.
+	 *
+	 * @return void
+	 */
+	protected function registerStoryTeller()
+	{
 		$this->app['orchestra.story'] = $this->app->share(function ($app)
 		{
 			return new Storyteller($this->app);
+		});
+	}
+
+	/**
+	 * Register service provider.
+	 *
+	 * @return void
+	 */
+	protected function registerFormatManager()
+	{
+		$this->app['orchestra.story.format'] = $this->app->share(function ($app)
+		{
+			return new FormatManager($this->app);
 		});
 	}
 

@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Story\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\Story;
-use dflydev\markdown\MarkdownExtraParser;
 
 class Content extends Eloquent {
 
@@ -13,12 +13,6 @@ class Content extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'story_contents';
-
-	/**
-	 * Available format type.
-	 */
-	const FORMAT_MARKDOWN = 'markdown';
-	const FORMAT_HTML = 'html';
 
 	/**
 	 * Available status type.
@@ -113,15 +107,10 @@ class Content extends Eloquent {
 	 */
 	public function getContentAttribute($value)
 	{
-		$markdown = new MarkdownExtraParser;
+		$format = $this->attributes['format'];
 
-		switch ($this->attributes['format'])
-		{
-			case 'markdown' :
-				return $markdown->transformMarkdown($value);
-			default :
-				return $value;
-		}
+		return App::make('orchestra.story.format')
+				->driver($format)->parse($value);
 	}
 
 	/**
