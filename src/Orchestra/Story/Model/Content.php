@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Story\Model;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\Story;
+use Orchestra\Story\Facades\StoryFormat;
 
 class Content extends Eloquent {
 
@@ -109,8 +109,7 @@ class Content extends Eloquent {
 	{
 		$format = $this->attributes['format'];
 
-		return App::make('orchestra.story.format')
-				->driver($format)->parse($value);
+		return StoryFormat::driver($format)->parse($value);
 	}
 
 	/**
