@@ -10,6 +10,7 @@ use Orchestra\Support\Facades\Widget;
 Acl::make('orchestra/story')->attach(App::memory());
 
 Config::map('orchestra/story', array(
+	'default_format' => 'orchestra/story::default_format',
 	'default_page'   => 'orchestra/story::default_page',
 	'per_page'       => 'orchestra/story::per_page',
 	'page_permalink' => 'orchestra/story::permalink.page',
