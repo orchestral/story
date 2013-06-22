@@ -30,7 +30,7 @@ class HomeController extends Controller {
 	 */
 	public function showPosts()
 	{
-		$posts = Content::post()->publish()->paginate(10);
+		$posts = Content::post()->publish()->paginate(Config::get('orchestra/story::per_page', 10));
 
 		return View::make('orchestra/story::posts', compact('posts'));
 	}
