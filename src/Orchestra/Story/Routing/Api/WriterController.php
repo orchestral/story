@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\Site;
 
 class WriterController extends EditorController {
 
@@ -34,6 +35,7 @@ class WriterController extends EditorController {
 	 */
 	public function getIndex()
 	{
+		Site::set('title', 'Write a Post');
 		return View::make('orchestra/story::api.editor');
 	}
 }
