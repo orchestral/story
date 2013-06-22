@@ -26,6 +26,12 @@ class WriterController extends EditorController {
 		});
 	}
 
+	/**
+	 * Write a post page.
+	 *
+	 * @access public
+	 * @return Response
+	 */
 	public function getIndex()
 	{
 		return View::make('orchestra/story::api.editor');
