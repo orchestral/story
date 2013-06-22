@@ -11,6 +11,9 @@
 		}
 	],
 	"autoload": {
+		"classmap": [
+			"src/migrations"
+		],
 		"psr-0": { 
 			"Orchestra\\Story" : "src/" 
 		}
