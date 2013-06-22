@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Support\Facades\App;
+use Orchestra\Support\Facades\Resources;
 
 Route::group(array('prefix' => App::route('orchestra/story', 'cms')), function ()
 {
@@ -17,4 +19,16 @@ Route::group(array('prefix' => App::route('orchestra/story', 'cms')), function (
 		->where('{slug}', '(^[posts|rss])');
 
 	Route::get('/', 'Orchestra\Story\Routing\HomeController@index');
+});
+
+Event::listen('orchestra.started: admin', function ()
+{
+	$story = Resources::make('storycms', array(
+		'name' => 'Story CMS',
+		'uses' => 'restful:Orchestra\Story\Routing\Api\WriterController',
+		'visible' => true,
+	));
+
+	$story['posts'] = 'resource:Orchestra\Story\Routing\Api\PostsController';
+	$story['pages'] = 'resource:Orchestra\Story\Routing\Api\PagesController';
 });
