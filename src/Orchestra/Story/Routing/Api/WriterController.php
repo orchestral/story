@@ -19,6 +19,7 @@ class WriterController extends Controller {
 		$format = StoryFormat::get(Input::get('format'));
 
 		$this->beforeFilter("orchestra.story.editor:{$format}");
+		View::share('story_format', $format);
 	}
 
 	public function getIndex()

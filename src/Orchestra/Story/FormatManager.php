@@ -69,7 +69,7 @@ class FormatManager extends Manager {
 	 */
 	public function get($name)
 	{
-		if (in_array($name, $this->getParsers())) return $name;
+		if (array_key_exists($name, $this->getParsers())) return $name;
 
 		return $this->getDefaultDriver();
 	}
