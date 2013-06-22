@@ -1,12 +1,9 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
-use Illuminate\Routing\Controllers\Controller;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
-use Orchestra\Story\Facades\StoryFormat;
+use Orchestra\Support\Facades\Acl;
 
-class WriterController extends Controller {
+class WriterController extends EditorController {
 
 	/**
 	 * Define filter for the controller.
@@ -16,10 +13,17 @@ class WriterController extends Controller {
 	 */
 	public function __construct()
 	{
-		$format = StoryFormat::get(Input::get('format'));
+		parent::__construct();
 
-		$this->beforeFilter("orchestra.story.editor:{$format}");
-		View::share('story_format', $format);
+		$acl = Acl::make('orchestra/story');
+
+		$this->beforeFilter(function () use ($acl)
+		{
+			if ( ! ($acl->can('create post') or $acl->can('manage post')))
+			{
+				return resources('/');
+			}
+		});
 	}
 
 	public function getIndex()
