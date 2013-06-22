@@ -6,8 +6,5 @@ use Orchestra\Story\Facades\StoryFormat;
 
 Route::filter('orchestra.story.editor', function ($request, $route, $format = '')
 {
-	if (in_array($format, StoryFormat::getParsers()))
-	{
-		Event::fire("orchestra.story.editor: {$format}");
-	}
+	Event::fire("orchestra.story.editor: {$format}");
 });

@@ -61,6 +61,20 @@ class FormatManager extends Manager {
 	}
 
 	/**
+	 * Get available parser, or use the default.
+	 *
+	 * @access public
+	 * @param  string   $name
+	 * @return string
+	 */
+	public function get($name)
+	{
+		if (in_array($name, $this->getParsers())) return $name;
+
+		return $this->getDefaultDriver();
+	}
+
+	/**
 	 * Create Default driver.
 	 * 
 	 * @access protected
