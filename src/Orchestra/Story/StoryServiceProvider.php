@@ -24,7 +24,7 @@ class StoryServiceProvider extends ServiceProvider {
 	{
 		$this->app['orchestra.story'] = $this->app->share(function ($app)
 		{
-			return new Storyteller($this->app);
+			return new Storyteller($app);
 		});
 	}
 
@@ -37,7 +37,7 @@ class StoryServiceProvider extends ServiceProvider {
 	{
 		$this->app['orchestra.story.format'] = $this->app->share(function ($app)
 		{
-			return new FormatManager($this->app);
+			return new FormatManager($app);
 		});
 	}
 
