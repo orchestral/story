@@ -13,7 +13,7 @@ class OrchestraStoryMakeContentsTable extends Migration {
 	 */
 	public function up()
 	{
-		$format = Config::get('orchestra/story::format', 'markdown');
+		$format = Config::get('orchestra/story::config.default_format', 'markdown');
 
 		Schema::create('story_contents', function ($table) use ($format)
 		{
