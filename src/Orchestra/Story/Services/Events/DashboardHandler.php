@@ -18,7 +18,11 @@ class DashboardHandler {
 
 		$posts = Content::post()->publish()->latest(10)->get();
 
+		if ($posts->isEmpty()) return;
+
 		$pane->add('story-latest-posts')
-			->html('foo'); //View::make('orchestra/story::widgets.latest-posts')->with('posts', $posts));
+			->attributes(array('class' => 'col col-lg-6 widget'))
+			->title('Latest Post')
+			->content(View::make('orchestra/story::widgets.latest-posts')->with('posts', $posts));
 	}
 }
