@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Acl;
 use Orchestra\Support\Facades\Site;
@@ -22,7 +23,7 @@ class WriterController extends EditorController {
 		{
 			if ( ! ($acl->can('create post') or $acl->can('manage post')))
 			{
-				return resources('/');
+				return Redirect::to(resources('/'));
 			}
 		});
 	}
