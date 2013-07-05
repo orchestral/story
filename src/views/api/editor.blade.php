@@ -2,14 +2,14 @@
 	<div class="row">
 		<label class="col-lg-2 control-label" for="title">Title</label>
 		<div class="col-lg-10">
-			<?php echo Form::text('title', Input::old('title')); ?>
+			<?php echo Form::text('title', Input::old('title'), array('id' => 'title')); ?>
 		</div>
 	</div>
 
 	<div class="row">
 		<label class="col-lg-2 control-label" for="slug">Slug</label>
 		<div class="col-lg-10">
-			<?php echo Form::text('slug', Input::old('slug')); ?>
+			<?php echo Form::text('slug', Input::old('slug'), array('role' => 'slug-editor')); ?>
 		</div>
 	</div>
 

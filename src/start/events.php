@@ -23,5 +23,6 @@ Event::listen('orchestra.story.editor: markdown', function ()
 	$asset = Asset::container('orchestra/foundation::footer');
 	$asset->script('editor', 'packages/orchestra/story/vendor/editor/editor.js');
 	$asset->style('editor', 'packages/orchestra/story/vendor/editor/editor.css');
-	$asset->script('storycms.md', 'packages/orchestra/story/js/storycms.markdown.js', array('editor'));
+	$asset->script('storycms', 'packages/orchestra/story/js/storycms.js');
+	$asset->script('storycms.md', 'packages/orchestra/story/js/storycms.markdown.min.js', array('editor'));
 });
