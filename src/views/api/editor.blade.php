@@ -1,6 +1,6 @@
 @include('orchestra/story::widgets.menu')
 
-<?php echo Form::model($content, array('url' => resources('storycms.posts'), 'method' => 'get', 'class' => 'form-horizontal')); ?>
+<?php echo Form::model($content, array('url' => $url, 'method' => $method, 'class' => 'form-horizontal')); ?>
 	<?php echo Form::hidden('type'); ?>
 	<?php echo Form::hidden('format'); ?>
 	<fieldset>
@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="row">
-			<button type="submit" name="status" value="publish" class="btn btn-primary">Publish a Post</button>
+			<button type="submit" name="status" value="publish" class="btn btn-primary">Save as Publish</button>
 			<button type="submit" name="status" value="draft" class="btn">Save as Draft</button>
 		</div>
 	</fieldset>

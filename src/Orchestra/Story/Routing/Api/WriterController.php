@@ -30,7 +30,7 @@ class WriterController extends EditorController {
 	}
 
 	/**
-	 * Write a post page.
+	 * Write a post.
 	 *
 	 * @access public
 	 * @return Response
@@ -43,6 +43,10 @@ class WriterController extends EditorController {
 		$content->type   = Content::POST;
 		$content->format = $this->editorFormat;
 
-		return View::make('orchestra/story::api.editor', compact('content'));
+		return View::make('orchestra/story::api.editor', array(
+			'content' => $content,
+			'url'     => resources('storycms.posts'),
+			'method'  => 'POST',
+		));
 	}
 }
