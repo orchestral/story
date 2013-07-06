@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Acl;
 use Orchestra\Support\Facades\Site;
+use Orchestra\Story\Model\Content;
 
 class WriterController extends EditorController {
 
@@ -37,6 +38,11 @@ class WriterController extends EditorController {
 	public function getIndex()
 	{
 		Site::set('title', 'Write a Post');
-		return View::make('orchestra/story::api.editor');
+
+		$content         = new Content;
+		$content->type   = Content::POST;
+		$content->format = $this->editorFormat;
+
+		return View::make('orchestra/story::api.editor', compact('content'));
 	}
 }
