@@ -11,7 +11,6 @@ class FormatManager extends Manager {
 	 * @var array
 	 */
 	protected $parsers = array(
-		'plain'    => 'Plain Text',
 		'markdown' => 'Markdown',
 	);
 
@@ -83,6 +82,6 @@ class FormatManager extends Manager {
 	 */
 	protected function getDefaultDriver()
 	{
-		return $this->app['config']->get('orchestra/story::format', 'markdown');
+		return $this->app['config']->get('orchestra/story::default_format', 'markdown');
 	}
 }
