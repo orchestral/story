@@ -87,26 +87,16 @@ class Content extends Eloquent {
 
 		$query->orderBy(static::PUBLISHED_AT, 'DESC');
 	}
-	
-	/**
-	 * Accessor for raw content.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function getRawContentAttribute($value)
-	{
-		return $this->attributes['content'];
-	}
 
 	/**
-	 * Accessor for content.
+	 * Accessor for parsed content.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function getContentAttribute($value)
+	public function getBodyAttribute($value)
 	{
+		$value  = $this->attributes['content'];
 		$format = $this->attributes['format'];
 
 		return StoryFormat::driver($format)->parse($value);
