@@ -81,7 +81,7 @@ class Content extends Eloquent {
 	 * @access public
 	 * @return void
 	 */
-	public function scopeLatest($query, $take)
+	public function scopeLatest($query, $take = null)
 	{
 		if (is_int($take) and $take > 0) $query->take($take);
 
