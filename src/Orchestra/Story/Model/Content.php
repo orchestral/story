@@ -40,7 +40,15 @@ class Content extends Eloquent {
 	public function getDates()
 	{
 		return array(static::CREATED_AT, static::UPDATED_AT, static::DELETED_AT, static::PUBLISHED_AT);
-	} 
+	}
+
+	/**
+	 * Belongs to relationship with User.
+	 */
+	public function author()
+	{
+		return $this->belongsTo('User', 'user_id');
+	}
 
 	/**
 	 * Query scope for pages.
