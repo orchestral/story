@@ -41,7 +41,7 @@ class PostController extends ContentController {
 				return Content::post()->publish()->where('id', $id)->firstOrFail();
 				break;
 			case isset($slug) and ! is_null($slug) :
-				return Content::post()->publish()->where('slug', $slug)->firstOrFail();
+				return Content::post()->publish()->where('slug', "_page_/{$slug}")->firstOrFail();
 				break;
 			default :
 				return App::abort(404);

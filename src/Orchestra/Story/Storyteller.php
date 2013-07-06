@@ -36,7 +36,7 @@ class Storyteller {
 
 		if (in_array($type, $predefined)) return handles("orchestra/story::{$type}");
 
-		return $this->content($type, $content);
+		return $this->permalink($type, $content);
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Storyteller {
 	 * @access public
 	 * @param  string  
 	 */
-	public function content($type, $content = null)
+	public function permalink($type, $content = null)
 	{
 		$config = $this->app['config']->get('orchestra/story::config');
 		$format = $this->app['config']->get("orchestra/story::permalink.{$type}");
@@ -57,7 +57,7 @@ class Storyteller {
 		
 		$permalinks = array(
 			'id'    => $content->id,
-			'slug'  => $content->slug,
+			'slug'  => str_replace(array('_post_/', '_page_/'), '', $content->slug),
 			'type'  => $content->type,
 			'date'  => $content->published_at->format('Y-m-d'),
 			'year'  => $content->published_at->format('Y'),

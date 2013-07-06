@@ -120,6 +120,6 @@ class Content extends Eloquent {
 	{
 		$type = $this->attributes['type'];
 		
-		return Story::content($type, $this);
+		return Story::permalink($type, $this);
 	}
 }

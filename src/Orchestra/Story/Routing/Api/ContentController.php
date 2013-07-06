@@ -53,9 +53,10 @@ abstract class ContentController extends EditorController {
 	 */	
 	public function store()
 	{
-		$input      = Input::all();
-		$validation = App::make('Orchestra\Story\Services\Validation\Content')
-						->on('create')->with($input);
+		$input         = Input::all();
+		$input['slug'] = $this->generateUniqueSlug($input);
+		$validation    = App::make('Orchestra\Story\Services\Validation\Content')
+							->on('create')->with($input);
 
 		if ($validation->fails())
 		{
@@ -88,9 +89,10 @@ abstract class ContentController extends EditorController {
 	 */	
 	public function update($id = null)
 	{
-		$input       = Input::all();
-		$validation  = App::make('Orchestra\Story\Services\Validation\Content')
-						->on('update')->bind(array('id' => $id))->with($input);
+		$input         = Input::all();
+		$input['slug'] = $this->generateUniqueSlug($input);
+		$validation    = App::make('Orchestra\Story\Services\Validation\Content')
+							->on('update')->bind(array('id' => $id))->with($input);
 
 		if ($validation->fails())
 		{
@@ -164,4 +166,15 @@ abstract class ContentController extends EditorController {
 	 * @return Response
 	 */
 	protected abstract function destroyCallback($content);
+
+	/**
+	 * Generate Unique Slug.
+	 *
+	 * @access protected
+	 * @return string
+	 */
+	protected function generateUniqueSlug($input)
+	{
+		return '_'.$input['type'].'_/'.$input['slug'];
+	}
 }
