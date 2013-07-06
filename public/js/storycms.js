@@ -9,7 +9,7 @@ jQuery(function ($) { 'use strict';
 		if (_.isUndefined(string))
 			return '';
 
-		return string.toLowerCase().replace(/[^\w\/]+/g, '-').replace(/ +/g, '-');
+		return string.toLowerCase().replace(/[^\w\.]+/g, '-').replace(/ +/g, '-');
 	};
 
 	if (slug.val() === '') {
