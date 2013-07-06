@@ -32,9 +32,9 @@ Site::set('header::add-button', true); ?>
 				$owner = ($content->user_id === $auth->id); ?>
 				<tr>
 					<td>
-						<a href="<?php echo $content->link; ?>" target="_blank">
+						<strong>
 							<?php echo e($content->title); ?>
-						</a>
+						</strong>
 					</td>
 					<td><?php echo e($content->author->fullname); ?></td>
 					<td><?php echo Str::title($content->format); ?></td>

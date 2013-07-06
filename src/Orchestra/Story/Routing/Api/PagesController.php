@@ -1,10 +1,25 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Orchestra\Support\Facades\Messages;
 use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
 
 class PagesController extends ContentController {
+
+	/**
+	 * Define filters for current controller.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->resource = 'storycms.pages';
+	}
 
 	/**
 	 * List all the pages.
@@ -60,5 +75,48 @@ class PagesController extends ContentController {
 			'url'     => resources("storycms.pages/{$content->id}"),
 			'method'  => 'PUT',
 		));
+	}
+
+	/**
+	 * Store a page.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function storeCallback($content, $input)
+	{
+		$content->save();
+
+		Messages::add('success', 'Page has been created.');
+		return Redirect::to(resources("storycms.pages/{$content->id}/edit"));
+	}
+
+	/**
+	 * Update a page.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function updateCallback($content, $input)
+	{
+		$content->save();
+
+		Messages::add('success', 'Page has been updated.');
+		return Redirect::to(resources("storycms.pages/{$content->id}/edit"));
+	}
+
+	/**
+	 * Delete a page.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function destroyCallback($content)
+	{
+		$content->delete();
+
+		Messages::add('success', 'Page has been deleted.');
+
+		return Redirect::to(resources('storycms.pages'));
 	}
 }

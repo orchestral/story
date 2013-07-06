@@ -1,10 +1,25 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Orchestra\Support\Facades\Messages;
 use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
 
 class PostsController extends ContentController {
+
+	/**
+	 * Define filters for current controller.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->resource = 'storycms.posts';
+	}
 
 	/**
 	 * List all the posts.
@@ -59,5 +74,48 @@ class PostsController extends ContentController {
 			'url'     => resources("storycms.posts/{$content->id}"),
 			'method'  => 'PUT',
 		));
+	}
+
+	/**
+	 * Store a post.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function storeCallback($content, $input)
+	{
+		$content->save();
+
+		Messages::add('success', 'Post has been created.');
+		return Redirect::to(resources("storycms.posts/{$content->id}/edit"));
+	}
+
+	/**
+	 * Update a post.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function updateCallback($content, $input)
+	{
+		$content->save();
+
+		Messages::add('success', 'Post has been updated.');
+		return Redirect::to(resources("storycms.posts/{$content->id}/edit"));
+	}
+
+	/**
+	 * Delete a post.
+	 *
+	 * @access protected
+	 * @return Response
+	 */
+	protected function destroyCallback($content)
+	{
+		$content->delete();
+
+		Messages::add('success', 'Post has been deleted.');
+
+		return Redirect::to(resources('storycms.posts'));
 	}
 }

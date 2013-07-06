@@ -4,10 +4,11 @@
 	<?php echo Form::hidden('type'); ?>
 	<?php echo Form::hidden('format'); ?>
 	<fieldset>
-		<div class="row">
+		<div class="row<?php echo $errors->has('title') ? ' has-error': ' '; ?>">
 			<label class="col-lg-2 control-label" for="title">Title</label>
 			<div class="col-lg-10">
 				<?php echo Form::text('title', null, array('id' => 'title')); ?>
+				<?php echo $errors->first('title', '<p class="help-block error">:message</p>'); ?>
 			</div>
 		</div>
 
