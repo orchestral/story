@@ -88,9 +88,9 @@ abstract class ContentController extends EditorController {
 	 */	
 	public function update($id = null)
 	{
-		$input      = Input::all();
-		$validation = App::make('Orchestra\Story\Services\Validation\Content')
-						->on('update')->with($input);
+		$input       = Input::all();
+		$validation  = App::make('Orchestra\Story\Services\Validation\Content')
+						->on('update')->bind(array('id' => $id))->with($input);
 
 		if ($validation->fails())
 		{

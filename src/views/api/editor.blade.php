@@ -12,16 +12,18 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row<?php echo $errors->has('slug') ? ' has-error': ' '; ?>">
 			<label class="col-lg-2 control-label" for="slug">Slug</label>
 			<div class="col-lg-10">
 				<?php echo Form::text('slug', null, array('role' => 'slug-editor')); ?>
+				<?php echo $errors->first('slug', '<p class="help-block error">:message</p>'); ?>
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row<?php echo $errors->has('content') ? ' has-error': ' '; ?>">
 			<div class="col col-lg-12">
 				<?php echo Form::textarea('content'); ?>
+				<?php echo $errors->first('content', '<p class="help-block error">:message</p>'); ?>
 			</div>
 		</div>
 		
