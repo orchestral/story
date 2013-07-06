@@ -25,7 +25,7 @@ Event::listen('orchestra.started: admin', function ()
 {
 	$story = Resources::make('storycms', array(
 		'name'    => 'Story CMS',
-		'uses'    => 'restful:Orchestra\Story\Routing\Api\WriterController',
+		'uses'    => 'restful:Orchestra\Story\Routing\Api\HomeController',
 		'visible' => true,
 	));
 

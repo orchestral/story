@@ -9,6 +9,7 @@ use Orchestra\Support\Str;
 
 $acl  = Acl::make('orchestra/story');
 $auth = Auth::user(); 
+
 Site::set('header::add-button', true); ?>
 
 <div class="row">
