@@ -19,6 +19,22 @@ abstract class ContentController extends EditorController {
 	protected $resource;
 
 	/**
+	 * Define filters for current controller.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->beforeFilter(function ()
+		{
+			if (Auth::guest()) return Redirect::to(handles('orchestra::/'));
+		});
+	}
+
+	/**
 	 * List all the contents.
 	 *
 	 * @abstract
