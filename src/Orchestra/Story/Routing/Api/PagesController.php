@@ -19,6 +19,18 @@ class PagesController extends ContentController {
 		parent::__construct();
 
 		$this->resource = 'storycms.pages';
+
+		$this->beforeFilter('orchestra.story:create-page', array(
+			'only' => array('create', 'store'),
+		));
+
+		$this->beforeFilter('orchestra.story:update-page', array(
+			'only' => array('edit', 'update'),
+		));
+
+		$this->beforeFilter('orchestra.story:delete-page', array(
+			'only' => array('delete', 'destroy'),
+		));
 	}
 
 	/**
@@ -30,7 +42,7 @@ class PagesController extends ContentController {
 	public function index()
 	{
 		$contents = Content::with('author')->page()->paginate(30);
-		$type     = 'pages';
+		$type     = 'page';
 
 		Site::set('title', 'List of Pages');
 

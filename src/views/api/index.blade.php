@@ -10,7 +10,9 @@ use Orchestra\Support\Str;
 $acl  = Acl::make('orchestra/story');
 $auth = Auth::user(); 
 
-Site::set('header::add-button', true); ?>
+if ($acl->can("create {$type}") or $acl->can("manage {$type}")) :
+	Site::set('header::add-button', true);
+endif; ?>
 
 <div class="row">
 	<div class="col col-lg-12 box white rounded">
@@ -43,12 +45,12 @@ Site::set('header::add-button', true); ?>
 					<td>
 						<div class="btn-group">
 						<?php if ($acl->can("manage {$content->type}") or ($owner and $acl->can("update {$content->type}"))) : ?>
-							<a href="<?php echo resources("storycms.{$type}/{$content->id}/edit"); ?>" class="btn btn-mini btn-warning">
+							<a href="<?php echo resources("storycms.{$type}s/{$content->id}/edit"); ?>" class="btn btn-mini btn-warning">
 								Edit
 							</a>
 						<?php endif; ?>
 						<?php if ($acl->can("manage {$content->type}") or ($owner and $acl->can("delete {$content->type}"))) : ?>
-							<a href="<?php echo resources("storycms.{$type}/{$content->id}/delete"); ?>" class="btn btn-mini btn-danger">
+							<a href="<?php echo resources("storycms.{$type}s/{$content->id}/delete"); ?>" class="btn btn-mini btn-danger">
 								Delete
 							</a>
 						<?php endif; ?>

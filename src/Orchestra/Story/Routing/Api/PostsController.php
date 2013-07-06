@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Orchestra\Support\Facades\Acl;
 use Orchestra\Support\Facades\Messages;
 use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
@@ -19,6 +20,18 @@ class PostsController extends ContentController {
 		parent::__construct();
 
 		$this->resource = 'storycms.posts';
+
+		$this->beforeFilter('orchestra.story:create-post', array(
+			'only' => array('create', 'store'),
+		));
+
+		$this->beforeFilter('orchestra.story:update-post', array(
+			'only' => array('edit', 'update'),
+		));
+
+		$this->beforeFilter('orchestra.story:delete-post', array(
+			'only' => array('delete', 'destroy'),
+		));
 	}
 
 	/**
@@ -30,7 +43,7 @@ class PostsController extends ContentController {
 	public function index()
 	{
 		$contents = Content::with('author')->post()->paginate(30);
-		$type     = 'posts';
+		$type     = 'post';
 
 		Site::set('title', 'List of Posts');
 		return View::make('orchestra/story::api.index', compact('contents', 'type'));
