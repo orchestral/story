@@ -16,10 +16,21 @@ class Content extends Validator {
 	);
 
 	/**
+	 * On create scenario
+	 *
+	 * @access protected
+	 * @return void
+	 */
+	protected function onCreate()
+	{
+		$this->rules['slug'] = array('required', 'unique:story_contents,slug');
+	}
+
+	/**
 	 * On update scenario.
 	 *
 	 * @access protected
-	 * @return voide
+	 * @return void
 	 */
 	protected function onUpdate()
 	{
