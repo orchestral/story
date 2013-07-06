@@ -70,6 +70,6 @@ class Storyteller {
 			$format = str_replace('{'.$key.'}', $value, $format);
 		}
 
-		return handles($format);
+		return handles("orchestra/story::{$format}");
 	}
 }
