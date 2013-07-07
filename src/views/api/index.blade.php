@@ -15,7 +15,7 @@ if ($acl->can("create {$type}") or $acl->can("manage {$type}")) :
 endif; ?>
 
 <div class="row">
-	<div class="col col-lg-12 box white rounded">
+	<div class="twelve columns white rounded box">
 		<table class="table table-striped">
 			<thead>
 				<tr>
