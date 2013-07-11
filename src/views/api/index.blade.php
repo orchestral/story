@@ -23,7 +23,7 @@ endif; ?>
 					<th>Author</th>
 					<th>Format</th>
 					<th>Status</th>
-					<th>&nbsp;</th>
+					<th class="th-actions">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
