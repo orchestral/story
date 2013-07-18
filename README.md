@@ -26,6 +26,8 @@ By default, Story CMS is using Markdown format for post and page, however you ca
 ### Adding new Format
 
 ```php
+use Orchestra\Story\Facades\StoryFormat;
+
 StoryFormat::extend('bbcode', function ()
 {
     return new BBCodeParser();
