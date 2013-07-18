@@ -16,6 +16,7 @@ Event::listen('orchestra.form: extension.orchestra/story', function ()
 Event::listen('orchestra.validate: extension.orchestra/story', function (& $rules)
 {
 	$rules['page_permalink'] = array('required');
+	$rules['post_permalink'] = array('required');
 });
 
 Event::listen('orchestra.story.editor: markdown', function ()
