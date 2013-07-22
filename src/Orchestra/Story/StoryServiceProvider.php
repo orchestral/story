@@ -49,5 +49,10 @@ class StoryServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('orchestra/story', 'orchestra/story');
+
+		include __DIR__.'/../../start/global.php';
+		include __DIR__.'/../../start/events.php';
+		include __DIR__.'/../../filters.php';
+		include __DIR__.'/../../routes.php';
 	}
 }
