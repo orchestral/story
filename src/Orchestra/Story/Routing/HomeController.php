@@ -11,7 +11,6 @@ class HomeController extends Controller {
 	/**
 	 * Get landing page.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function index()
@@ -26,7 +25,6 @@ class HomeController extends Controller {
 	/**
 	 * Show posts.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function showPosts()
@@ -39,7 +37,6 @@ class HomeController extends Controller {
 	/**
 	 * Show default page.
 	 * 
-	 * @access protected
 	 * @param  string   $slug
 	 * @return Response
 	 */

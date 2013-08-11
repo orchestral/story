@@ -17,7 +17,7 @@ class Content extends Eloquent {
 	/**
 	 * Available status type.
 	 */
-	const STATUS_DRAFT = 'draft';
+	const STATUS_DRAFT   = 'draft';
 	const STATUS_PUBLISH = 'publish';
 	const STATUS_PRIVATE = 'private';
 
@@ -47,13 +47,12 @@ class Content extends Eloquent {
 	 */
 	public function author()
 	{
-		return $this->belongsTo('User', 'user_id');
+		return $this->belongsTo(Config::get('auth.model', 'User'), 'user_id');
 	}
 
 	/**
 	 * Query scope for pages.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function scopePage($query)
@@ -64,7 +63,6 @@ class Content extends Eloquent {
 	/**
 	 * Query scope for posts.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function scopePost($query)
@@ -75,7 +73,6 @@ class Content extends Eloquent {
 	/**
 	 * Query scope for published.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function scopePublish($query)
@@ -86,7 +83,6 @@ class Content extends Eloquent {
 	/**
 	 * Query scope for published.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function scopeLatest($query, $take = null)
@@ -99,7 +95,6 @@ class Content extends Eloquent {
 	/**
 	 * Accessor for parsed content.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function getBodyAttribute($value)
@@ -113,7 +108,6 @@ class Content extends Eloquent {
 	/**
 	 * Accessor for link.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function getLinkAttribute($value)

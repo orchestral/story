@@ -5,7 +5,6 @@ class Plain extends Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @access protected
 	 * @return void
 	 */
 	protected function initiate() {}
@@ -13,7 +12,6 @@ class Plain extends Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @access public
 	 * @param  string   $content
 	 * @return void
 	 */

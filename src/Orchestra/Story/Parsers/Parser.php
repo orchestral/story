@@ -19,9 +19,7 @@ abstract class Parser {
 	/**
 	 * Create a new instance of Storytelling.
 	 *
-	 * @access public
 	 * @param  \Illuminate\Foundation\Application   $app
-	 * @return void
 	 */
 	public function __construct($app)
 	{
@@ -32,8 +30,6 @@ abstract class Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @return void
 	 */
 	protected abstract function initiate();
@@ -41,8 +37,6 @@ abstract class Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @abstract
-	 * @access public
 	 * @param  string   $content
 	 * @return void
 	 */

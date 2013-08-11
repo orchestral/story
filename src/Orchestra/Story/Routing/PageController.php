@@ -10,7 +10,6 @@ class PageController extends ContentController {
 	 * Return the response, this method allow each content type to be group 
 	 * via different set of view.
 	 *
-	 * @access protected
 	 * @param  \Orchestra\Story\Model\Content   $page
 	 * @param  integer                          $id
 	 * @param  string                           $slug
@@ -29,7 +28,6 @@ class PageController extends ContentController {
 	/**
 	 * Get the requested page/content from Model.
 	 *
-	 * @access protected
 	 * @param  integer  $id
 	 * @param  string   $slug
 	 * @return \Orchestra\Story\Model\Content

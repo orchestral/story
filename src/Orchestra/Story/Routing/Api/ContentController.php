@@ -20,9 +20,6 @@ abstract class ContentController extends EditorController {
 
 	/**
 	 * Define filters for current controller.
-	 *
-	 * @access public
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -37,8 +34,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * List all the contents.
 	 *
-	 * @abstract
-	 * @access public
 	 * @return Response
 	 */
 	public abstract function index();
@@ -46,8 +41,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Write a content.
 	 *
-	 * @abstract
-	 * @access public
 	 * @return Response
 	 */
 	public abstract function create();
@@ -55,8 +48,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Edit a content.
 	 *
-	 * @abstract
-	 * @access public
 	 * @return Response
 	 */
 	public abstract function edit($id = null);
@@ -64,7 +55,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Store a content.
 	 *
-	 * @access public
 	 * @return Response
 	 */	
 	public function store()
@@ -100,7 +90,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Update a content.
 	 *
-	 * @access public
 	 * @return Response
 	 */	
 	public function update($id = null)
@@ -135,8 +124,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Store a content.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @return Response
 	 */
 	protected abstract function storeCallback($content, $input);
@@ -144,8 +131,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Update a content.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @return Response
 	 */
 	protected abstract function updateCallback($content, $input);
@@ -153,7 +138,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Delete a content.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function delete($id = null)
@@ -164,7 +148,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Delete a content.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -177,8 +160,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Delete a content.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @return Response
 	 */
 	protected abstract function destroyCallback($content);
@@ -186,7 +167,6 @@ abstract class ContentController extends EditorController {
 	/**
 	 * Generate Unique Slug.
 	 *
-	 * @access protected
 	 * @return string
 	 */
 	protected function generateUniqueSlug($input)

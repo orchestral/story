@@ -11,7 +11,6 @@ class HomeController extends EditorController {
 	/**
 	 * Show Dashboard.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function getIndex()
@@ -28,7 +27,6 @@ class HomeController extends EditorController {
 	/**
 	 * Write a post.
 	 *
-	 * @access protected
 	 * @return Response
 	 */
 	protected function write()

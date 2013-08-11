@@ -18,7 +18,6 @@ class Content extends Validator {
 	/**
 	 * On create scenario
 	 *
-	 * @access protected
 	 * @return void
 	 */
 	protected function onCreate()
@@ -29,7 +28,6 @@ class Content extends Validator {
 	/**
 	 * On update scenario.
 	 *
-	 * @access protected
 	 * @return void
 	 */
 	protected function onUpdate()
