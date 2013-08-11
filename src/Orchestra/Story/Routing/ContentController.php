@@ -9,7 +9,6 @@ abstract class ContentController extends Controller {
 	/**
 	 * Show the content.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function show()
@@ -28,8 +27,6 @@ abstract class ContentController extends Controller {
 	 * Return the response, this method allow each content type to be group 
 	 * via different set of view.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @param  \Orchestra\Story\Model\Content   $page
 	 * @param  integer                          $id
 	 * @param  string                           $slug
@@ -40,8 +37,6 @@ abstract class ContentController extends Controller {
 	/**
 	 * Get the requested page/content from Model.
 	 *
-	 * @abstract
-	 * @access protected
 	 * @param  integer  $id
 	 * @param  string   $slug
 	 * @return \Orchestra\Story\Model\Content

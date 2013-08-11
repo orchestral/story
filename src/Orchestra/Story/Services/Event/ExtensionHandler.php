@@ -9,7 +9,6 @@ class ExtensionHandler {
 	/**
 	 * Handle on form view.
 	 *
-	 * @access public							
 	 * @param  \Illuminate\Support\Fluent       $model
 	 * @param  \Orchestra\Html\Form\FormBuilder $form
 	 * @return void

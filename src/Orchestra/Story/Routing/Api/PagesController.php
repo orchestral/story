@@ -10,9 +10,6 @@ class PagesController extends ContentController {
 
 	/**
 	 * Define filters for current controller.
-	 *
-	 * @access public
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -36,7 +33,6 @@ class PagesController extends ContentController {
 	/**
 	 * List all the pages.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function index()
@@ -52,7 +48,6 @@ class PagesController extends ContentController {
 	/**
 	 * Write a page.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function create()
@@ -73,7 +68,6 @@ class PagesController extends ContentController {
 	/**
 	 * Edit a page.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function edit($id = null)
@@ -92,7 +86,6 @@ class PagesController extends ContentController {
 	/**
 	 * Store a page.
 	 *
-	 * @access protected
 	 * @return Response
 	 */
 	protected function storeCallback($content, $input)

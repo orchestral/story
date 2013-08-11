@@ -11,9 +11,6 @@ class PostsController extends ContentController {
 
 	/**
 	 * Define filters for current controller.
-	 *
-	 * @access public
-	 * @return void
 	 */
 	public function __construct()
 	{
@@ -37,7 +34,6 @@ class PostsController extends ContentController {
 	/**
 	 * List all the posts.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function index()
@@ -52,7 +48,6 @@ class PostsController extends ContentController {
 	/**
 	 * Write a post.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function create()
@@ -73,7 +68,6 @@ class PostsController extends ContentController {
 	/**
 	 * Edit a post.
 	 *
-	 * @access public
 	 * @return Response
 	 */
 	public function edit($id = null)
@@ -92,7 +86,6 @@ class PostsController extends ContentController {
 	/**
 	 * Store a post.
 	 *
-	 * @access protected
 	 * @return Response
 	 */
 	protected function storeCallback($content, $input)
@@ -106,7 +99,6 @@ class PostsController extends ContentController {
 	/**
 	 * Update a post.
 	 *
-	 * @access protected
 	 * @return Response
 	 */
 	protected function updateCallback($content, $input)
@@ -120,7 +112,6 @@ class PostsController extends ContentController {
 	/**
 	 * Delete a post.
 	 *
-	 * @access protected
 	 * @return Response
 	 */
 	protected function destroyCallback($content)

@@ -7,7 +7,6 @@ class Markdown extends Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @access protected
 	 * @return void
 	 */
 	protected function initiate()
@@ -18,7 +17,6 @@ class Markdown extends Parser {
 	/**
 	 * Initiate a the parser.
 	 *
-	 * @access public
 	 * @param  string   $content
 	 * @return void
 	 */

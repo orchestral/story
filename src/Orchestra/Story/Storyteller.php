@@ -14,7 +14,6 @@ class Storyteller {
 	/**
 	 * Create a new instance of Storytelling.
 	 *
-	 * @access public
 	 * @param  \Illuminate\Foundation\Application   $app
 	 * @return void
 	 */
@@ -26,7 +25,6 @@ class Storyteller {
 	/**
 	 * Generate URL.
 	 *
-	 * @access public
 	 * @return string
 	 */
 	public function url($type, $content = null)
@@ -42,7 +40,6 @@ class Storyteller {
 	/**
 	 * Generate URL by content.
 	 *
-	 * @access public
 	 * @param  string  
 	 */
 	public function permalink($type, $content = null)

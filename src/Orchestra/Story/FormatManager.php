@@ -51,7 +51,6 @@ class FormatManager extends Manager {
 	/**
 	 * Get list of parsers.
 	 *
-	 * @access public
 	 * @return array
 	 */
 	public function getParsers()
@@ -62,7 +61,6 @@ class FormatManager extends Manager {
 	/**
 	 * Get available parser, or use the default.
 	 *
-	 * @access public
 	 * @param  string   $name
 	 * @return string
 	 */
@@ -76,7 +74,6 @@ class FormatManager extends Manager {
 	/**
 	 * Create Default driver.
 	 * 
-	 * @access protected
 	 * @param  string   $name
 	 * @return string
 	 */

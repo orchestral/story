@@ -17,9 +17,6 @@ abstract class EditorController extends Controller {
 
 	/**
 	 * Define filter for the controller.
-	 *
-	 * @access public
-	 * @return void
 	 */
 	public function __construct()
 	{

@@ -9,7 +9,6 @@ class DashboardHandler {
 	/**
 	 * Handle pane for dashboard page.
 	 *
-	 * @access public
 	 * @return void
 	 */
 	public function onDashboardView()
