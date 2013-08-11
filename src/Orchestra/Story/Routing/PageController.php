@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Routing;
 
 use Illuminate\Support\Facades\View;
+use Orchestra\Support\Facades\Facile;
 use Orchestra\Story\Model\Content;
 
 class PageController extends ContentController {
@@ -22,7 +23,7 @@ class PageController extends ContentController {
 			$view = 'orchestra/story::page';
 		}
 
-		return View::make($view, compact('page'));
+		return Facile::view($view)->with(compact('page'))->render();
 	}
 
 	/**
