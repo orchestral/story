@@ -17,7 +17,7 @@ class Content extends Eloquent {
 	/**
 	 * Available status type.
 	 */
-	const STATUS_DRAFT = 'draft';
+	const STATUS_DRAFT   = 'draft';
 	const STATUS_PUBLISH = 'publish';
 	const STATUS_PRIVATE = 'private';
 
@@ -47,7 +47,7 @@ class Content extends Eloquent {
 	 */
 	public function author()
 	{
-		return $this->belongsTo('User', 'user_id');
+		return $this->belongsTo(Config::get('auth.model', 'User'), 'user_id');
 	}
 
 	/**
