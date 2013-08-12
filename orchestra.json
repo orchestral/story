@@ -3,7 +3,7 @@
 	"description": "Story CMS Extension",
 	"author": "Mior Muhammad Zaki",
 	"url": "https://github.com/orchestral/story",
-	"version": "2.1.x",
+	"version": "2.1.0",
 	"config": {
 		"handles": "cms"
 	},

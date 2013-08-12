@@ -24,8 +24,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
-		"illuminate/support": "4.1.*",
-		"orchestra/support": "2.1.*"
+		"orchestra/testbench": "2.1.*",
+		"orchestra/foundation": "2.1.*"
 	},
 	"extra": {
 		"branch-alias": {
