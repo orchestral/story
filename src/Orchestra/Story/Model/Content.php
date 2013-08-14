@@ -81,6 +81,16 @@ class Content extends Eloquent {
 	}
 
 	/**
+	 * Query scope for latest published.
+	 *
+	 * @return void
+	 */
+	public function scopeLatestPublish($query)
+	{
+		$query->latest()->publish();
+	}
+
+	/**
 	 * Query scope for published.
 	 *
 	 * @return void
