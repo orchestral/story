@@ -103,13 +103,23 @@ class Content extends Eloquent {
 	}
 
 	/**
+	 * Accessor for content.
+	 *
+	 * @return void
+	 */
+	public function getContentAttribute($value)
+	{
+		return stripslashes($value);
+	}
+
+	/**
 	 * Accessor for parsed content.
 	 *
 	 * @return void
 	 */
 	public function getBodyAttribute($value)
 	{
-		$value  = $this->attributes['content'];
+		$value  = $this->getAttribute('content');
 		$format = $this->attributes['format'];
 
 		return StoryFormat::driver($format)->parse($value);
