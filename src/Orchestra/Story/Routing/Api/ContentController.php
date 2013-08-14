@@ -78,11 +78,8 @@ abstract class ContentController extends EditorController {
 		$content->format  = $input['format'];
 		$content->status  = $input['status'];
 		$content->user_id = Auth::user()->id;
-
-		if ($content->status === Content::STATUS_PUBLISH and is_null($content->published_at))
-		{
-			$content->published_at = Carbon::now();
-		}
+		
+		$this->updatePublishedAt($content) and $content->published_at = Carbon::now();
 		
 		return call_user_func(array($this, 'storeCallback'), $content, $input);
 	}
@@ -113,10 +110,7 @@ abstract class ContentController extends EditorController {
 		$content->format  = $input['format'];
 		$content->status  = $input['status'];
 
-		if ($content->status === Content::STATUS_PUBLISH and is_null($content->published_at))
-		{
-			$content->published_at = Carbon::now();
-		}
+		$this->updatePublishedAt($content) and $content->published_at = Carbon::now();
 		
 		return call_user_func(array($this, 'updateCallback'), $content, $input);
 	}
@@ -172,5 +166,31 @@ abstract class ContentController extends EditorController {
 	protected function generateUniqueSlug($input)
 	{
 		return '_'.$input['type'].'_/'.$input['slug'];
+	}
+
+	/**
+	 * Determine whether published_at should be updated.
+	 * 
+	 * @param  Orchestra\Story\Model\Content    $content
+	 * @return boolean
+	 */
+	protected function updatePublishedAt($content)
+	{
+		$theBeginning = new Carbon('0000-00-00 00:00:00');
+
+		if ($content->status !== Content::STATUS_PUBLISH) return false;
+
+		switch (true)
+		{
+			case is_null($content->published_at) :
+				# passthru;
+			case $content->published_at->format('Y-m-d H:i:s') === '0000-00-00 00:00:00' :
+				# passthru;
+			case $content->published_at->toDateTimeString() === $theBeginning->toDateTimeString() :
+				return true;
+				break;
+			default :
+				return false;
+		}
 	}
 }
