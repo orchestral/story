@@ -37,7 +37,7 @@ class PagesController extends ContentController {
 	 */
 	public function index()
 	{
-		$contents = Content::with('author')->page()->paginate(30);
+		$contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate(30);
 		$type     = 'page';
 
 		Site::set('title', 'List of Pages');

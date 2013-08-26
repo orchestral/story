@@ -91,7 +91,20 @@ class Content extends Eloquent {
 	}
 
 	/**
-	 * Query scope for published.
+	 * Query scope for latest by specified field.
+	 *
+	 * @return void
+	 */
+	public function scopeLatestBy($query, $by = null, $take = null)
+	{
+		if (is_null($by)) $by = static::PUBLISHED_AT;
+		if (is_int($take) and $take > 0) $query->take($take);
+
+		$query->orderBy($by, 'DESC');
+	}
+
+	/**
+	 * Query scope for latest published.
 	 *
 	 * @return void
 	 */
@@ -99,7 +112,7 @@ class Content extends Eloquent {
 	{
 		if (is_int($take) and $take > 0) $query->take($take);
 
-		$query->orderBy(static::PUBLISHED_AT, 'DESC');
+		$query->latestBy(static::PUBLISHED_AT, 'DESC');
 	}
 
 	/**
