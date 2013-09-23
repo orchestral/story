@@ -113,9 +113,19 @@ class Content extends Eloquent {
 	}
 
 	/**
+	 * Accessor for title.
+	 *
+	 * @return string
+	 */
+	public function getTitleAttribute($value)
+	{
+		return stripslashes($value);
+	}
+
+	/**
 	 * Accessor for content.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function getContentAttribute($value)
 	{
@@ -125,7 +135,7 @@ class Content extends Eloquent {
 	/**
 	 * Accessor for parsed content.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function getBodyAttribute($value)
 	{
@@ -139,7 +149,7 @@ class Content extends Eloquent {
 	 * Accessor for link.
 	 *
 	 * @param  mixed   $value
-	 * @return void
+	 * @return string
 	 */
 	public function getLinkAttribute($value)
 	{
