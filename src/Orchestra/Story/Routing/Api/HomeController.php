@@ -16,6 +16,7 @@ class HomeController extends EditorController {
 	public function getIndex()
 	{
 		$acl = Acl::make('orchestra/story');
+		
 		if ($acl->can('create post') or $acl->can('manage post'))
 		{
 			return $this->write();
