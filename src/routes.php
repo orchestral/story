@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Resources;
 
-Route::group(array('prefix' => App::route('orchestra/story', 'cms')), function ()
+Route::group(App::group('orchestra/story', 'cms'), function ()
 {
 	$page = Config::get('orchestra/story::permalink.page');
 	$post = Config::get('orchestra/story::permalink.post');
