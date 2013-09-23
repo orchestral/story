@@ -33,14 +33,11 @@ class Content extends Eloquent {
 	const PUBLISHED_AT = 'published_at';
 
 	/**
-	 * Get the attributes that should be converted to dates.
+	 * The attributes that should be mutated to dates.
 	 *
-	 * @return array
+	 * @var array
 	 */
-	public function getDates()
-	{
-		return array(static::CREATED_AT, static::UPDATED_AT, static::DELETED_AT, static::PUBLISHED_AT);
-	}
+	protected $dates = array('published_at');
 
 	/**
 	 * Belongs to relationship with User.
@@ -95,12 +92,12 @@ class Content extends Eloquent {
 	 *
 	 * @return void
 	 */
-	public function scopeLatestBy($query, $by = null, $take = null)
+	public function scopeLatestBy($query, $orderBy = null, $take = null)
 	{
-		if (is_null($by)) $by = static::PUBLISHED_AT;
+		if (is_null($orderBy)) $orderBy = static::PUBLISHED_AT;
 		if (is_int($take) and $take > 0) $query->take($take);
 
-		$query->orderBy($by, 'DESC');
+		$query->orderBy($orderBy, 'DESC');
 	}
 
 	/**
@@ -116,9 +113,19 @@ class Content extends Eloquent {
 	}
 
 	/**
+	 * Accessor for title.
+	 *
+	 * @return string
+	 */
+	public function getTitleAttribute($value)
+	{
+		return stripslashes($value);
+	}
+
+	/**
 	 * Accessor for content.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function getContentAttribute($value)
 	{
@@ -128,7 +135,7 @@ class Content extends Eloquent {
 	/**
 	 * Accessor for parsed content.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function getBodyAttribute($value)
 	{
@@ -141,7 +148,8 @@ class Content extends Eloquent {
 	/**
 	 * Accessor for link.
 	 *
-	 * @return void
+	 * @param  mixed   $value
+	 * @return string
 	 */
 	public function getLinkAttribute($value)
 	{
