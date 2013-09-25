@@ -33,11 +33,14 @@ class Content extends Eloquent {
 	const PUBLISHED_AT = 'published_at';
 
 	/**
-	 * The attributes that should be mutated to dates.
+	 * Get the attributes that should be converted to dates.
 	 *
-	 * @var array
+	 * @return array
 	 */
-	protected $dates = array('published_at');
+	public function getDates()
+	{
+		return array_merge(parent::getDates(), array(static::PUBLISHED_AT));
+	}
 
 	/**
 	 * Belongs to relationship with User.

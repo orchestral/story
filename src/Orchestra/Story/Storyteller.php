@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story;
 
+use Carbon\Carbon;
 use Orchestra\Story\Model\Content;
 
 class Storyteller {
@@ -44,22 +45,26 @@ class Storyteller {
 	 */
 	public function permalink($type, $content = null)
 	{
-		$config = $this->app['config']->get('orchestra/story::config');
 		$format = $this->app['config']->get("orchestra/story::permalink.{$type}");
 		
 		if (is_null($format) or ! ($content instanceof Content)) 
 		{
 			return handles("orchestra/story::/");
 		}
+
+		if (is_null($published = $content->published_at))
+		{
+			$published = Carbon::now();
+		}
 		
 		$permalinks = array(
 			'id'    => $content->id,
 			'slug'  => str_replace(array('_post_/', '_page_/'), '', $content->slug),
 			'type'  => $content->type,
-			'date'  => $content->published_at->format('Y-m-d'),
-			'year'  => $content->published_at->format('Y'),
-			'month' => $content->published_at->format('m'),
-			'day'   => $content->published_at->format('d'),
+			'date'  => $published->format('Y-m-d'),
+			'year'  => $published->format('Y'),
+			'month' => $published->format('m'),
+			'day'   => $published->format('d'),
 		);
 
 		foreach ($permalinks as $key => $value)
