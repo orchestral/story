@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Story\Routing;
 
-use Illuminate\Routing\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
