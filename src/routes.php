@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Route;
 use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Resources;
 
+/*
+|--------------------------------------------------------------------------
+| Frontend Routing
+|--------------------------------------------------------------------------
+*/
+
 Route::group(App::group('orchestra/story', 'cms'), function ()
 {
 	$page = Config::get('orchestra/story::permalink.page');
@@ -21,6 +27,12 @@ Route::group(App::group('orchestra/story', 'cms'), function ()
 
 	Route::get('/', 'Orchestra\Story\Routing\HomeController@index');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Backend Routing
+|--------------------------------------------------------------------------
+*/
 
 Event::listen('orchestra.started: admin', function ()
 {
