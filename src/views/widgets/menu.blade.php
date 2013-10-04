@@ -9,10 +9,10 @@ use Illuminate\Support\Fluent;
 use Orchestra\Support\Facades\App; ?>
 
 <ul class="nav navbar-nav">
-	<li class="<?php echo Request::is('*/resources/storycms.posts*') ? 'active' : ''; ?>">
+	<li class="<?php echo Request::is('*resources/storycms.posts*') ? 'active' : ''; ?>">
 		<a href="<?php echo resources('storycms.posts'); ?>">Posts</a>
 	</li>
-	<li class="<?php echo Request::is('*/resources/storycms.pages*') ? 'active' : ''; ?>">
+	<li class="<?php echo Request::is('*resources/storycms.pages*') ? 'active' : ''; ?>">
 		<a href="<?php echo resources('storycms.pages'); ?>">Pages</a>
 	</li>
 </ul>
