@@ -13,7 +13,7 @@ abstract class ContentController extends Controller {
 	 */
 	public function show()
 	{
-		$params = App::make('router')->getCurrentRoute()->getParameters();
+		$params = App::make('router')->current()->parameters();
 		$id     = isset($params['id']) ? $params['id'] : null;
 		$slug   = isset($params['slug']) ? $params['slug'] : null;
 		$page   = $this->getRequestedContent($id, $slug);
