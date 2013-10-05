@@ -20,7 +20,7 @@
 	},
 	"require": {
 		"php": ">=5.3.3",
-		"dflydev/markdown": "v1.0.2"
+		"dflydev/markdown": "v1.0.3"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
