@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Asset;
 use Orchestra\Support\Facades\Widget;
 
-Event::listen('orchestra.ready: admin', 'Orchestra\Story\Services\Event\DashboardHandler@onDashboardView');
-Event::listen('orchestra.form: extension.orchestra/story', 'Orchestra\Story\Services\Event\ExtensionHandler@onFormView');
+Event::listen('orchestra.ready: admin', 'Orchestra\Story\Event\DashboardHandler@onDashboardView');
+Event::listen('orchestra.form: extension.orchestra/story', 'Orchestra\Story\Event\ExtensionHandler@onFormView');
 Event::listen('orchestra.form: extension.orchestra/story', function ()
 {
 	$placeholder = Widget::make('placeholder.orchestra.extensions');

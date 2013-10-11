@@ -81,8 +81,7 @@ abstract class ContentController extends EditorController {
 	{
 		$input         = Input::all();
 		$input['slug'] = $this->generateUniqueSlug($input);
-		$validation    = App::make('Orchestra\Story\Services\Validation\Content')
-							->on('create')->with($input);
+		$validation    = $this->validator->on('create')->with($input);
 
 		if ($validation->fails())
 		{
@@ -113,8 +112,7 @@ abstract class ContentController extends EditorController {
 	{
 		$input         = Input::all();
 		$input['slug'] = $this->generateUniqueSlug($input);
-		$validation    = App::make('Orchestra\Story\Services\Validation\Content')
-							->on('update')->bind(array('id' => $id))->with($input);
+		$validation    = $this->validator->on('update')->bind(array('id' => $id))->with($input);
 
 		if ($validation->fails())
 		{
