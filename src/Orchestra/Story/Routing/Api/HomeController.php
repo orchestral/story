@@ -9,6 +9,13 @@ use Orchestra\Story\Model\Content;
 class HomeController extends EditorController {
 
 	/**
+	 * Define filters for current controller.
+	 *
+	 * @return void
+	 */
+	protected function setupFilters() {}
+
+	/**
 	 * Show Dashboard.
 	 *
 	 * @return Response

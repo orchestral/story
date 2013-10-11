@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
+use Orchestra\Story\Validation\Content as ContentValidator;
 
 abstract class ContentController extends EditorController {
 
@@ -19,12 +20,31 @@ abstract class ContentController extends EditorController {
 	protected $resource;
 
 	/**
-	 * Define filters for current controller.
+	 * Validation instance.
+	 *
+	 * @var object
 	 */
-	public function __construct()
+	protected $validator = null;
+
+	/**
+	 * Content CRUD Controller.
+	 * 
+	 * @param \Orchestra\Story\Validation\Content  $validator
+	 */
+	public function __construct(ContentValidator $validator)
 	{
 		parent::__construct();
 
+		$this->validator = $validator;
+	}
+
+	/**
+	 * Define filters for current controller.
+	 *
+	 * @return void
+	 */
+	protected function setupFilters()
+	{
 		$this->beforeFilter(function ()
 		{
 			if (Auth::guest()) return Redirect::to(handles('orchestra::/'));
