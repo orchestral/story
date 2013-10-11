@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story\Services\Event;
+<?php namespace Orchestra\Story\Event;
 
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Widget;
