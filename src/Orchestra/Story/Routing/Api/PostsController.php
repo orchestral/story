@@ -11,10 +11,12 @@ class PostsController extends ContentController {
 
 	/**
 	 * Define filters for current controller.
+	 * 
+	 * @return void
 	 */
-	public function __construct()
+	public function setupFilters()
 	{
-		parent::__construct();
+		parent::setupFilters();
 
 		$this->resource = 'storycms.posts';
 
