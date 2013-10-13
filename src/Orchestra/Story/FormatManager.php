@@ -46,7 +46,7 @@ class FormatManager extends Manager {
 	 */
 	public function extend($name, Closure $callback)
 	{
-		$this->parsers[$driver = Str::camel($name)] = $name;
+		$this->parsers[$driver = Str::camel($name)] = Str::title($name);
 
 		return parent::extend($name, $callback);
 	}

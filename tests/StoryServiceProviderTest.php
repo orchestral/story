@@ -7,7 +7,6 @@ use Orchestra\Story\StoryServiceProvider;
 
 class StoryServiceProviderTest extends TestCase {
 
-	
 	/**
 	 * Teardown the test environment.
 	 */
