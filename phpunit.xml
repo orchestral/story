@@ -26,8 +26,8 @@
     </logging>
 
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">src/</directory>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src/Orchestra/Story</directory>
         </whitelist>
     </filter>
 </phpunit>

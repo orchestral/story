@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story;
 
+use Closure;
 use Illuminate\Support\Manager;
 use Orchestra\Support\Str;
 
@@ -19,8 +20,10 @@ class FormatManager extends Manager {
 	 *
 	 * @return \Orchestra\Story\Parsers\Plain
 	 */
-	public function createPlainDriver()
+	protected function createPlainDriver()
 	{
+		$this->parsers['plain'] = 'Plain';
+
 		return new Parsers\Plain($this->app);
 	}
 
@@ -29,7 +32,7 @@ class FormatManager extends Manager {
 	 *
 	 * @return \Orchestra\Story\Parsers\Markdown
 	 */
-	public function createMarkdownDriver()
+	protected function createMarkdownDriver()
 	{		
 		return new Parsers\Markdown($this->app);
 	}
@@ -43,9 +46,9 @@ class FormatManager extends Manager {
 	 */
 	public function extend($name, Closure $callback)
 	{
-		$this->parsers[$driver = Str::camel($name)] = $name;
+		$this->parsers[$driver = Str::camel($name)] = Str::title($name);
 
-		return parent::extend($driver, $callback);
+		return parent::extend($name, $callback);
 	}
 
 	/**
