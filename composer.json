@@ -25,7 +25,8 @@
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
 		"orchestra/testbench": "2.0.*",
-		"orchestra/foundation": "2.0.*"
+		"orchestra/foundation": "2.0.*",
+		"packagist/yuicompressor-bin": "dev-master"
 	},
 	"extra": {
 		"branch-alias": {

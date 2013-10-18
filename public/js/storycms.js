@@ -1,11 +1,11 @@
-jQuery(function ($) { 'use strict';
+jQuery(function onStoryCMSReady($) { 'use strict';
 	var Sluggable, events, title, slug;
 
 	title  = $('#title');
 	slug   = $('input[role="slug-editor"]:first');
 	events = new Javie.Events;
 
-	Sluggable = function (string, allowSlashes) {
+	Sluggable = function(string, allowSlashes) {
 		if (_.isUndefined(string))
 			return '';
 
@@ -15,7 +15,7 @@ jQuery(function ($) { 'use strict';
 				.replace(/ +/g, '-');
 	};
 
-	events.listen('storycms.update: slug', function listenToSlugUpdate (string, forceUpdate) {
+	events.listen('storycms.update: slug', function listenToSlugUpdate(string, forceUpdate) {
 		string = Sluggable(string);
 
 		if (_.isUndefined(forceUpdate))
@@ -33,13 +33,11 @@ jQuery(function ($) { 'use strict';
 		events.fire('storycms.update: slug', [slug.val(), true]);
 	}
 
-	title.on('keyup', function onTitleKeyUp () {
+	title.on('keyup', function onTitleKeyUp() {
 		events.fire('storycms.update: slug', [title.val()]);
 	});
 
-	slug.on('blur', function onSlugBlurFocus () {
+	slug.on('blur', function onSlugBlurFocus() {
 		events.fire('storycms.update: slug', [slug.val(), true]);
 	});
-
-	
 });
