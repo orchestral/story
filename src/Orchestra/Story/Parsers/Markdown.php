@@ -2,26 +2,21 @@
 
 use dflydev\markdown\MarkdownExtraParser;
 
-class Markdown extends Parser {
+class Markdown extends Parser
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected function initiate()
+    {
+        $this->parser = new MarkdownExtraParser;
+    }
 
-	/**
-	 * Initiate a the parser.
-	 *
-	 * @return void
-	 */
-	protected function initiate()
-	{
-		$this->parser = new MarkdownExtraParser;
-	}
-
-	/**
-	 * Initiate a the parser.
-	 *
-	 * @param  string   $content
-	 * @return void
-	 */
-	public function parse($content)
-	{
-		return $this->parser->transformMarkdown($content);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function parse($content)
+    {
+        return $this->parser->transformMarkdown($content);
+    }
 }

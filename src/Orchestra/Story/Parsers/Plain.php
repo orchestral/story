@@ -1,22 +1,20 @@
 <?php namespace Orchestra\Story\Parsers;
 
-class Plain extends Parser {
+class Plain extends Parser
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected function initiate()
+    {
+        //
+    }
 
-	/**
-	 * Initiate a the parser.
-	 *
-	 * @return void
-	 */
-	protected function initiate() {}
-
-	/**
-	 * Initiate a the parser.
-	 *
-	 * @param  string   $content
-	 * @return void
-	 */
-	public function parse($content)
-	{
-		return $content;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function parse($content)
+    {
+        return $content;
+    }
 }

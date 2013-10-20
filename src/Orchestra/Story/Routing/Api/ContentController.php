@@ -10,205 +10,206 @@ use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Validation\Content as ContentValidator;
 
-abstract class ContentController extends EditorController {
+abstract class ContentController extends EditorController
+{
+    /**
+     * Current Resource.
+     *
+     * @var string
+     */
+    protected $resource;
 
-	/**
-	 * Current Resource.
-	 *
-	 * @var string
-	 */
-	protected $resource;
+    /**
+     * Validation instance.
+     *
+     * @var object
+     */
+    protected $validator = null;
 
-	/**
-	 * Validation instance.
-	 *
-	 * @var object
-	 */
-	protected $validator = null;
+    /**
+     * Content CRUD Controller.
+     *
+     * @param \Orchestra\Story\Validation\Content  $validator
+     */
+    public function __construct(ContentValidator $validator)
+    {
+        parent::__construct();
 
-	/**
-	 * Content CRUD Controller.
-	 * 
-	 * @param \Orchestra\Story\Validation\Content  $validator
-	 */
-	public function __construct(ContentValidator $validator)
-	{
-		parent::__construct();
+        $this->validator = $validator;
+    }
 
-		$this->validator = $validator;
-	}
+    /**
+     * Define filters for current controller.
+     *
+     * @return void
+     */
+    protected function setupFilters()
+    {
+        $this->beforeFilter(function () {
+            if (Auth::guest()) {
+                return Redirect::to(handles('orchestra::/'));
+            }
+        });
+    }
 
-	/**
-	 * Define filters for current controller.
-	 *
-	 * @return void
-	 */
-	protected function setupFilters()
-	{
-		$this->beforeFilter(function ()
-		{
-			if (Auth::guest()) return Redirect::to(handles('orchestra::/'));
-		});
-	}
+    /**
+     * List all the contents.
+     *
+     * @return Response
+     */
+    abstract public function index();
 
-	/**
-	 * List all the contents.
-	 *
-	 * @return Response
-	 */
-	public abstract function index();
+    /**
+     * Write a content.
+     *
+     * @return Response
+     */
+    abstract public function create();
 
-	/**
-	 * Write a content.
-	 *
-	 * @return Response
-	 */
-	public abstract function create();
+    /**
+     * Edit a content.
+     *
+     * @return Response
+     */
+    abstract public function edit($id = null);
 
-	/**
-	 * Edit a content.
-	 *
-	 * @return Response
-	 */
-	public abstract function edit($id = null);
+    /**
+     * Store a content.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $input         = Input::all();
+        $input['slug'] = $this->generateUniqueSlug($input);
+        $validation    = $this->validator->on('create')->with($input);
 
-	/**
-	 * Store a content.
-	 *
-	 * @return Response
-	 */	
-	public function store()
-	{
-		$input         = Input::all();
-		$input['slug'] = $this->generateUniqueSlug($input);
-		$validation    = $this->validator->on('create')->with($input);
+        if ($validation->fails()) {
+            return Redirect::to(resources("{$this->resource}/create"))
+                    ->withInput()->withErrors($validation);
+        }
 
-		if ($validation->fails())
-		{
-			return Redirect::to(resources("{$this->resource}/create"))
-					->withInput()->withErrors($validation);
-		}
+        $content          = new Content;
+        $content->title   = $input['title'];
+        $content->content = $input['content'];
+        $content->slug    = $input['slug'];
+        $content->type    = $input['type'];
+        $content->format  = $input['format'];
+        $content->status  = $input['status'];
+        $content->user_id = Auth::user()->id;
 
-		$content          = new Content;
-		$content->title   = $input['title'];
-		$content->content = $input['content'];
-		$content->slug    = $input['slug'];
-		$content->type    = $input['type'];
-		$content->format  = $input['format'];
-		$content->status  = $input['status'];
-		$content->user_id = Auth::user()->id;
-		
-		$this->updatePublishedAt($content) and $content->published_at = Carbon::now();
-		
-		return call_user_func(array($this, 'storeCallback'), $content, $input);
-	}
+        $this->updatePublishedAt($content) and $content->published_at = Carbon::now();
 
-	/**
-	 * Update a content.
-	 *
-	 * @return Response
-	 */	
-	public function update($id = null)
-	{
-		$input         = Input::all();
-		$input['slug'] = $this->generateUniqueSlug($input);
-		$validation    = $this->validator->on('update')->bind(array('id' => $id))->with($input);
+        return call_user_func(array($this, 'storeCallback'), $content, $input);
+    }
 
-		if ($validation->fails())
-		{
-			return Redirect::to(resources("{$this->resource}/{$id}/edit"))
-					->withInput()->withErrors($validation);
-		}
+    /**
+     * Update a content.
+     *
+     * @return Response
+     */
+    public function update($id = null)
+    {
+        $input         = Input::all();
+        $input['slug'] = $this->generateUniqueSlug($input);
+        $validation    = $this->validator->on('update')->bind(array('id' => $id))->with($input);
 
-		$content          = Content::findOrFail($id);
-		$content->title   = $input['title'];
-		$content->content = $input['content'];
-		$content->slug    = $input['slug'];
-		$content->type    = $input['type'];
-		$content->format  = $input['format'];
-		$content->status  = $input['status'];
+        if ($validation->fails()) {
+            return Redirect::to(resources("{$this->resource}/{$id}/edit"))
+                    ->withInput()->withErrors($validation);
+        }
 
-		$this->updatePublishedAt($content) and $content->published_at = Carbon::now();
-		
-		return call_user_func(array($this, 'updateCallback'), $content, $input);
-	}
+        $content          = Content::findOrFail($id);
+        $content->title   = $input['title'];
+        $content->content = $input['content'];
+        $content->slug    = $input['slug'];
+        $content->type    = $input['type'];
+        $content->format  = $input['format'];
+        $content->status  = $input['status'];
 
-	/**
-	 * Store a content.
-	 *
-	 * @return Response
-	 */
-	protected abstract function storeCallback($content, $input);
+        $this->updatePublishedAt($content) and $content->published_at = Carbon::now();
 
-	/**
-	 * Update a content.
-	 *
-	 * @return Response
-	 */
-	protected abstract function updateCallback($content, $input);
+        return call_user_func(array($this, 'updateCallback'), $content, $input);
+    }
 
-	/**
-	 * Delete a content.
-	 *
-	 * @return Response
-	 */
-	public function delete($id = null)
-	{
-		return $this->destroy($id);
-	}
+    /**
+     * Store a content.
+     *
+     * @return Response
+     */
+    abstract protected function storeCallback($content, $input);
 
-	/**
-	 * Delete a content.
-	 *
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		$content = Content::findOrFail($id);
+    /**
+     * Update a content.
+     *
+     * @return Response
+     */
+    abstract protected function updateCallback($content, $input);
 
-		return call_user_func(array($this, 'destroyCallback'), $content);
-	}
+    /**
+     * Delete a content.
+     *
+     * @return Response
+     */
+    public function delete($id = null)
+    {
+        return $this->destroy($id);
+    }
 
-	/**
-	 * Delete a content.
-	 *
-	 * @return Response
-	 */
-	protected abstract function destroyCallback($content);
+    /**
+     * Delete a content.
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $content = Content::findOrFail($id);
 
-	/**
-	 * Generate Unique Slug.
-	 *
-	 * @return string
-	 */
-	protected function generateUniqueSlug($input)
-	{
-		return '_'.$input['type'].'_/'.$input['slug'];
-	}
+        return call_user_func(array($this, 'destroyCallback'), $content);
+    }
 
-	/**
-	 * Determine whether published_at should be updated.
-	 * 
-	 * @param  Orchestra\Story\Model\Content    $content
-	 * @return boolean
-	 */
-	protected function updatePublishedAt($content)
-	{
-		$theBeginning = new Carbon('0000-00-00 00:00:00');
+    /**
+     * Delete a content.
+     *
+     * @return Response
+     */
+    abstract protected function destroyCallback($content);
 
-		if ($content->status !== Content::STATUS_PUBLISH) return false;
+    /**
+     * Generate Unique Slug.
+     *
+     * @return string
+     */
+    protected function generateUniqueSlug($input)
+    {
+        return '_'.$input['type'].'_/'.$input['slug'];
+    }
 
-		switch (true)
-		{
-			case is_null($content->published_at) :
-				# passthru;
-			case $content->published_at->format('Y-m-d H:i:s') === '0000-00-00 00:00:00' :
-				# passthru;
-			case $content->published_at->toDateTimeString() === $theBeginning->toDateTimeString() :
-				return true;
-				break;
-			default :
-				return false;
-		}
-	}
+    /**
+     * Determine whether published_at should be updated.
+     *
+     * @param  Orchestra\Story\Model\Content    $content
+     * @return boolean
+     */
+    protected function updatePublishedAt($content)
+    {
+        $theBeginning = new Carbon('0000-00-00 00:00:00');
+
+        if ($content->status !== Content::STATUS_PUBLISH) {
+            return false;
+        }
+
+        switch (true)
+        {
+            case is_null($content->published_at):
+                # passthru;
+            case $content->published_at->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
+                # passthru;
+            case $content->published_at->toDateTimeString() === $theBeginning->toDateTimeString():
+                return true;
+                break;
+            default:
+                return false;
+        }
+    }
 }
