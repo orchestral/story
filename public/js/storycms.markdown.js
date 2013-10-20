@@ -1,4 +1,4 @@
-jQuery(function onPageLoadAddEditorForMarkdown ($) { 'use strict';
+jQuery(function onPageLoadAddEditorForMarkdown($) { 'use strict';
 	var editor;
 
 	// Only include the editor if the current page contain a textarea.

@@ -14,8 +14,8 @@
 		"classmap": [
 			"src/migrations"
 		],
-		"psr-0": { 
-			"Orchestra\\Story" : "src/" 
+		"psr-0": {
+			"Orchestra\\Story" : "src/"
 		}
 	},
 	"require": {
@@ -25,7 +25,8 @@
 	"require-dev": {
 		"mockery/mockery": "0.8.0",
 		"orchestra/testbench": "2.1.*",
-		"orchestra/foundation": "2.1.*"
+		"orchestra/foundation": "2.1.*",
+		"packagist/yuicompressor-bin": "dev-master"
 	},
 	"extra": {
 		"branch-alias": {

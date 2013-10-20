@@ -5,11 +5,13 @@
     <target name="clean" description="Clean up and create artifact directories">
         <delete dir="${basedir}/build/code-browser"/>
         <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/docs"/>
         <delete dir="${basedir}/build/logs"/>
         <delete dir="${basedir}/build/pdepend"/>
 
         <mkdir dir="${basedir}/build/code-browser"/>
         <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/docs"/>
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/pdepend"/>
     </target>
@@ -18,6 +20,7 @@
         <exec executable="composer.phar">
             <arg value="update"/>
             <arg value="--dev"/>
+            <arg value="--prefer-dist"/>
         </exec>
     </target>
 
@@ -25,6 +28,45 @@
         <exec executable="composer.phar">
             <arg value="dumpautoload"/>
             <arg value="-o"/>
+        </exec>
+    </target>
+
+    <target name="minify-css" description="Minify the CSS">
+        <exec executable="lessc">
+            <arg value="${basedir}/public/css/style.less"/>
+            <arg value="${basedir}/public/css/style.css"/>
+            <arg value="--verbose"/>
+            <arg value="-x"/>
+        </exec>
+    </target>
+
+     <target name="minify-js" description="Minify the CSS">
+        <exec executable="java">
+            <arg value="-jar"/>
+            <arg value="${basedir}/vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar"/>
+            <arg value="--charset"/>
+            <arg value="utf-8"/>
+            <arg value="--preserve-semi"/>
+            <arg value="--line-break"/>
+            <arg value="150"/>
+            <arg value="-o"/>
+            <arg value="${basedir}/public/js/storycms.min.js"/>
+            <arg value="${basedir}/public/js/storycms.js"/>
+        </exec>
+    </target>
+
+    <target name="minify-markdown-js" description="Minify the CSS">
+        <exec executable="java">
+            <arg value="-jar"/>
+            <arg value="${basedir}/vendor/packagist/yuicompressor-bin/bin/yuicompressor.jar"/>
+            <arg value="--charset"/>
+            <arg value="utf-8"/>
+            <arg value="--preserve-semi"/>
+            <arg value="--line-break"/>
+            <arg value="150"/>
+            <arg value="-o"/>
+            <arg value="${basedir}/public/js/storycms.markdown.min.js"/>
+            <arg value="${basedir}/public/js/storycms.markdown.js"/>
         </exec>
     </target>
 
@@ -75,6 +117,7 @@
     <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
             <arg value="--standard=${basedir}/build/phpcs.xml" />
+            <arg value="--ignore=${basedir}/src/config,${basedir}/src/migrations,${basedir}/src/views" />
             <arg path="${basedir}/src" />
         </exec>
     </target>
@@ -113,6 +156,20 @@
         <exec executable="phpunit" failonerror="true" />
     </target>
 
- <target name="build"
-   depends="clean,composer-update,composer-dumpautoload,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb"/>
+    <target name="phpdoc" description="Run build phpdoc">
+        <exec executable="phpdoc">
+            <arg value="-d"/>
+            <arg value="src/"/>
+            <arg value="-i"/>
+            <arg value="*tests*"/>
+            <arg value="-t"/>
+            <arg value="${basedir}/build/docs"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="update,generate"/>
+    <target name="minify" depends="minify-css,minify-js,minify-markdown-js"/>
+    <target name="generate" depends="clean,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb,phpdoc"/>
+    <target name="update" depends="composer-update,composer-dumpautoload"/>
+    <target name="quick-build" depends="composer-dumpautoload,generate"/>
 </project>
