@@ -11,7 +11,8 @@ use Orchestra\Support\Facades\Widget;
 |--------------------------------------------------------------------------
 */
 
-Event::listen('orchestra.ready: admin', 'Orchestra\Story\Event\DashboardHandler@onDashboardView');
+View::composer('orchestra/foundation::dashboard.index', 'Orchestra\Story\Event\DashboardHandler@onDashboardView');
+
 Event::listen('orchestra.form: extension.orchestra/story', function () {
     $placeholder = Widget::make('placeholder.orchestra.extensions');
     $placeholder->add('permalink')->value(View::make('orchestra/story::widgets.help'));
