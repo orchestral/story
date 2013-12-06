@@ -46,6 +46,7 @@ class HomeController extends Controller
     protected function showDefaultPage($slug)
     {
         $page = Content::page()->publish()->where('slug', '=', $slug)->firstOrFail();
+        $slug = preg_replace('/^_page_\//', '', $slug);
 
         if (! View::exists($view = "orchestra/story::pages.{$slug}")) {
             $view = 'orchestra/story::page';
