@@ -17,6 +17,8 @@ class PageController extends ContentController
      */
     protected function getResponse($page, $id, $slug)
     {
+        $slug = preg_replace('/^_page_\//', '', $slug);
+
         if (! View::exists($view = "orchestra/story::pages.{$slug}")) {
             $view = 'orchestra/story::page';
         }
