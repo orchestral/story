@@ -129,7 +129,11 @@ class Content extends Eloquent
      */
     public function getTitleAttribute($value)
     {
-        return stripslashes($value);
+        if (get_magic_quotes_gpc()) {
+            return stripslashes($value);
+        }
+
+        return $value;
     }
 
     /**
@@ -139,7 +143,11 @@ class Content extends Eloquent
      */
     public function getContentAttribute($value)
     {
-        return stripslashes($value);
+        if (get_magic_quotes_gpc()) {
+            return stripslashes($value);
+        }
+
+        return $value;
     }
 
     /**
