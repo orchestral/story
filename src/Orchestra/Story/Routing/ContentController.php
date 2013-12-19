@@ -14,9 +14,12 @@ abstract class ContentController extends Controller
     public function show()
     {
         $params = App::make('router')->current()->parameters();
-        $id     = isset($params['id']) ? $params['id'] : null;
-        $slug   = isset($params['slug']) ? $params['slug'] : null;
-        $page   = $this->getRequestedContent($id, $slug);
+        $id     = array_get($params, 'id');
+        $slug   = array_get($params, 'slug');
+
+        $page = $this->getRequestedContent($id, $slug);
+        $id   = $page->id;
+        $slug = $page->slug;
 
         Site::set('title', $page->title);
 

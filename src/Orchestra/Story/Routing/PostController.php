@@ -23,7 +23,13 @@ class PostController extends ContentController
             $view = 'orchestra/story::post';
         }
 
-        return Facile::view($view)->with(array('id' => $id, 'page' => $page))->render();
+        $data = array(
+            'id'   => $id,
+            'page' => $page,
+            'slug' => $slug,
+        );
+
+        return Facile::view($view)->with($data)->render();
     }
 
     /**
