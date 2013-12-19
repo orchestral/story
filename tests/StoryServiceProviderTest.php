@@ -39,7 +39,7 @@ class StoryServiceProviderTest extends TestCase
     public function testBootMethod()
     {
         $app = $this->app;
-        $app['orchestra.acl'] = $acl = m::mock('alias:\Orchestra\Auth\Acl\Container');
+        $app['orchestra.acl'] = $acl = m::mock('\Orchestra\Auth\Acl\Environment');
         $app['orchestra.app'] = $orchestra = m::mock('\Orchestra\Foundation\Application');
         $app['orchestra.memory'] = $memory = m::mock('\Orchestra\Memory\Drivers\Driver');
         $app['orchestra.extension.config'] = $extconfig = m::mock('ExtensionConfig');
