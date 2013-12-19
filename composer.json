@@ -24,8 +24,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.8.*",
-		"orchestra/testbench": "2.1.*",
-		"orchestra/foundation": "2.1.*",
+		"orchestra/testbench": "2.2.*",
+		"orchestra/foundation": "2.2.*",
 		"packagist/yuicompressor-bin": "2.4.8"
 	},
 	"extra": {
