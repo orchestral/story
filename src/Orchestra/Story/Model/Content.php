@@ -57,7 +57,7 @@ class Content extends Eloquent
      */
     public function scopePage($query)
     {
-        $query->where('type', '=', self::PAGE);
+        $query->with('author')->where('type', '=', self::PAGE);
     }
 
     /**
@@ -67,7 +67,7 @@ class Content extends Eloquent
      */
     public function scopePost($query)
     {
-        $query->where('type', '=', self::POST);
+        $query->with('author')->where('type', '=', self::POST);
     }
 
     /**
