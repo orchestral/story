@@ -40,7 +40,7 @@ class PostsController extends ContentController
      */
     public function index()
     {
-        $contents = Content::with('author')->latestBy(Content::CREATED_AT)->post()->paginate(30);
+        $contents = Content::with('author')->latestBy(Content::CREATED_AT)->post()->paginate();
         $type     = 'post';
 
         Site::set('title', 'List of Posts');
