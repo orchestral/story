@@ -1,6 +1,6 @@
 @include('orchestra/story::widgets.menu')
 
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Support\Facades\Acl;
@@ -8,7 +8,7 @@ use Orchestra\Support\Facades\Site;
 use Orchestra\Support\Str;
 
 $acl  = Acl::make('orchestra/story');
-$auth = Auth::user(); 
+$auth = Auth::user();
 
 if ($acl->can("create {$type}") or $acl->can("manage {$type}")) :
 	Site::set('header::add-button', true);
@@ -31,7 +31,7 @@ endif; ?>
 				<tr>
 					<td colspan="5">No records at the moment.</td>
 				</tr>
-			<?php else : foreach ($contents as $content) : 
+			<?php else : foreach ($contents as $content) :
 				$owner = ($content->user_id === $auth->id); ?>
 				<tr>
 					<td>
@@ -60,5 +60,6 @@ endif; ?>
 			<?php endforeach; endif; ?>
 			</tbody>
 		</table>
+		<?php echo $contents->links(); ?>
 	</div>
 </div>
