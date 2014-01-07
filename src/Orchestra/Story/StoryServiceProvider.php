@@ -22,7 +22,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function registerStoryTeller()
     {
-        $this->app['orchestra.story'] = $this->app->share(function ($app) {
+        $this->app->bindShared('orchestra.story', function ($app) {
             return new Storyteller($app);
         });
     }
@@ -34,7 +34,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function registerFormatManager()
     {
-        $this->app['orchestra.story.format'] = $this->app->share(function ($app) {
+        $this->app->bindShared('orchestra.story.format', function ($app) {
             return new FormatManager($app);
         });
     }
