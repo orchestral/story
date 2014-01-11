@@ -12,7 +12,7 @@
 			<item>
 				<title>{{ $post->title }}</title>
 				<description>
-					{{ htmlspecialchars($post->content) }}
+					{{ htmlspecialchars($post->body) }}
 				</description>
 				<link>{{ $post->link }}</link>
 				<guid isPermaLink="true">{{ $post->link }}</guid>
