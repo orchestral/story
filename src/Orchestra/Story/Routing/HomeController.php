@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
 use Orchestra\Story\Model\Content;
