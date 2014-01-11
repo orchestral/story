@@ -25,14 +25,29 @@ class HomeController extends Controller
     }
 
     /**
+     * Show RSS.
+     *
+     * @return Response
+     */
+    public function rss()
+    {
+        $perPage = Config::get('orchestra/story::per_page', 10);
+        $posts = Content::post()->latestPublish()->limit($perPage)->get();
+
+        return Response::view('orchestra/story::atom', array('posts' => $posts), 200, array(
+            'Content-Type' => 'application/rss+xml; charset=UTF-8',
+        ));
+    }
+
+    /**
      * Show posts.
      *
      * @return Response
      */
-    public function showPosts()
+    public function posts()
     {
         $perPage = Config::get('orchestra/story::per_page', 10);
-        $posts   = Content::post()->latestPublish()->paginate($perPage);
+        $posts = Content::post()->latestPublish()->paginate($perPage);
 
         return Facile::view('orchestra/story::posts')->with(array('posts' => $posts))->render();
     }

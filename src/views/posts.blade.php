@@ -7,15 +7,15 @@
 	@foreach ($posts as $post)
 		<li>
 			<span>
-				<i class="icon-calendar"></i><?php echo $post->published_at->format('M d, Y'); ?>
+				<i class="icon-calendar"></i>{{ $post->published_at->format('M d, Y') }}
 			</span>&nbsp;
 			<strong>
-				<a href="<?php echo $post->link; ?>"><?php echo $post->title; ?></a>
+				<a href="{{ $post->link }}">{{ $post->title }}</a>
 			</strong>
 		</li>
 	@endforeach
 	</ul>
 
-	<?php echo $posts->links(); ?>
+	{{ $posts->links() }}
 </section>
 @stop
