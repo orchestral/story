@@ -18,10 +18,10 @@ class HomeController extends Controller
         $page = Config::get('orchestra/story::default_page', '_posts_');
 
         if ($page === '_posts_') {
-            return $this->showPosts();
+            return $this->posts();
         }
 
-        return $this->showDefaultPage($page);
+        return $this->page($page);
     }
 
     /**
@@ -58,7 +58,7 @@ class HomeController extends Controller
      * @param  string   $slug
      * @return Response
      */
-    protected function showDefaultPage($slug)
+    protected function page($slug)
     {
         $page = Content::page()->publish()->where('slug', '=', $slug)->firstOrFail();
         $slug = preg_replace('/^_page_\//', '', $slug);
