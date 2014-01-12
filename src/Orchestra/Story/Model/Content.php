@@ -151,6 +151,21 @@ class Content extends Eloquent
     }
 
     /**
+     * Accessor for parsed excerpt.
+     *
+     * @return string
+     */
+    public function getExcerptAttribute($value)
+    {
+        $value  = $this->getAttribute('content');
+        $format = $this->attributes['format'];
+
+        list($excerpt, ) = explode('<!--more-->', $value, 2);
+
+        return StoryFormat::driver($format)->parse($excerpt);
+    }
+
+    /**
      * Accessor for parsed content.
      *
      * @return string
