@@ -48,9 +48,6 @@ endif; ?>
 						<span class="meta">
 							<span class="label label-default">{{ Str::title($content->format) }}</span>
 							<span class="label label-success">{{ Str::title($content->status) }}</span>
-							@if ($content->status === 'publish')
-							<a href="{{ $content->link }}" target="_blank">{{ Str::title($content->status) }}</a>
-							@endif
 						</span>
 					</td>
 					<td>{{{ $content->author->fullname }}}</td>
