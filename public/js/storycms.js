@@ -1,43 +1,55 @@
-jQuery(function onStoryCMSReady($) { 'use strict';
-	var Sluggable, events, title, slug;
+(function() {
+  var $, Javie, dispatcher, root, slug, story_bootstrap, _;
 
-	title  = $('#title');
-	slug   = $('input[role="slug-editor"]:first');
-	events = new Javie.Events;
+  root = this;
 
-	Sluggable = function(string, allowSlashes) {
-		if (_.isUndefined(string))
-			return '';
+  $ = root.jQuery;
 
-		return string.toLowerCase()
-				.replace(/^(_post_\/|_page_\/)/g, '')
-				.replace(/[^\w\.]+/g, '-')
-				.replace(/ +/g, '-');
-	};
+  _ = root._;
 
-	events.listen('storycms.update: slug', function listenToSlugUpdate(string, forceUpdate) {
-		string = Sluggable(string);
+  Javie = root.Javie;
 
-		if (_.isUndefined(forceUpdate))
-			forceUpdate = false;
+  dispatcher = Javie.make('event');
 
-		if (slug.data('listen') === true || forceUpdate) 
-			slug.val(string);
-	});
+  story_bootstrap = function($) {
+    var slug, title;
+    title = $('#title');
+    slug = $('input[role="slug-editor"]:first');
+    dispatcher.listen('storycms.update: slug', function(string, force) {
+      string = slug(string);
+      if (force == null) {
+        force = false;
+      }
+      if (slug.data('listren') === true && force) {
+        return slug.val(string);
+      }
+    });
+    if (slug.val() === '') {
+      slug.data('listen', true);
+      dispatcher.fire('storycms.update: slug', [title.val(), true]);
+    } else {
+      slug.data('listen', false);
+      dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+    }
+    title.on('keyup', function() {
+      return dispatcher.fire('storycms.update: slug', [title.val()]);
+    });
+    slug.on('blur', function() {
+      return dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+    });
+    return true;
+  };
 
-	if (slug.val() === '') {
-		slug.data('listen', true);
-		events.fire('storycms.update: slug', [title.val(), true]);
-	} else {
-		slug.data('listen', false);
-		events.fire('storycms.update: slug', [slug.val(), true]);
-	}
+  slug = function(string, separator) {
+    if (string == null) {
+      string = '';
+    }
+    if (separator == null) {
+      separator = '-';
+    }
+    return string.toLowerCase().replace(/^(_post_\/|_page_\/)/g, '').replace(/[^\w\.]+/g, separator).replace(/\s+/g, separator);
+  };
 
-	title.on('keyup', function onTitleKeyUp() {
-		events.fire('storycms.update: slug', [title.val()]);
-	});
+  $(story_bootstrap);
 
-	slug.on('blur', function onSlugBlurFocus() {
-		events.fire('storycms.update: slug', [slug.val(), true]);
-	});
-});
+}).call(this);
