@@ -23,10 +23,9 @@
 		"dflydev/markdown": "1.0.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.8.*",
+		"mockery/mockery": "0.9.*",
 		"orchestra/testbench": "2.2.*",
-		"orchestra/foundation": "2.2.*",
-		"packagist/yuicompressor-bin": "2.4.8"
+		"orchestra/foundation": "2.2.*"
 	},
 	"extra": {
 		"branch-alias": {
