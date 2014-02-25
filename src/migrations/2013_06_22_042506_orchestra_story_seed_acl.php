@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-
 use Orchestra\Support\Facades\Acl;
 use Orchestra\Support\Facades\App;
 use Orchestra\Model\Role;
