@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Model\Content;
 
@@ -15,7 +16,7 @@ class OrchestraStoryMakeContentsTable extends Migration
     {
         $format = Config::get('orchestra/story::config.default_format', 'markdown');
 
-        Schema::create('story_contents', function ($table) use ($format) {
+        Schema::create('story_contents', function (Blueprint $table) use ($format) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('slug');
