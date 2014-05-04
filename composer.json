@@ -14,8 +14,8 @@
 		"classmap": [
 			"src/migrations"
 		],
-		"psr-0": {
-			"Orchestra\\Story" : "src/"
+		"psr-4": {
+			"Orchestra\\Story\\" : "src/Story/"
 		}
 	},
 	"require": {
