@@ -24,8 +24,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"orchestra/testbench": "2.2.*",
-		"orchestra/foundation": "2.2.*"
+		"orchestra/testbench": "2.3.*",
+		"orchestra/foundation": "2.3.*"
 	},
 	"extra": {
 		"branch-alias": {
