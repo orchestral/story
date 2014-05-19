@@ -10,7 +10,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
 	"require": {
-		"orchestra/story": "2.1.*"
+		"orchestra/story": "2.2.*"
 	}
 }
 ```
