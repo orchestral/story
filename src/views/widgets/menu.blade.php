@@ -15,6 +15,9 @@ use Orchestra\Support\Facades\App; ?>
 	<li class="{{ Request::is('*resources/storycms.pages*') ? 'active' : '' }}">
 		<a href="{{ resources('storycms.pages') }}">Pages</a>
 	</li>
+	<li class="{{ Request::is('*resources/storycms.navigations*') ? 'active' : '' }}">
+        <a href="{{ resources('storycms.navigations.group') }}">Navigation</a>
+    </li>
 </ul>
 <ul class="nav navbar-nav pull-right">
 	<li>

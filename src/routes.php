@@ -44,4 +44,6 @@ Event::listen('orchestra.started: admin', function () {
 
     $story['posts'] = 'resource:Orchestra\Story\Routing\Api\PostsController';
     $story['pages'] = 'resource:Orchestra\Story\Routing\Api\PagesController';
+    $story['navigations'] = 'resource:Orchestra\Story\Routing\Api\NavigationsController';
+    $story['navigations.group'] = 'resource:Orchestra\Story\Routing\Api\NavigationsGroupController';
 });
