@@ -1,5 +1,5 @@
 (function() {
-  var $, Javie, dispatcher, root, slug, story_bootstrap, _;
+  var $, Javie, dispatcher, root, slugify, story_bootstrap, _;
 
   root = this;
 
@@ -16,7 +16,7 @@
     title = $('#title');
     slug = $('input[role="slug-editor"]:first');
     dispatcher.listen('storycms.update: slug', function(string, force) {
-      string = slug(string);
+      string = slugify(string);
       if (force == null) {
         force = false;
       }
@@ -40,7 +40,7 @@
     return true;
   };
 
-  slug = function(string, separator) {
+  slugify = function(string, separator) {
     if (string == null) {
       string = '';
     }

@@ -9,7 +9,7 @@ story_bootstrap = ($) ->
     slug  = $('input[role="slug-editor"]:first')
 
     dispatcher.listen('storycms.update: slug', (string, force) ->
-        string = slug(string)
+        string = slugify(string)
         force ?= false
 
         if slug.data('listren') is yes and force
@@ -33,7 +33,7 @@ story_bootstrap = ($) ->
 
     true
 
-slug = (string, separator) ->
+slugify = (string, separator) ->
     string ?= ''
     separator ?= '-'
 
