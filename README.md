@@ -22,7 +22,7 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "orchestra/story=2.1.*"
+composer require "orchestra/story=2.2.*"
 ```
 
 ### Setup
