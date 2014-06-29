@@ -5,6 +5,11 @@ title: Story Change Log
 
 ## Version 2.1 {#v2-1}
 
+### v2.1.2 {#v2-1-2}
+
+* Add `gulp` and restructure JavaScript to use CoffeeScript.
+* Fixes JavaScript bug preventing the page to load markdown editor.
+
 ### v2.1.1 {#v2-1-1}
 
 * Add rss routing.
