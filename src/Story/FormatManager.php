@@ -82,7 +82,7 @@ class FormatManager extends Manager
      * @param  string   $name
      * @return string
      */
-    protected function getDefaultDriver()
+    public function getDefaultDriver()
     {
         return $this->app['config']->get('orchestra/story::config.default_format', 'markdown');
     }
