@@ -3,6 +3,18 @@ title: Story Change Log
 
 ---
 
+## Version 2.1 {#v2-1}
+
+### v2.1.1 {#v2-1-1}
+
+* Add rss routing.
+* Add `<!—more—>` tag to create excerpt.
+
+### v2.1.0 {#v2-1-0}
+
+* Add support for Orchestra Platform 2.1
+* Implement [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard.
+
 ## Version 2.0 {#v2-0}
 
 ### v2.0.6 {#v2-0-6}
