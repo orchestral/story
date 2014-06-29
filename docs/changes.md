@@ -3,6 +3,18 @@ title: Story Change Log
 
 ---
 
+## Version 2.2 {#v2-2}
+
+### v2.2.1 {#v2-2-1}
+
+* Fixes JavaScript bug preventing the page to load markdown editor.
+
+### v2.2.0 {#v2-2-0}
+
+* Bump minimum version to PHP v5.4.0.
+* Add support for Orchestra Platform 2.2.
+* Add `gulp` and restructure JavaScript to use CoffeeScript.
+
 ## Version 2.1 {#v2-1}
 
 ### v2.1.2 {#v2-1-2}
