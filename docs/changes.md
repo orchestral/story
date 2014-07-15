@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.2 {#v2-2-2}
+
+* Fixes invalid reference to `markdown.min.js` asset.
+
 ### v2.2.1 {#v2-2-1}
 
 * Fixes JavaScript bug preventing the page to load markdown editor.
@@ -16,6 +20,10 @@ title: Story Change Log
 * Add `gulp` and restructure JavaScript to use CoffeeScript.
 
 ## Version 2.1 {#v2-1}
+
+### v2.1.3 {#v2-1-3}
+
+* Fixes invalid reference to `markdown.min.js` asset.
 
 ### v2.1.2 {#v2-1-2}
 
