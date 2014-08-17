@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Story\Event;
 
-use Orchestra\Support\Facades\Form;
 use Orchestra\Story\Facades\StoryFormat;
 use Orchestra\Story\Model\Content;
 

@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story\Routing;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
 use Orchestra\Story\Model\Content;
@@ -13,7 +14,7 @@ class PageController extends ContentController
      * @param  \Orchestra\Story\Model\Content   $page
      * @param  integer                          $id
      * @param  string                           $slug
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     protected function getResponse($page, $id, $slug)
     {
