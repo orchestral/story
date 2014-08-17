@@ -44,6 +44,8 @@ class Content extends Eloquent
 
     /**
      * Belongs to relationship with User.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function author()
     {
@@ -53,6 +55,7 @@ class Content extends Eloquent
     /**
      * Query scope for pages.
      *
+     * @param  object   $query
      * @return void
      */
     public function scopePage($query)
@@ -63,6 +66,7 @@ class Content extends Eloquent
     /**
      * Query scope for posts.
      *
+     * @param  object   $query
      * @return void
      */
     public function scopePost($query)
@@ -73,6 +77,7 @@ class Content extends Eloquent
     /**
      * Query scope for published.
      *
+     * @param  object   $query
      * @return void
      */
     public function scopePublish($query)
@@ -83,6 +88,7 @@ class Content extends Eloquent
     /**
      * Query scope for latest published.
      *
+     * @param  object   $query
      * @return void
      */
     public function scopeLatestPublish($query)
@@ -93,6 +99,9 @@ class Content extends Eloquent
     /**
      * Query scope for latest by specified field.
      *
+     * @param  object       $query
+     * @param  string|null  $orderBy
+     * @param  int|null     $take
      * @return void
      */
     public function scopeLatestBy($query, $orderBy = null, $take = null)
@@ -111,6 +120,8 @@ class Content extends Eloquent
     /**
      * Query scope for latest published.
      *
+     * @param  object   $query
+     * @param  int|null $take
      * @return void
      */
     public function scopeLatest($query, $take = null)
@@ -125,6 +136,7 @@ class Content extends Eloquent
     /**
      * Accessor for title.
      *
+     * @param  mixed    $value
      * @return string
      */
     public function getTitleAttribute($value)
@@ -139,6 +151,7 @@ class Content extends Eloquent
     /**
      * Accessor for content.
      *
+     * @param  mixed    $value
      * @return string
      */
     public function getContentAttribute($value)
@@ -153,6 +166,7 @@ class Content extends Eloquent
     /**
      * Accessor for parsed excerpt.
      *
+     * @param  mixed    $value
      * @return string
      */
     public function getExcerptAttribute($value)
@@ -168,6 +182,7 @@ class Content extends Eloquent
     /**
      * Accessor for parsed content.
      *
+     * @param  mixed    $value
      * @return string
      */
     public function getBodyAttribute($value)
