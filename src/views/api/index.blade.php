@@ -1,6 +1,6 @@
 @include('orchestra/story::widgets.menu')
 
-<?
+<?php
 
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Support\Facades\Acl;
