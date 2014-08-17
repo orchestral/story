@@ -42,7 +42,7 @@ class FormatManager extends Manager
      *
      * @param  string   $name
      * @param  Closure  $callback
-     * @return void
+     * @return $this
      */
     public function extend($name, Closure $callback)
     {

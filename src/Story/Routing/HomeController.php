@@ -12,7 +12,7 @@ class HomeController extends Controller
     /**
      * Get landing page.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -28,7 +28,7 @@ class HomeController extends Controller
     /**
      * Show RSS.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function rss()
     {
@@ -43,7 +43,7 @@ class HomeController extends Controller
     /**
      * Show posts.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function posts()
     {
@@ -57,7 +57,7 @@ class HomeController extends Controller
      * Show default page.
      *
      * @param  string   $slug
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     protected function page($slug)
     {

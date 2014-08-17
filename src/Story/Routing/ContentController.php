@@ -9,7 +9,7 @@ abstract class ContentController extends Controller
     /**
      * Show the content.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show()
     {
@@ -33,7 +33,7 @@ abstract class ContentController extends Controller
      * @param  \Orchestra\Story\Model\Content   $page
      * @param  integer                          $id
      * @param  string                           $slug
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     abstract protected function getResponse($page, $id, $slug);
 
