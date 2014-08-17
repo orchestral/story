@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Routing;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Site;
 
@@ -14,8 +15,8 @@ abstract class ContentController extends Controller
     public function show()
     {
         $params = App::make('router')->current()->parameters();
-        $id     = array_get($params, 'id');
-        $slug   = array_get($params, 'slug');
+        $id     = Arr::get($params, 'id');
+        $slug   = Arr::get($params, 'slug');
 
         $page = $this->getRequestedContent($id, $slug);
         $id   = $page->id;
