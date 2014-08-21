@@ -5,6 +5,11 @@ title: Story Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.3 {#v2-2-3}
+
+* Utilize `Illuminate\Support\Arr`.
+* Small code improvement.
+
 ### v2.2.2 {#v2-2-2}
 
 * Fixes invalid reference to `markdown.min.js` asset.
