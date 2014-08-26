@@ -53,6 +53,10 @@ class StoryServiceProvider extends ServiceProvider
         include "{$path}/start/global.php";
         include "{$path}/start/events.php";
         include "{$path}/filters.php";
-        include "{$path}/routes.php";
+        include "{$path}/resources.php";
+
+        if (! $this->app->routesAreCached()) {
+            include "{$path}/routes.php";
+        }
     }
 }
