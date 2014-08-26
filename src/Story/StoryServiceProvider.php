@@ -50,6 +50,17 @@ class StoryServiceProvider extends ServiceProvider
 
         $this->package('orchestra/story', 'orchestra/story', $path);
 
+        $this->bootStartFiles($path);
+    }
+
+    /**
+     * Boot start up files.
+     *
+     * @param  string   $path
+     * @return void
+     */
+    protected function bootStartFiles($path)
+    {
         include "{$path}/start/global.php";
         include "{$path}/start/events.php";
         include "{$path}/filters.php";

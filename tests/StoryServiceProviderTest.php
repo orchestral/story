@@ -51,7 +51,11 @@ class StoryServiceProviderTest extends TestCase
         $acl->shouldReceive('make')->once()->with('orchestra/story')->andReturn($acl)
             ->shouldReceive('attach')->once()->with($memory)->andReturn(null);
 
-        $stub = new StoryServiceProvider($app);
+        $stub = m::mock('\Orchestra\Story\StoryServiceProvider[bootStartFiles]', array($app))
+                ->shouldAllowMockingProtectedMethods();
+
+        $stub->shouldReceive('bootStartFiles')->once();
+
         $stub->boot();
     }
 }

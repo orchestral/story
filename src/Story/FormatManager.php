@@ -77,9 +77,8 @@ class FormatManager extends Manager
     }
 
     /**
-     * Create Default driver.
+     * Create default driver.
      *
-     * @param  string   $name
      * @return string
      */
     public function getDefaultDriver()
