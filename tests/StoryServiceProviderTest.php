@@ -39,22 +39,21 @@ class StoryServiceProviderTest extends TestCase
     public function testBootMethod()
     {
         $app = $this->app;
-        $app['orchestra.acl'] = $acl = m::mock('\Orchestra\Auth\Acl\Environment');
+        $app['orchestra.acl'] = $acl = m::mock('\Orchestra\Auth\Acl\Factory');
         $app['orchestra.app'] = $orchestra = m::mock('\Orchestra\Foundation\Application');
         $app['orchestra.memory'] = $memory = m::mock('\Orchestra\Memory\Drivers\Driver');
-        $app['orchestra.extension.config'] = $extconfig = m::mock('ExtensionConfig');
+        $app['orchestra.extension.config'] = $extconfig = m::mock('\Orchestra\Extension\ConfigManager');
 
         $orchestra->shouldReceive('memory')->once()->andReturn($memory)
-            ->shouldReceive('group')->once()->with('orchestra/story', 'cms')->andReturn(array('prefix' => 'cms'));
+            ->shouldReceive('group')->once()->with('orchestra/story', 'cms', [], m::type('Closure'))->andReturn(array('prefix' => 'cms'));
         $extconfig->shouldReceive('map')->once()->with('orchestra/story', m::type('Array'))->andReturn(null);
 
         $acl->shouldReceive('make')->once()->with('orchestra/story')->andReturn($acl)
             ->shouldReceive('attach')->once()->with($memory)->andReturn(null);
 
-        $stub = m::mock('\Orchestra\Story\StoryServiceProvider[bootStartFiles]', array($app))
-                ->shouldAllowMockingProtectedMethods();
+        $stub = new StoryServiceProvider($app);
 
-        $stub->shouldReceive('bootStartFiles')->once();
+        //$stub->shouldReceive('bootStartFiles')->once();
 
         $stub->boot();
     }
