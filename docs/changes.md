@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.4 {#v2-2-4}
+
+* Fixes slug generator.
+
 ### v2.2.3 {#v2-2-3}
 
 * Utilize `Illuminate\Support\Arr`.
@@ -25,6 +29,10 @@ title: Story Change Log
 * Add `gulp` and restructure JavaScript to use CoffeeScript.
 
 ## Version 2.1 {#v2-1}
+
+### v2.1.4 {#v2-1-4}
+
+* Fixes slug generator.
 
 ### v2.1.3 {#v2-1-3}
 
