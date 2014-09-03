@@ -12,7 +12,7 @@ story_bootstrap = ($) ->
         string = slugify(string)
         force ?= false
 
-        if slug.data('listen') is yes and force
+        if slug.data('listen') is yes or force
             slug.val(string)
     )
 
@@ -25,10 +25,15 @@ story_bootstrap = ($) ->
 
     title.on('keyup', () ->
         dispatcher.fire('storycms.update: slug', [title.val()])
+
+        return
     )
 
     slug.on('blur', () ->
         dispatcher.fire('storycms.update: slug', [slug.val(), true])
+        slug.data('listen', false) if slug.val() is not ''
+
+        return
     )
 
     true
