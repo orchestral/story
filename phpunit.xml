@@ -27,7 +27,7 @@
 
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/Orchestra/Story</directory>
+            <directory suffix=".php">src/Story</directory>
         </whitelist>
     </filter>
 </phpunit>
