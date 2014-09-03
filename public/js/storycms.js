@@ -20,7 +20,7 @@
       if (force == null) {
         force = false;
       }
-      if (slug.data('listren') === true && force) {
+      if (slug.data('listen') === true && force) {
         return slug.val(string);
       }
     });

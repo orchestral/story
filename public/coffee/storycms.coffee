@@ -12,7 +12,7 @@ story_bootstrap = ($) ->
         string = slugify(string)
         force ?= false
 
-        if slug.data('listren') is yes and force
+        if slug.data('listen') is yes and force
             slug.val(string)
     )
 
