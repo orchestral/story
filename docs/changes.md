@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 2.1 {#v2-1}
 
+### v2.1.4 {#v2-1-4}
+
+* Fixes slug generator.
+
 ### v2.1.3 {#v2-1-3}
 
 * Fixes invalid reference to `markdown.min.js` asset.
