@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 2.2 {#v2-2}
 
+### v2.2.4 {#v2-2-4}
+
+* Fixes slug generator.
+
 ### v2.2.3 {#v2-2-3}
 
 * Utilize `Illuminate\Support\Arr`.
