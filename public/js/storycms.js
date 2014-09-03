@@ -20,7 +20,7 @@
       if (force == null) {
         force = false;
       }
-      if (slug.data('listen') === true && force) {
+      if (slug.data('listen') === true || force) {
         return slug.val(string);
       }
     });
@@ -32,10 +32,13 @@
       dispatcher.fire('storycms.update: slug', [slug.val(), true]);
     }
     title.on('keyup', function() {
-      return dispatcher.fire('storycms.update: slug', [title.val()]);
+      dispatcher.fire('storycms.update: slug', [title.val()]);
     });
     slug.on('blur', function() {
-      return dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+      dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+      if (slug.val() === !'') {
+        slug.data('listen', false);
+      }
     });
     return true;
   };
