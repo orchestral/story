@@ -1,6 +1,6 @@
 <?php
 
-use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\ACL;
 use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Config;
 
