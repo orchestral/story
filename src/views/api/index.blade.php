@@ -37,11 +37,11 @@ endif; ?>
 					<td>
 						<strong>
 							@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("update {$content->type}")))
-							<a href="{{ resources("storycms.{$type}s/{$content->id}/edit") }}">
-								{{{ $content->title }}}
+							<a href="{!! resources("storycms.{$type}s/{$content->id}/edit") !!}">
+								{{ $content->title }}
 							</a>
 							@else
-							{{{ $content->title }}}
+							{{ $content->title }}
 							@endif
 						</strong>
 						<br>
@@ -50,11 +50,11 @@ endif; ?>
 							<span class="label label-success">{{ Str::title($content->status) }}</span>
 						</span>
 					</td>
-					<td>{{{ $content->author->fullname }}}</td>
+					<td>{{ $content->author->fullname }}</td>
 					<td>
 						<div class="btn-group">
 						@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("delete {$content->type}")))
-							<a href="{{ resources("storycms.{$type}s/{$content->id}/delete") }}" class="btn btn-mini btn-danger">
+							<a href="{!! resources("storycms.{$type}s/{$content->id}/delete") !!}" class="btn btn-mini btn-danger">
 								Delete
 							</a>
 						@endif
@@ -66,6 +66,6 @@ endif; ?>
 			</tbody>
 		</table>
 
-		{{ $contents->links() }}
+		{!! $contents->links() !!}
 	</div>
 </div>
