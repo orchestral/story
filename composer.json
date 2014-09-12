@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/story",
-	"description": "CMS Extension for Orchestra Platform 2",
+	"description": "CMS Extension for Orchestra Platform",
 	"license": "MIT",
 	"keywords": ["orchestra-platform", "orchestral", "laravel", "cms"],
 	"authors": [
@@ -24,12 +24,12 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"orchestra/testbench": "2.3.*",
-		"orchestra/foundation": "2.3.*"
+		"orchestra/testbench": "3.0.*",
+		"orchestra/foundation": "3.0.*"
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3-dev"
+			"dev-master": "3.0-dev"
 		}
 	},
 	"minimum-stability": "dev"

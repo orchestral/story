@@ -1,7 +1,7 @@
 Story CMS Extension
 ==============
 
-Official Content Management System for Orchestra Platform, based on [Cello CMS](https://github.com/orchestral/cello) and inspired by [WardrobeCMS](http://wardrobecms.com).
+Content Management System for Orchestra Platform, based on [Cello CMS](https://github.com/orchestral/cello) and inspired by [WardrobeCMS](http://wardrobecms.com).
 
 ## Installation
 
@@ -10,7 +10,7 @@ To install through composer, simply put the following in your `composer.json` fi
 ```json
 {
 	"require": {
-		"orchestra/story": "2.3.*"
+		"orchestra/story": "3.0.*"
 	}
 }
 ```
@@ -22,7 +22,7 @@ And then run `composer install` to fetch the package.
 You could also simplify the above code by using the following command:
 
 ```
-composer require "orchestra/story=2.3.*"
+composer require "orchestra/story=3.0.*"
 ```
 
 ### Setup
