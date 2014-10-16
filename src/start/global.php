@@ -1,8 +1,8 @@
 <?php
 
 use Orchestra\Support\Facades\ACL;
-use Orchestra\Support\Facades\App;
 use Orchestra\Support\Facades\Config;
+use Orchestra\Support\Facades\Foundation;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +10,7 @@ use Orchestra\Support\Facades\Config;
 |--------------------------------------------------------------------------
 */
 
-Acl::make('orchestra/story')->attach(App::memory());
+Acl::make('orchestra/story')->attach(Foundation::memory());
 
 /*
 |--------------------------------------------------------------------------

@@ -1,20 +1,14 @@
 <?php namespace Orchestra\Story\Routing;
 
-use Illuminate\Support\Facades\App;
+use Orchestra\Story\Model\Content;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
-use Orchestra\Story\Model\Content;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends ContentController
 {
     /**
-     * Return the response, this method allow each content type to be group
-     * via different set of view.
-     *
-     * @param  \Orchestra\Story\Model\Content   $page
-     * @param  integer                          $id
-     * @param  string                           $slug
-     * @return \Illuminate\Http\Response
+     * {@inheritdoc}
      */
     protected function getResponse($page, $id, $slug)
     {
@@ -34,11 +28,7 @@ class PostController extends ContentController
     }
 
     /**
-     * Get the requested page/content from Model.
-     *
-     * @param  integer  $id
-     * @param  string   $slug
-     * @return \Orchestra\Story\Model\Content
+     * {@inheritdoc}
      */
     protected function getRequestedContent($id, $slug)
     {
@@ -48,6 +38,6 @@ class PostController extends ContentController
             return Content::post()->publish()->where('slug', "_post_/{$slug}")->firstOrFail();
         }
 
-        return App::abort(404);
+        throw new NotFoundHttpException;
     }
 }

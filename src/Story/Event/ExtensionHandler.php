@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Story\Event;
 
-use Orchestra\Story\Facades\StoryFormat;
 use Orchestra\Story\Model\Content;
+use Orchestra\Story\Facades\StoryFormat;
 
 class ExtensionHandler
 {

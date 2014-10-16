@@ -2,23 +2,23 @@
 
 use Carbon\Carbon;
 use Orchestra\Story\Model\Content;
+use Illuminate\Contracts\Foundation\Application;
 
 class Storyteller
 {
     /**
      * Application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
     /**
      * Create a new instance of Storytelling.
      *
-     * @param  \Illuminate\Foundation\Application   $app
-     * @return void
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      */
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }
@@ -26,6 +26,8 @@ class Storyteller
     /**
      * Generate URL.
      *
+     * @param  string  $type
+     * @param  \Orchestra\Story\Model\Content|null  $content
      * @return string
      */
     public function url($type, $content = null)
@@ -43,7 +45,9 @@ class Storyteller
     /**
      * Generate URL by content.
      *
-     * @param  string
+     * @param  string  $type
+     * @param  \Orchestra\Story\Model\Content|null  $content
+     * @return string
      */
     public function permalink($type, $content = null)
     {
@@ -53,14 +57,14 @@ class Storyteller
             return handles("orchestra/story::/");
         }
 
-        if (is_null($published = $content->published_at)) {
+        if (is_null($published = $content->getAttribute('published_at'))) {
             $published = Carbon::now();
         }
 
         $permalinks = array(
-            'id'    => $content->id,
-            'slug'  => str_replace(array('_post_/', '_page_/'), '', $content->slug),
-            'type'  => $content->type,
+            'id'    => $content->getAttribute('id'),
+            'slug'  => str_replace(array('_post_/', '_page_/'), '', $content->getAttribute('slug')),
+            'type'  => $content->getAttribute('type'),
             'date'  => $published->format('Y-m-d'),
             'year'  => $published->format('Y'),
             'month' => $published->format('m'),

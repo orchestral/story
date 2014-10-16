@@ -1,18 +1,10 @@
 @section('orchestra/story::primary_menu')
 
-<?php
-
-use Illuminate\Support\Facades\HTML;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Fluent;
-use Orchestra\Support\Facades\App; ?>
-
 <ul class="nav navbar-nav">
-	<li class="{!! Request::is('*resources/storycms.posts*') ? 'active' : '' !!}">
+	<li class="{!! app('request')->is('*resources/storycms.posts*') ? 'active' : '' !!}">
 		<a href="{!! resources('storycms.posts') !!}">Posts</a>
 	</li>
-	<li class="{!! Request::is('*resources/storycms.pages*') ? 'active' : '' !!}">
+	<li class="{!! app('request')->is('*resources/storycms.pages*') ? 'active' : '' !!}">
 		<a href="{!! resources('storycms.pages') !!}">Pages</a>
 	</li>
 </ul>
@@ -25,11 +17,11 @@ use Orchestra\Support\Facades\App; ?>
 
 <?php
 
-$navbar = new Fluent([
+$navbar = new \Illuminate\Support\Fluent([
 	'id'    => 'story',
 	'title' => 'Story CMS',
 	'url'   => resources('storycms'),
-	'menu'  => View::yieldContent('orchestra/story::primary_menu'),
+	'menu'  => app('view')->yieldContent('orchestra/story::primary_menu'),
 ]); ?>
 
 @decorator('navbar', $navbar)

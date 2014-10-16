@@ -1,10 +1,9 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
-use Orchestra\Support\Facades\Messages;
-use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
+use Orchestra\Support\Facades\Meta;
+use Illuminate\Http\RedirectResponse;
+use Orchestra\Support\Facades\Messages;
 
 class PagesController extends ContentController
 {
@@ -19,104 +18,110 @@ class PagesController extends ContentController
 
         $this->resource = 'storycms.pages';
 
-        $this->beforeFilter('orchestra.story:create-page', array(
-            'only' => array('create', 'store'),
-        ));
+        $this->beforeFilter('orchestra.story:create-page', [
+            'only' => ['create', 'store'],
+        ]);
 
-        $this->beforeFilter('orchestra.story:update-page', array(
-            'only' => array('edit', 'update'),
-        ));
+        $this->beforeFilter('orchestra.story:update-page', [
+            'only' => ['edit', 'update'],
+        ]);
 
-        $this->beforeFilter('orchestra.story:delete-page', array(
-            'only' => array('delete', 'destroy'),
-        ));
+        $this->beforeFilter('orchestra.story:delete-page', [
+            'only' => ['delete', 'destroy'],
+        ]);
     }
 
     /**
      * List all the pages.
      *
-     * @return Response
+     * @return mixed
      */
     public function index()
     {
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate();
         $type     = 'page';
 
-        Site::set('title', 'List of Pages');
+        Meta::set('title', 'List of Pages');
 
-        return View::make('orchestra/story::api.index', compact('contents', 'type'));
+        return view('orchestra/story::api.index', compact('contents', 'type'));
     }
 
     /**
      * Write a page.
      *
-     * @return Response
+     * @return mixed
      */
     public function create()
     {
-        Site::set('title', 'Write a Page');
+        Meta::set('title', 'Write a Page');
 
-        $content         = new Content;
-        $content->type   = Content::PAGE;
-        $content->format = $this->editorFormat;
+        $content = new Content;
+        $content->setAttribute('type', Content::PAGE);
+        $content->setAttribute('format', $this->editorFormat);
 
-        return View::make('orchestra/story::api.editor', array(
+        return view('orchestra/story::api.editor', [
             'content' => $content,
             'url'     => resources('storycms.pages'),
             'method'  => 'POST',
-        ));
+        ]);
     }
 
     /**
      * Edit a page.
      *
-     * @return Response
+     * @param  int  $id
+     * @return mixed
      */
     public function edit($id = null)
     {
-        Site::set('title', 'Write a Page');
+        Meta::set('title', 'Write a Page');
 
         $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
 
-        return View::make('orchestra/story::api.editor', array(
+        return view('orchestra/story::api.editor', [
             'content' => $content,
             'url'     => resources("storycms.pages/{$content->id}"),
             'method'  => 'PUT',
-        ));
+        ]);
     }
 
     /**
      * Store a page.
      *
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     * @return mixed
      */
     protected function storeCallback($content, $input)
     {
         $content->save();
 
         Messages::add('success', 'Page has been created.');
-        return Redirect::to(resources("storycms.pages/{$content->id}/edit"));
+
+        return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
     }
 
     /**
      * Update a page.
      *
-     * @access protected
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     * @return mixed
      */
     protected function updateCallback($content, $input)
     {
         $content->save();
 
         Messages::add('success', 'Page has been updated.');
-        return Redirect::to(resources("storycms.pages/{$content->id}/edit"));
+
+        return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
     }
 
     /**
      * Delete a page.
      *
-     * @access protected
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @return mixed
      */
     protected function destroyCallback($content)
     {
@@ -124,6 +129,6 @@ class PagesController extends ContentController
 
         Messages::add('success', 'Page has been deleted.');
 
-        return Redirect::to(resources('storycms.pages'));
+        return new RedirectResponse(resources('storycms.pages'));
     }
 }

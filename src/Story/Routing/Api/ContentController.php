@@ -1,13 +1,10 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
 use Carbon\Carbon;
+use Orchestra\Story\Model\Content;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
-use Orchestra\Support\Facades\App;
-use Orchestra\Support\Facades\Site;
-use Orchestra\Story\Model\Content;
+use Illuminate\Http\RedirectResponse;
 use Orchestra\Story\Validation\Content as ContentValidator;
 
 abstract class ContentController extends EditorController
@@ -24,7 +21,7 @@ abstract class ContentController extends EditorController
      *
      * @var object
      */
-    protected $validator = null;
+    protected $validator;
 
     /**
      * Content CRUD Controller.
@@ -47,7 +44,7 @@ abstract class ContentController extends EditorController
     {
         $this->beforeFilter(function () {
             if (Auth::guest()) {
-                return Redirect::to(handles('orchestra::/'));
+                return new RedirectResponse(handles('orchestra::/'));
             }
         });
     }
@@ -55,28 +52,29 @@ abstract class ContentController extends EditorController
     /**
      * List all the contents.
      *
-     * @return Response
+     * @return mixed
      */
     abstract public function index();
 
     /**
      * Write a content.
      *
-     * @return Response
+     * @return mixed
      */
     abstract public function create();
 
     /**
      * Edit a content.
      *
-     * @return Response
+     * @param  int  $id
+     * @return mixed
      */
     abstract public function edit($id = null);
 
     /**
      * Store a content.
      *
-     * @return Response
+     * @return mixed
      */
     public function store()
     {
@@ -85,20 +83,20 @@ abstract class ContentController extends EditorController
         $validation    = $this->validator->on('create')->with($input);
 
         if ($validation->fails()) {
-            return Redirect::to(resources("{$this->resource}/create"))
+            return (new RedirectResponse(resources("{$this->resource}/create")))
                     ->withInput()->withErrors($validation);
         }
 
-        $content          = new Content;
-        $content->title   = $input['title'];
-        $content->content = $input['content'];
-        $content->slug    = $input['slug'];
-        $content->type    = $input['type'];
-        $content->format  = $input['format'];
-        $content->status  = $input['status'];
-        $content->user_id = Auth::user()->id;
+        $content = new Content;
+        $content->setAttribute('title', $input['title']);
+        $content->setAttribute('content', $input['content']);
+        $content->setAttribute('slug', $input['slug']);
+        $content->setAttribute('type', $input['type']);
+        $content->setAttribute('format', $input['format']);
+        $content->setAttribute('status', $input['status']);
+        $content->setAttribute('user_id', Auth::user()->id);
 
-        $this->updatePublishedAt($content) and $content->published_at = Carbon::now();
+        $this->updatePublishedAt($content) && $content->setAttribute('published_at', Carbon::now());
 
         return call_user_func(array($this, 'storeCallback'), $content, $input);
     }
@@ -106,7 +104,8 @@ abstract class ContentController extends EditorController
     /**
      * Update a content.
      *
-     * @return Response
+     * @param  int  $id
+     * @return mixed
      */
     public function update($id = null)
     {
@@ -115,41 +114,47 @@ abstract class ContentController extends EditorController
         $validation    = $this->validator->on('update')->bind(array('id' => $id))->with($input);
 
         if ($validation->fails()) {
-            return Redirect::to(resources("{$this->resource}/{$id}/edit"))
+            return (new RedirectResponse(resources("{$this->resource}/{$id}/edit")))
                     ->withInput()->withErrors($validation);
         }
 
-        $content          = Content::findOrFail($id);
-        $content->title   = $input['title'];
-        $content->content = $input['content'];
-        $content->slug    = $input['slug'];
-        $content->type    = $input['type'];
-        $content->format  = $input['format'];
-        $content->status  = $input['status'];
+        $content = Content::findOrFail($id);
 
-        $this->updatePublishedAt($content) and $content->published_at = Carbon::now();
+        $content->setAttribute('title', $input['title']);
+        $content->setAttribute('content', $input['content']);
+        $content->setAttribute('slug', $input['slug']);
+        $content->setAttribute('type', $input['type']);
+        $content->setAttribute('format', $input['format']);
+        $content->setAttribute('status', $input['status']);
 
-        return call_user_func(array($this, 'updateCallback'), $content, $input);
+        $this->updatePublishedAt($content) && $content->setAttribute('published_at', Carbon::now());
+
+        return call_user_func([$this, 'updateCallback'], $content, $input);
     }
 
     /**
      * Store a content.
      *
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     * @return mixed
      */
     abstract protected function storeCallback($content, $input);
 
     /**
      * Update a content.
      *
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     * @return mixed
      */
     abstract protected function updateCallback($content, $input);
 
     /**
      * Delete a content.
      *
-     * @return Response
+     * @param  int  $id
+     * @return mixed
      */
     public function delete($id = null)
     {
@@ -159,28 +164,31 @@ abstract class ContentController extends EditorController
     /**
      * Delete a content.
      *
-     * @return Response
+     * @param  int  $id
+     * @return mixed
      */
     public function destroy($id)
     {
         $content = Content::findOrFail($id);
 
-        return call_user_func(array($this, 'destroyCallback'), $content);
+        return call_user_func([$this, 'destroyCallback'], $content);
     }
 
     /**
      * Delete a content.
      *
-     * @return Response
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @return mixed
      */
     abstract protected function destroyCallback($content);
 
     /**
      * Generate Unique Slug.
      *
+     * @param  array    $input
      * @return string
      */
-    protected function generateUniqueSlug($input)
+    protected function generateUniqueSlug(array $input)
     {
         return '_'.$input['type'].'_/'.$input['slug'];
     }
@@ -188,24 +196,26 @@ abstract class ContentController extends EditorController
     /**
      * Determine whether published_at should be updated.
      *
-     * @param  Orchestra\Story\Model\Content    $content
-     * @return boolean
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @return bool
      */
     protected function updatePublishedAt($content)
     {
         $theBeginning = new Carbon('0000-00-00 00:00:00');
 
-        if ($content->status !== Content::STATUS_PUBLISH) {
+        if ($content->getAttribute('status') !== Content::STATUS_PUBLISH) {
             return false;
         }
 
+        $publishedAt = $content->getAttribute('published_at');
+
         switch (true)
         {
-            case is_null($content->published_at):
+            case is_null($publishedAt):
                 # passthru;
-            case $content->published_at->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
+            case $publishedAt->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
                 # passthru;
-            case $content->published_at->toDateTimeString() === $theBeginning->toDateTimeString():
+            case $publishedAt->toDateTimeString() === $theBeginning->toDateTimeString():
                 return true;
                 break;
             default:

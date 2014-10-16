@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Orchestra\Support\Facades\Acl;
-use Orchestra\Support\Facades\App;
 use Orchestra\Model\Role;
+use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\Foundation;
+use Illuminate\Database\Migrations\Migration;
 
 class OrchestraStorySeedAcl extends Migration
 {
@@ -42,6 +42,6 @@ class OrchestraStorySeedAcl extends Migration
      */
     public function down()
     {
-        App::memory()->forget('acl_orchestra/story');
+        Foundation::memory()->forget('acl_orchestra/story');
     }
 }

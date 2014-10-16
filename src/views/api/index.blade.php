@@ -4,14 +4,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Orchestra\Support\Facades\Acl;
-use Orchestra\Support\Facades\Site;
+use Orchestra\Support\Facades\Meta;
 use Orchestra\Support\Str;
 
-$acl  = Acl::make('orchestra/story');
-$auth = Auth::user();
+$acl  = app('orchestra.acl')->make('orchestra/story');
+$auth = app('auth')->user();
 
 if ($acl->can("create {$type}") or $acl->can("manage {$type}")) :
-	Site::set('header::add-button', true);
+	set_meta('header::add-button', true);
 endif; ?>
 
 <div class="row">

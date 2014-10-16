@@ -1,8 +1,7 @@
 <?php namespace Orchestra\Story\Event;
 
-use Illuminate\Support\Facades\View;
-use Orchestra\Support\Facades\Widget;
 use Orchestra\Story\Model\Content;
+use Orchestra\Support\Facades\Widget;
 
 class DashboardHandler
 {
@@ -24,6 +23,6 @@ class DashboardHandler
         $pane->add('story-latest-posts')
             ->attributes(array('class' => 'six columns widget'))
             ->title('Latest Post')
-            ->content(View::make('orchestra/story::widgets.latest-posts')->with('posts', $posts));
+            ->content(view('orchestra/story::widgets.latest-posts')->with('posts', $posts));
     }
 }

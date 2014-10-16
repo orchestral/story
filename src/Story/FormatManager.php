@@ -1,8 +1,10 @@
 <?php namespace Orchestra\Story;
 
 use Closure;
-use Illuminate\Support\Manager;
 use Orchestra\Support\Str;
+use Illuminate\Support\Manager;
+use Orchestra\Story\Parsers\Plain;
+use Orchestra\Story\Parsers\Markdown;
 
 class FormatManager extends Manager
 {
@@ -11,9 +13,9 @@ class FormatManager extends Manager
      *
      * @var array
      */
-    protected $parsers = array(
+    protected $parsers = [
         'markdown' => 'Markdown',
-    );
+    ];
 
     /**
      * Create an instance of the plain-text driver.
@@ -24,7 +26,7 @@ class FormatManager extends Manager
     {
         $this->parsers['plain'] = 'Plain';
 
-        return new Parsers\Plain($this->app);
+        return new Plain($this->app);
     }
 
     /**
@@ -34,7 +36,7 @@ class FormatManager extends Manager
      */
     protected function createMarkdownDriver()
     {
-        return new Parsers\Markdown($this->app);
+        return new Markdown($this->app);
     }
 
     /**

@@ -1,18 +1,18 @@
 <?php namespace Orchestra\Story\Routing;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Response;
+use Orchestra\Routing\Controller;
+use Orchestra\Story\Model\Content;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
-use Orchestra\Story\Model\Content;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller
 {
     /**
      * Get landing page.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
@@ -28,36 +28,36 @@ class HomeController extends Controller
     /**
      * Show RSS.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function rss()
     {
         $perPage = Config::get('orchestra/story::per_page', 10);
         $posts = Content::post()->latestPublish()->limit($perPage)->get();
 
-        return Response::view('orchestra/story::atom', array('posts' => $posts), 200, array(
+        return Response::view('orchestra/story::atom', ['posts' => $posts], 200, [
             'Content-Type' => 'application/rss+xml; charset=UTF-8',
-        ));
+        ]);
     }
 
     /**
      * Show posts.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function posts()
     {
         $perPage = Config::get('orchestra/story::per_page', 10);
         $posts = Content::post()->latestPublish()->paginate($perPage);
 
-        return Facile::view('orchestra/story::posts')->with(array('posts' => $posts))->render();
+        return Facile::view('orchestra/story::posts')->with(['posts' => $posts])->render();
     }
 
     /**
      * Show default page.
      *
-     * @param  string   $slug
-     * @return \Illuminate\Http\Response
+     * @param  string  $slug
+     * @return mixed
      */
     protected function page($slug)
     {
@@ -68,6 +68,6 @@ class HomeController extends Controller
             $view = 'orchestra/story::page';
         }
 
-        return Facile::view($view)->with(array('page' => $page))->render();
+        return Facile::view($view)->with(['page' => $page])->render();
     }
 }

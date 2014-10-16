@@ -1,9 +1,9 @@
 <?php
 
+use Orchestra\Support\Facades\Acl;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
-use Orchestra\Support\Facades\Acl;
-use Orchestra\Story\Facades\StoryFormat;
+use Illuminate\Http\RedirectResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,6 @@ Route::filter('orchestra.story', function ($request, $route, $value = '') {
     $acl = Acl::make('orchestra/story');
 
     if (! ($acl->can("{$action} {$type}") or $acl->can("manage {$type}"))) {
-        return Redirect::to(resources("storycms.{$type}s"));
+        return new RedirectResponse(resources("storycms.{$type}s"));
     }
 });

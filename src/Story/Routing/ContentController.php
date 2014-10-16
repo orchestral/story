@@ -1,28 +1,27 @@
 <?php namespace Orchestra\Story\Routing;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
-use Orchestra\Support\Facades\App;
-use Orchestra\Support\Facades\Site;
+use Orchestra\Routing\Controller;
+use Orchestra\Support\Facades\Meta;
 
 abstract class ContentController extends Controller
 {
     /**
      * Show the content.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show()
     {
-        $params = App::make('router')->current()->parameters();
+        $params = app('router')->current()->parameters();
         $id     = Arr::get($params, 'id');
         $slug   = Arr::get($params, 'slug');
 
         $page = $this->getRequestedContent($id, $slug);
-        $id   = $page->id;
-        $slug = $page->slug;
+        $id   = $page->getAttribute('id');
+        $slug = $page->getAttribute('slug');
 
-        Site::set('title', $page->title);
+        Meta::set('title', $page->getAttribute('title'));
 
         return $this->getResponse($page, $id, $slug);
     }
@@ -31,19 +30,20 @@ abstract class ContentController extends Controller
      * Return the response, this method allow each content type to be group
      * via different set of view.
      *
-     * @param  \Orchestra\Story\Model\Content   $page
-     * @param  integer                          $id
-     * @param  string                           $slug
-     * @return \Illuminate\Http\Response
+     * @param  \Orchestra\Story\Model\Content  $page
+     * @param  int  $id
+     * @param  string  $slug
+     * @return mixed
      */
     abstract protected function getResponse($page, $id, $slug);
 
     /**
      * Get the requested page/content from Model.
      *
-     * @param  integer  $id
-     * @param  string   $slug
+     * @param  int  $id
+     * @param  string  $slug
      * @return \Orchestra\Story\Model\Content
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     abstract protected function getRequestedContent($id, $slug);
 }

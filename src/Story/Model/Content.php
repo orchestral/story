@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Story\Model;
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\Story;
+use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\StoryFormat;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent
 {

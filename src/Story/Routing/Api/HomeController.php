@@ -1,10 +1,8 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
-use Orchestra\Support\Facades\Acl;
-use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Model\Content;
+use Orchestra\Support\Facades\Acl;
+use Orchestra\Support\Facades\Meta;
 
 class HomeController extends EditorController
 {
@@ -21,7 +19,7 @@ class HomeController extends EditorController
     /**
      * Show Dashboard.
      *
-     * @return Response
+     * @return mixed
      */
     public function getIndex()
     {
@@ -31,26 +29,26 @@ class HomeController extends EditorController
             return $this->write();
         }
 
-        return View::make('orchestra/story::api.home');
+        return view('orchestra/story::api.home');
     }
 
     /**
      * Write a post.
      *
-     * @return Response
+     * @return mixed
      */
     protected function write()
     {
-        Site::set('title', 'Write a Post');
+        Meta::set('title', 'Write a Post');
 
-        $content         = new Content;
-        $content->type   = Content::POST;
-        $content->format = $this->editorFormat;
+        $content = new Content;
+        $content->setAttribute('type', Content::POST);
+        $content->setAttribute('format', $this->editorFormat);
 
-        return View::make('orchestra/story::api.editor', array(
+        return view('orchestra/story::api.editor', [
             'content' => $content,
             'url'     => resources('storycms.posts'),
             'method'  => 'POST',
-        ));
+        ]);
     }
 }

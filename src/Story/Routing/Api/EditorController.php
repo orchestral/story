@@ -1,9 +1,7 @@
 <?php namespace Orchestra\Story\Routing\Api;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Config;
+use Orchestra\Routing\Controller;
 use Illuminate\Support\Facades\Input;
-use Orchestra\Support\Facades\Site;
 use Orchestra\Story\Facades\StoryFormat;
 
 abstract class EditorController extends Controller
