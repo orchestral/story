@@ -18,11 +18,11 @@ class PageController extends ContentController
             $view = 'orchestra/story::page';
         }
 
-        $data = array(
+        $data = [
             'id'   => $id,
             'page' => $page,
             'slug' => $slug,
-        );
+        ];
 
         return Facile::view($view)->with($data)->render();
     }

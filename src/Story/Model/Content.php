@@ -39,7 +39,7 @@ class Content extends Eloquent
      */
     public function getDates()
     {
-        return array_merge(parent::getDates(), array(static::PUBLISHED_AT));
+        return array_merge(parent::getDates(), [static::PUBLISHED_AT]);
     }
 
     /**

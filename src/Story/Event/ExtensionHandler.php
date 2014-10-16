@@ -23,7 +23,7 @@ class ExtensionHandler
 
                 $fieldset->control('select', 'default_page', function ($control) {
                     $pages = array_merge(
-                        array('_posts_' => 'Display Posts'),
+                        ['_posts_' => 'Display Posts'],
                         Content::page()->publish()->lists('title', 'slug')
                     );
                     $control->label('Default Page');

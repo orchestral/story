@@ -18,21 +18,21 @@ class OrchestraStorySeedAcl extends Migration
         $member = Role::member();
         $acl    = Acl::make('orchestra/story');
 
-        $acl->roles()->attach(array($member->name, $admin->name));
-        $acl->actions()->attach(array(
+        $acl->roles()->attach([$member->name, $admin->name]);
+        $acl->actions()->attach([
             'Create Post', 'Update Post', 'Delete Post', 'Manage Post',
             'Create Page', 'Update Page', 'Delete Page', 'Manage Page',
-        ));
+        ]);
 
-        $acl->allow($member->name, array(
+        $acl->allow($member->name, [
             'Create Post', 'Update Post', 'Delete Post',
             'Create Page', 'Update Page', 'Delete Page',
-        ));
+        ]);
 
-        $acl->allow($admin->name, array(
+        $acl->allow($admin->name, [
             'Create Post', 'Update Post', 'Delete Post', 'Manage Post',
             'Create Page', 'Update Page', 'Delete Page', 'Manage Page',
-        ));
+        ]);
     }
 
     /**

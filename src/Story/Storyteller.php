@@ -33,7 +33,7 @@ class Storyteller
     public function url($type, $content = null)
     {
         $type       = trim($type, '/');
-        $predefined = array('posts', 'rss', 'archives');
+        $predefined = ['posts', 'rss', 'archives'];
 
         if (in_array($type, $predefined)) {
             return handles("orchestra/story::{$type}");
@@ -61,15 +61,15 @@ class Storyteller
             $published = Carbon::now();
         }
 
-        $permalinks = array(
+        $permalinks = [
             'id'    => $content->getAttribute('id'),
-            'slug'  => str_replace(array('_post_/', '_page_/'), '', $content->getAttribute('slug')),
+            'slug'  => str_replace(['_post_/', '_page_/'], '', $content->getAttribute('slug')),
             'type'  => $content->getAttribute('type'),
             'date'  => $published->format('Y-m-d'),
             'year'  => $published->format('Y'),
             'month' => $published->format('m'),
             'day'   => $published->format('d'),
-        );
+        ];
 
         foreach ($permalinks as $key => $value) {
             $format = str_replace('{'.$key.'}', $value, $format);

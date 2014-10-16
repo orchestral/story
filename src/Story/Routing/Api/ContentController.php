@@ -98,7 +98,7 @@ abstract class ContentController extends EditorController
 
         $this->updatePublishedAt($content) && $content->setAttribute('published_at', Carbon::now());
 
-        return call_user_func(array($this, 'storeCallback'), $content, $input);
+        return call_user_func([$this, 'storeCallback'], $content, $input);
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class ContentController extends EditorController
     {
         $input         = Input::all();
         $input['slug'] = $this->generateUniqueSlug($input);
-        $validation    = $this->validator->on('update')->bind(array('id' => $id))->with($input);
+        $validation    = $this->validator->on('update')->bind(['id' => $id])->with($input);
 
         if ($validation->fails()) {
             return (new RedirectResponse(resources("{$this->resource}/{$id}/edit")))

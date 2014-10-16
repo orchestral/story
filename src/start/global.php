@@ -18,10 +18,10 @@ Acl::make('orchestra/story')->attach(Foundation::memory());
 |--------------------------------------------------------------------------
 */
 
-Config::map('orchestra/story', array(
+Config::map('orchestra/story', [
     'default_format' => 'orchestra/story::config.default_format',
     'default_page'   => 'orchestra/story::config.default_page',
     'per_page'       => 'orchestra/story::config.per_page',
     'page_permalink' => 'orchestra/story::config.permalink.page',
     'post_permalink' => 'orchestra/story::config.permalink.post',
-));
+]);

@@ -9,11 +9,11 @@ class Content extends Validator
      *
      * @var array
      */
-    protected $rules = array(
-        'title'   => array('required'),
-        'slug'    => array('required', 'not_in:rss,posts'),
-        'content' => array('required'),
-    );
+    protected $rules = [
+        'title'   => ['required'],
+        'slug'    => ['required', 'not_in:rss,posts'],
+        'content' => ['required'],
+    ];
 
     /**
      * On create scenario
@@ -22,7 +22,7 @@ class Content extends Validator
      */
     protected function onCreate()
     {
-        $this->rules['slug'] = array('required', 'not_in:rss,posts', 'unique:story_contents,slug');
+        $this->rules['slug'] = ['required', 'not_in:rss,posts', 'unique:story_contents,slug'];
     }
 
     /**
@@ -32,6 +32,6 @@ class Content extends Validator
      */
     protected function onUpdate()
     {
-        $this->rules['slug'] = array('required', 'not_in:rss,posts', 'unique:story_contents,slug,{id}');
+        $this->rules['slug'] = ['required', 'not_in:rss,posts', 'unique:story_contents,slug,{id}'];
     }
 }
