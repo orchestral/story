@@ -16,6 +16,6 @@
 	@endforeach
 	</ul>
 
-	{!! $posts->links() !!}
+	{!! $posts !!}
 </section>
 @stop

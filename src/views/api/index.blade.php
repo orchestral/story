@@ -66,6 +66,6 @@ endif; ?>
 			</tbody>
 		</table>
 
-		{!! $contents->links() !!}
+		{!! $contents !!}
 	</div>
 </div>
