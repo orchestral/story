@@ -1,7 +1,5 @@
 <?php namespace Orchestra\Story\Parsers;
 
-use Illuminate\Contracts\Foundation\Application;
-
 abstract class Parser
 {
     /**
@@ -23,7 +21,7 @@ abstract class Parser
      *
      * @param  \Illuminate\Contracts\Foundation\Application   $app
      */
-    public function __construct(Application $app)
+    public function __construct($app)
     {
         $this->app = $app;
         $this->initiate();
