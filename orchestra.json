@@ -8,6 +8,7 @@
 		"handles": "cms"
 	},
 	"provide": [
-		"Orchestra\\Story\\StoryServiceProvider"
+		"Orchestra\\Story\\StoryServiceProvider",
+		"Orchestra\\Facile\\FacileServiceProvider"
 	]
 }
