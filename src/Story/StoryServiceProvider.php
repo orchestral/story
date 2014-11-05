@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Story;
 
-use Illuminate\Support\ServiceProvider;
+use Orchestra\Support\Providers\ServiceProvider;
 
 class StoryServiceProvider extends ServiceProvider
 {
@@ -12,6 +12,7 @@ class StoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerStoryTeller();
+
         $this->registerFormatManager();
     }
 
@@ -22,7 +23,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function registerStoryTeller()
     {
-        $this->app->bindShared('orchestra.story', function ($app) {
+        $this->app->singleton('orchestra.story', function ($app) {
             return new Storyteller($app);
         });
     }
@@ -34,7 +35,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function registerFormatManager()
     {
-        $this->app->bindShared('orchestra.story.format', function ($app) {
+        $this->app->singleton('orchestra.story.format', function ($app) {
             return new FormatManager($app);
         });
     }
@@ -48,9 +49,10 @@ class StoryServiceProvider extends ServiceProvider
     {
         $path = realpath(__DIR__.'/../');
 
-        $this->package('orchestra/story', 'orchestra/story', $path);
+        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
+        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/view');
 
-        $this->bootStartFiles($path);
+        $this->loadBootstrapFiles($path);
     }
 
     /**
@@ -59,7 +61,7 @@ class StoryServiceProvider extends ServiceProvider
      * @param  string   $path
      * @return void
      */
-    protected function bootStartFiles($path)
+    protected function loadBootstrapFiles($path)
     {
         include "{$path}/start/global.php";
         include "{$path}/start/events.php";
