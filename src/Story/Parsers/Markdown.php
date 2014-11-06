@@ -1,6 +1,6 @@
 <?php namespace Orchestra\Story\Parsers;
 
-use dflydev\markdown\MarkdownExtraParser;
+use ParsedownExtra;
 
 class Markdown extends Parser
 {
@@ -9,7 +9,7 @@ class Markdown extends Parser
      */
     protected function initiate()
     {
-        $this->parser = new MarkdownExtraParser;
+        $this->parser = new ParsedownExtra;
     }
 
     /**
@@ -17,6 +17,6 @@ class Markdown extends Parser
      */
     public function parse($content)
     {
-        return $this->parser->transformMarkdown($content);
+        return $this->parser->text($content);
     }
 }
