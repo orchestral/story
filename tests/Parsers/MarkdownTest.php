@@ -13,8 +13,8 @@ class MarkdownTest extends \PHPUnit_Framework_TestCase
     public function getParsingDataProvider()
     {
         return array(
-            array("<p>foo <strong>bar</strong></p>\n", 'foo **bar**'),
-            array("<p>foo <strong>bar</strong></p>\n", 'foo <strong>bar</strong>'),
+            array("<p>foo <strong>bar</strong></p>", 'foo **bar**'),
+            array("<p>foo <strong>bar</strong></p>", 'foo <strong>bar</strong>'),
         );
     }
 
