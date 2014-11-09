@@ -50,7 +50,7 @@ class StoryServiceProvider extends ServiceProvider
         $path = realpath(__DIR__.'/../');
 
         $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
-        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/view');
+        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/views');
 
         $this->loadBootstrapFiles($path);
     }
