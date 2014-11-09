@@ -15,6 +15,13 @@ class Content extends Eloquent
     protected $table = 'story_contents';
 
     /**
+     * The class name to be used in polymorphic relations.
+     *
+     * @var string
+     */
+    protected $morphClass = 'Content';
+
+    /**
      * Available status type.
      */
     const STATUS_DRAFT   = 'draft';
@@ -120,8 +127,8 @@ class Content extends Eloquent
     /**
      * Query scope for latest published.
      *
-     * @param  object   $query
-     * @param  int|null $take
+     * @param  object     $query
+     * @param  int|null   $take
      * @return void
      */
     public function scopeLatest($query, $take = null)
@@ -136,7 +143,7 @@ class Content extends Eloquent
     /**
      * Accessor for title.
      *
-     * @param  mixed    $value
+     * @param  mixed   $value
      * @return string
      */
     public function getTitleAttribute($value)
@@ -151,7 +158,7 @@ class Content extends Eloquent
     /**
      * Accessor for content.
      *
-     * @param  mixed    $value
+     * @param  mixed   $value
      * @return string
      */
     public function getContentAttribute($value)
@@ -166,10 +173,9 @@ class Content extends Eloquent
     /**
      * Accessor for parsed excerpt.
      *
-     * @param  mixed    $value
      * @return string
      */
-    public function getExcerptAttribute($value)
+    public function getExcerptAttribute()
     {
         $value  = $this->getAttribute('content');
         $format = $this->attributes['format'];
@@ -182,10 +188,9 @@ class Content extends Eloquent
     /**
      * Accessor for parsed content.
      *
-     * @param  mixed    $value
      * @return string
      */
-    public function getBodyAttribute($value)
+    public function getBodyAttribute()
     {
         $value  = $this->getAttribute('content');
         $format = $this->attributes['format'];
@@ -196,10 +201,9 @@ class Content extends Eloquent
     /**
      * Accessor for link.
      *
-     * @param  mixed   $value
      * @return string
      */
-    public function getLinkAttribute($value)
+    public function getLinkAttribute()
     {
         $type = $this->attributes['type'];
 
