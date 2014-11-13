@@ -42,11 +42,7 @@ abstract class ContentController extends EditorController
      */
     protected function setupFilters()
     {
-        $this->beforeFilter(function () {
-            if (Auth::guest()) {
-                return new RedirectResponse(handles('orchestra::/'));
-            }
-        });
+        $this->beforeFilter('orchestra.auth');
     }
 
     /**
