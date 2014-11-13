@@ -45,11 +45,7 @@ abstract class ContentController extends EditorController
      */
     protected function setupFilters()
     {
-        $this->beforeFilter(function () {
-            if (Auth::guest()) {
-                return Redirect::to(handles('orchestra::/'));
-            }
-        });
+        $this->beforeFilter('orchestra.auth');
 
         $this->beforeFilter('orchestra.csrf', array(
             'only' => array('store', 'update', 'destroy')
