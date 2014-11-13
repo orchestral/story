@@ -49,6 +49,10 @@ abstract class ContentController extends EditorController
             if (Auth::guest()) {
                 return Redirect::to(handles('orchestra::/'));
             }
+
+            $this->beforeFilter('orchestra.csrf', array(
+                'only' => array('store', 'update', 'destroy')
+            ));
         });
 
         $this->beforeFilter('orchestra.csrf', array(
