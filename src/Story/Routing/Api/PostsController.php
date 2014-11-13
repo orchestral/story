@@ -31,6 +31,10 @@ class PostsController extends ContentController
         $this->beforeFilter('orchestra.story:delete-post', array(
             'only' => array('delete', 'destroy'),
         ));
+
+        $this->beforeFilter('orchestra.csrf', array(
+            'only' => array('store', 'update', 'destroy')
+        ));
     }
 
     /**
