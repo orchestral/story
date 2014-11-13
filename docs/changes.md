@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 2.1 {#v2-1}
 
+### v2.1.5 {#v2-1-5}
+
+* Improves CSRF support.
+
 ### v2.1.4 {#v2-1-4}
 
 * Fixes slug generator.
