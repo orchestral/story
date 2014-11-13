@@ -50,6 +50,10 @@ abstract class ContentController extends EditorController
                 return Redirect::to(handles('orchestra::/'));
             }
         });
+
+        $this->beforeFilter('orchestra.csrf', array(
+            'only' => array('store', 'update', 'destroy')
+        ));
     }
 
     /**
