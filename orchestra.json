@@ -7,7 +7,7 @@
 	"config": {
 		"handles": "cms"
 	},
-	"provide": [
+	"provides": [
 		"Orchestra\\Story\\StoryServiceProvider",
 		"Orchestra\\Facile\\FacileServiceProvider"
 	]
