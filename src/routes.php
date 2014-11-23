@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
+use Illuminate\Routing\Router;
 use Orchestra\Support\Facades\Foundation;
 
 /*
@@ -9,19 +9,17 @@ use Orchestra\Support\Facades\Foundation;
 |--------------------------------------------------------------------------
 */
 
-Foundation::group('orchestra/story', 'cms', [], function ($router) {
-    $page = Config::get('orchestra/story::permalink.page');
-    $post = Config::get('orchestra/story::permalink.post');
+Foundation::group('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Routing'], function (Router $router) {
+    $page = config('orchestra/story::permalink.page');
+    $post = config('orchestra/story::permalink.post');
 
-    $router->get('rss', 'Orchestra\Story\Routing\HomeController@rss');
+    $router->get('rss', 'HomeController@rss');
 
-    $router->get($post, 'Orchestra\Story\Routing\PostController@show')
-        ->where('{slug}', '(^[posts|rss])');
+    $router->get($post, 'PostController@show')->where('{slug}', '(^[posts|rss])');
 
-    $router->get('posts', 'Orchestra\Story\Routing\HomeController@posts');
+    $router->get('posts', 'HomeController@posts');
 
-    $router->get($page, 'Orchestra\Story\Routing\PageController@show')
-        ->where('{slug}', '(^[posts|rss])');
+    $router->get($page, 'PageController@show')->where('{slug}', '(^[posts|rss])');
 
-    $router->get('/', 'Orchestra\Story\Routing\HomeController@index');
+    $router->get('/', 'HomeController@index');
 });
