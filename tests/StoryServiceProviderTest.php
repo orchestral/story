@@ -45,15 +45,15 @@ class StoryServiceProviderTest extends TestCase
         $app['orchestra.extension.config'] = $extconfig = m::mock('\Orchestra\Extension\ConfigManager');
 
         $orchestra->shouldReceive('memory')->once()->andReturn($memory)
-            ->shouldReceive('group')->once()->with('orchestra/story', 'cms', [], m::type('Closure'))->andReturn(array('prefix' => 'cms'));
+            ->shouldReceive('group')->once()
+                ->with('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Routing'], m::type('Closure'))
+                ->andReturn(['prefix' => 'cms']);
         $extconfig->shouldReceive('map')->once()->with('orchestra/story', m::type('Array'))->andReturn(null);
 
         $acl->shouldReceive('make')->once()->with('orchestra/story')->andReturn($acl)
             ->shouldReceive('attach')->once()->with($memory)->andReturn(null);
 
         $stub = new StoryServiceProvider($app);
-
-        //$stub->shouldReceive('bootStartFiles')->once();
 
         $stub->boot();
     }

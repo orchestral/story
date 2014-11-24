@@ -14,11 +14,9 @@ Foundation::group('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Rou
     $post = config('orchestra/story::permalink.post');
 
     $router->get('rss', 'HomeController@rss');
-
-    $router->get($post, 'PostController@show')->where('{slug}', '(^[posts|rss])');
-
     $router->get('posts', 'HomeController@posts');
 
+    $router->get($post, 'PostController@show')->where('{slug}', '(^[posts|rss])');
     $router->get($page, 'PageController@show')->where('{slug}', '(^[posts|rss])');
 
     $router->get('/', 'HomeController@index');
