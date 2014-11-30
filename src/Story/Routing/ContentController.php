@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Arr;
 use Orchestra\Routing\Controller;
-use Orchestra\Support\Facades\Meta;
 
 abstract class ContentController extends Controller
 {
@@ -13,7 +12,7 @@ abstract class ContentController extends Controller
      */
     public function show()
     {
-        $params = app('router')->current()->parameters();
+        $params = static::$router->current()->parameters();
         $id     = Arr::get($params, 'id');
         $slug   = Arr::get($params, 'slug');
 
@@ -21,7 +20,7 @@ abstract class ContentController extends Controller
         $id   = $page->getAttribute('id');
         $slug = $page->getAttribute('slug');
 
-        Meta::set('title', $page->getAttribute('title'));
+        set_meta('title', $page->getAttribute('title'));
 
         return $this->getResponse($page, $id, $slug);
     }

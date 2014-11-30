@@ -86,32 +86,28 @@ class PostsController extends ContentController
     }
 
     /**
-     * Store a post.
+     * Response when content store has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
      * @return mixed
      */
-    protected function storeCallback($content, $input)
+    public function storeHasSucceed(Content $content, array $input)
     {
-        $content->save();
-
         Messages::add('success', 'Post has been created.');
 
         return new RedirectResponse(resources("storycms.posts/{$content->id}/edit"));
     }
 
     /**
-     * Update a post.
+     * Response when content update has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
      * @return mixed
      */
-    protected function updateCallback($content, $input)
+    public function updateHasSucceed(Content $content, array $input)
     {
-        $content->save();
-
         Messages::add('success', 'Post has been updated.');
 
         return new RedirectResponse(resources("storycms.posts/{$content->id}/edit"));

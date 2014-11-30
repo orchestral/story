@@ -1,13 +1,11 @@
 <?php namespace Orchestra\Story\Routing\Admin;
 
-use Carbon\Carbon;
 use Orchestra\Story\Model\Content;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Http\RedirectResponse;
-use Orchestra\Story\Validation\Content as ContentValidator;
+use Orchestra\Story\Processor\Content as Processor;
+use Orchestra\Story\Contracts\Listener\Content as Listener;
 
-abstract class ContentController extends EditorController
+abstract class ContentController extends EditorController implements Listener
 {
     /**
      * Current Resource.
@@ -17,22 +15,22 @@ abstract class ContentController extends EditorController
     protected $resource;
 
     /**
-     * Validation instance.
+     * Processor instance.
      *
-     * @var object
+     * @var \Orchestra\Story\Processor\Content
      */
-    protected $validator;
+    protected $processor;
 
     /**
      * Content CRUD Controller.
      *
-     * @param \Orchestra\Story\Validation\Content  $validator
+     * @param \Orchestra\Story\Processor\Content  $processor
      */
-    public function __construct(ContentValidator $validator)
+    public function __construct(Processor $processor)
     {
-        parent::__construct();
+        $this->processor = $processor;
 
-        $this->validator = $validator;
+        parent::__construct();
     }
 
     /**
@@ -74,27 +72,7 @@ abstract class ContentController extends EditorController
      */
     public function store()
     {
-        $input         = Input::all();
-        $input['slug'] = $this->generateUniqueSlug($input);
-        $validation    = $this->validator->on('create')->with($input);
-
-        if ($validation->fails()) {
-            return (new RedirectResponse(resources("{$this->resource}/create")))
-                    ->withInput()->withErrors($validation);
-        }
-
-        $content = new Content;
-        $content->setAttribute('title', $input['title']);
-        $content->setAttribute('content', $input['content']);
-        $content->setAttribute('slug', $input['slug']);
-        $content->setAttribute('type', $input['type']);
-        $content->setAttribute('format', $input['format']);
-        $content->setAttribute('status', $input['status']);
-        $content->setAttribute('user_id', Auth::user()->id);
-
-        $this->updatePublishedAt($content) && $content->setAttribute('published_at', Carbon::now());
-
-        return call_user_func([$this, 'storeCallback'], $content, $input);
+        return $this->processor->store($this, Input::all());
     }
 
     /**
@@ -105,46 +83,49 @@ abstract class ContentController extends EditorController
      */
     public function update($id = null)
     {
-        $input         = Input::all();
-        $input['slug'] = $this->generateUniqueSlug($input);
-        $validation    = $this->validator->on('update')->bind(['id' => $id])->with($input);
-
-        if ($validation->fails()) {
-            return (new RedirectResponse(resources("{$this->resource}/{$id}/edit")))
-                    ->withInput()->withErrors($validation);
-        }
-
-        $content = Content::findOrFail($id);
-
-        $content->setAttribute('title', $input['title']);
-        $content->setAttribute('content', $input['content']);
-        $content->setAttribute('slug', $input['slug']);
-        $content->setAttribute('type', $input['type']);
-        $content->setAttribute('format', $input['format']);
-        $content->setAttribute('status', $input['status']);
-
-        $this->updatePublishedAt($content) && $content->setAttribute('published_at', Carbon::now());
-
-        return call_user_func([$this, 'updateCallback'], $content, $input);
+        return $this->processor->update($this, $id, Input::all());
     }
 
     /**
-     * Store a content.
+     * Response when content update has failed validation.
      *
-     * @param  \Orchestra\Story\Model\Content  $content
-     * @param  array  $input
+     * @param  \Illuminate\Support\MessageBag|array  $errors
      * @return mixed
      */
-    abstract protected function storeCallback($content, $input);
+    public function storeHasFailedValidation($errors)
+    {
+        return redirect_with_errors(resources("{$this->resource}/{$id}/create"), $errors);
+    }
 
     /**
-     * Update a content.
+     * Response when content store has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
      * @return mixed
      */
-    abstract protected function updateCallback($content, $input);
+    abstract public function storeHasSucceed(Content $content, array $input);
+
+    /**
+     * Response when content update has failed validation.
+     *
+     * @param  int|string  $id
+     * @param  \Illuminate\Support\MessageBag|array  $errors
+     * @return mixed
+     */
+    public function updateHasFailedValidation($id, $errors)
+    {
+        return redirect_with_errors(resources("{$this->resource}/{$id}/edit"), $errors);
+    }
+
+    /**
+     * Response when content update has succeed.
+     *
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     * @return mixed
+     */
+    abstract public function updateHasSucceed(Content $content, array $input);
 
     /**
      * Delete a content.
@@ -177,45 +158,4 @@ abstract class ContentController extends EditorController
      * @return mixed
      */
     abstract protected function destroyCallback($content);
-
-    /**
-     * Generate Unique Slug.
-     *
-     * @param  array    $input
-     * @return string
-     */
-    protected function generateUniqueSlug(array $input)
-    {
-        return '_'.$input['type'].'_/'.$input['slug'];
-    }
-
-    /**
-     * Determine whether published_at should be updated.
-     *
-     * @param  \Orchestra\Story\Model\Content  $content
-     * @return bool
-     */
-    protected function updatePublishedAt($content)
-    {
-        $theBeginning = new Carbon('0000-00-00 00:00:00');
-
-        if ($content->getAttribute('status') !== Content::STATUS_PUBLISH) {
-            return false;
-        }
-
-        $publishedAt = $content->getAttribute('published_at');
-
-        switch (true)
-        {
-            case is_null($publishedAt):
-                # passthru;
-            case $publishedAt->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
-                # passthru;
-            case $publishedAt->toDateTimeString() === $theBeginning->toDateTimeString():
-                return true;
-                break;
-            default:
-                return false;
-        }
-    }
 }

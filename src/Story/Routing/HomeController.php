@@ -4,7 +4,6 @@ use Orchestra\Routing\Controller;
 use Orchestra\Story\Model\Content;
 use Illuminate\Support\Facades\View;
 use Orchestra\Support\Facades\Facile;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller
@@ -16,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $page = Config::get('orchestra/story::default_page', '_posts_');
+        $page = config('orchestra/story::default_page', '_posts_');
 
         if ($page === '_posts_') {
             return $this->posts();
@@ -32,8 +31,7 @@ class HomeController extends Controller
      */
     public function rss()
     {
-        $perPage = Config::get('orchestra/story::per_page', 10);
-        $posts = Content::post()->latestPublish()->limit($perPage)->get();
+        $posts = Content::post()->latestPublish()->limit(config('orchestra/story::per_page', 10))->get();
 
         return Response::view('orchestra/story::atom', ['posts' => $posts], 200, [
             'Content-Type' => 'application/rss+xml; charset=UTF-8',
@@ -47,8 +45,7 @@ class HomeController extends Controller
      */
     public function posts()
     {
-        $perPage = Config::get('orchestra/story::per_page', 10);
-        $posts = Content::post()->latestPublish()->paginate($perPage);
+        $posts = Content::post()->latestPublish()->paginate(config('orchestra/story::per_page', 10));
 
         return Facile::view('orchestra/story::posts')->with(['posts' => $posts])->render();
     }

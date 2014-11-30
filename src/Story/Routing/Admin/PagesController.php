@@ -86,32 +86,28 @@ class PagesController extends ContentController
     }
 
     /**
-     * Store a page.
+     * Response when content store has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
      * @return mixed
      */
-    protected function storeCallback($content, $input)
+    public function storeHasSucceed(Content $content, array $input)
     {
-        $content->save();
-
         Messages::add('success', 'Page has been created.');
 
         return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
     }
 
     /**
-     * Update a page.
+     * Response when content update has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
      * @return mixed
      */
-    protected function updateCallback($content, $input)
+    public function updateHasSucceed(Content $content, array $input)
     {
-        $content->save();
-
         Messages::add('success', 'Page has been updated.');
 
         return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
