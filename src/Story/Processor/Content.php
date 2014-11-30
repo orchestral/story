@@ -80,20 +80,20 @@ class Content extends Processor
      */
     protected function updatePublishedAt(Eloquent $content)
     {
-        $theBeginning = new Carbon('0000-00-00 00:00:00');
+        $start = new Carbon('0000-00-00 00:00:00');
 
         if ($content->getAttribute('status') !== Content::STATUS_PUBLISH) {
             return false;
         }
 
-        $publishedAt = $content->getAttribute('published_at');
+        $published = $content->getAttribute('published_at');
 
         switch (true) {
-            case is_null($publishedAt):
+            case is_null($published):
                 # next;
-            case $publishedAt->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
+            case $published->format('Y-m-d H:i:s') === '0000-00-00 00:00:00':
                 # next;
-            case $publishedAt->toDateTimeString() === $theBeginning->toDateTimeString():
+            case $published->toDateTimeString() === $start->toDateTimeString():
                 return true;
                 break;
             default:
