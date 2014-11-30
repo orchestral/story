@@ -144,8 +144,8 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionRouting($path)
     {
-        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filter\CanManage');
-        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filter\SetEditorFormat');
+        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filters\CanManage');
+        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filters\SetEditorFormat');
 
         include "{$path}/resources.php";
         include "{$path}/routes.php";

@@ -23,6 +23,16 @@ class HomeController extends EditorController
      */
     public function getIndex()
     {
+        return $this->show();
+    }
+
+    /**
+     * Show Dashboard.
+     *
+     * @return mixed
+     */
+    public function show()
+    {
         $acl = Acl::make('orchestra/story');
 
         if ($acl->can('create post') or $acl->can('manage post')) {
