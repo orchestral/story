@@ -91,7 +91,7 @@ class Content extends Processor
     {
         $start = new Carbon('0000-00-00 00:00:00');
 
-        if ($content->getAttribute('status') !== Content::STATUS_PUBLISH) {
+        if ($content->getAttribute('status') !== Eloquent::STATUS_PUBLISH) {
             return false;
         }
 
