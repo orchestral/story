@@ -1,3 +1,7 @@
+@extends('orchestra/foundation::layouts.main)
+
+@section('content')
+
 @include('orchestra/story::widgets.menu')
 
 <div class="row">
@@ -7,3 +11,5 @@
 		</div>
 	</div>
 </div>
+
+@stop

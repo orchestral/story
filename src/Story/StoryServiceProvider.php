@@ -147,7 +147,6 @@ class StoryServiceProvider extends ServiceProvider
         $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filters\CanManage');
         $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filters\SetEditorFormat');
 
-        include "{$path}/resources.php";
         include "{$path}/routes.php";
     }
 

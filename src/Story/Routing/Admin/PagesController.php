@@ -58,7 +58,7 @@ class PagesController extends ContentController
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => resources('storycms.pages'),
+            'url'     => handles('orchestra::storycms/pages'),
             'method'  => 'POST',
         ]);
     }
@@ -77,7 +77,7 @@ class PagesController extends ContentController
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => resources("storycms.pages/{$content->getAttribute('id')}"),
+            'url'     => handles("orchestra::storycms/pages/{$content->getAttribute('id')}"),
             'method'  => 'PUT',
         ]);
     }
@@ -93,7 +93,7 @@ class PagesController extends ContentController
     {
         messages('success', 'Page has been created.');
 
-        return redirect(resources("storycms.pages/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -107,7 +107,7 @@ class PagesController extends ContentController
     {
         messages('success', 'Page has been updated.');
 
-        return redirect(resources("storycms.pages/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -120,6 +120,6 @@ class PagesController extends ContentController
     {
         messages('success', 'Page has been deleted.');
 
-        return redirect(resources('storycms.pages'));
+        return redirect(handles('orchestra::storycms/pages'));
     }
 }

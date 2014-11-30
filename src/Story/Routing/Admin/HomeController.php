@@ -57,7 +57,7 @@ class HomeController extends EditorController
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => resources('storycms.posts'),
+            'url'     => handles('orchestra::storycms/posts'),
             'method'  => 'POST',
         ]);
     }

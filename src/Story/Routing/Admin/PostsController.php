@@ -59,7 +59,7 @@ class PostsController extends ContentController
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => resources('storycms.posts'),
+            'url'     => handles('orchestra::storycms/posts'),
             'method'  => 'POST',
         ]);
     }
@@ -78,7 +78,7 @@ class PostsController extends ContentController
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => resources("storycms.posts/{$content->getAttribute('id')}"),
+            'url'     => handles("orchestra::storycms/posts/{$content->getAttribute('id')}"),
             'method'  => 'PUT',
         ]);
     }
@@ -94,7 +94,7 @@ class PostsController extends ContentController
     {
         messages('success', 'Post has been created.');
 
-        return redirect(resources("storycms.posts/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/posts/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -108,7 +108,7 @@ class PostsController extends ContentController
     {
         messages('success', 'Post has been updated.');
 
-        return redirect(resources("storycms.posts/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/posts/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -121,6 +121,6 @@ class PostsController extends ContentController
     {
         messages('success', 'Post has been deleted.');
 
-        return redirect(resources('storycms.posts'));
+        return redirect(handles('orchestra::storycms/posts'));
     }
 }

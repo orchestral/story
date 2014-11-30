@@ -1,3 +1,7 @@
+@extends('orchestra/foundation::layouts.main)
+
+@section('content')
+
 @include('orchestra/story::widgets.menu')
 
 {!! Form::model($content, ['url' => $url, 'method' => $method, 'class' => 'form-horizontal']) !!}
@@ -36,3 +40,5 @@
 		</div>
 	</fieldset>
 {!! Form::close() !!}
+
+@stop

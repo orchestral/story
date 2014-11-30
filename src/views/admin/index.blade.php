@@ -1,3 +1,7 @@
+@extends('orchestra/foundation::layouts.main)
+
+@section('content')
+
 @include('orchestra/story::widgets.menu')
 
 <?php
@@ -34,7 +38,7 @@ endif; ?>
 					<td>
 						<strong>
 							@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("update {$content->type}")))
-							<a href="{!! resources("storycms.{$type}s/{$content->id}/edit") !!}">
+							<a href="{!! handles("orchestra::storycms/{$type}s/{$content->id}/edit") !!}">
 								{{ $content->title }}
 							</a>
 							@else
@@ -51,7 +55,7 @@ endif; ?>
 					<td>
 						<div class="btn-group">
 						@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("delete {$content->type}")))
-							<a href="{!! resources("storycms.{$type}s/{$content->id}/delete") !!}" class="btn btn-mini btn-danger">
+							<a href="{!! handles("orchestra::storycms/{$type}s/{$content->id}/delete") !!}" class="btn btn-mini btn-danger">
 								Delete
 							</a>
 						@endif
@@ -66,3 +70,5 @@ endif; ?>
 		{!! $contents !!}
 	</div>
 </div>
+
+@stop

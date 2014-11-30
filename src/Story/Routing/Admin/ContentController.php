@@ -116,7 +116,7 @@ abstract class ContentController extends EditorController implements Listener
      */
     public function storeHasFailedValidation($errors)
     {
-        return redirect_with_errors(resources("{$this->resource}/create"), $errors);
+        return redirect_with_errors(handles("orchestra::storycms/{$this->resource}/create"), $errors);
     }
 
     /**
@@ -137,7 +137,7 @@ abstract class ContentController extends EditorController implements Listener
      */
     public function updateHasFailedValidation($id, $errors)
     {
-        return redirect_with_errors(resources("{$this->resource}/{$id}/edit"), $errors);
+        return redirect_with_errors(handles("orchestra::storycms/{$this->resource}/{$id}/edit"), $errors);
     }
 
     /**

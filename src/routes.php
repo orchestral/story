@@ -24,6 +24,8 @@ Foundation::group('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Rou
 
 Foundation::namespaced('Orchestra\Story\Routing\Admin', function (Router $router) {
     $router->group(['prefix' => 'story'], function (Router $router) {
+        $router->resource('pages', 'PagesController');
+        $router->resource('posts', 'PostsController');
         $router->get('/', 'HomeController@show');
     });
 });

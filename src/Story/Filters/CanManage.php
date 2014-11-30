@@ -46,7 +46,7 @@ class CanManage
         list($action, $type) = explode('-', $value);
 
         if (! $this->checkUserAuthorization($action, $type)) {
-            return new RedirectResponse(resources("storycms.{$type}s"));
+            return redirect(handles("orchestra::storycms/{$type}s"));
         }
     }
 
