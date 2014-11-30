@@ -62,14 +62,14 @@ class Content extends Processor
     }
 
     /**
-     * Generate Unique Slug.
+     * Generate unique slug.
      *
      * @param  array  $input
      * @return string
      */
     protected function generateUniqueSlug(array $input)
     {
-        return '_'.$input['type'].'_/'.$input['slug'];
+        return sprintf('_%s_/%s', $input['type'], $input['slug']);
     }
 
     /**
