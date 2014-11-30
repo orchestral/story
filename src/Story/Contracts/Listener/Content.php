@@ -38,4 +38,12 @@ interface Content
      * @return mixed
      */
     public function updateHasSucceed(Eloquent $content, array $input);
+
+    /**
+     * Response when content deletion has succeed.
+     *
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @return mixed
+     */
+    public function deletionHasSucceed(Eloquent $content);
 }

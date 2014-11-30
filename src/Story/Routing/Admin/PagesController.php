@@ -1,9 +1,6 @@
 <?php namespace Orchestra\Story\Routing\Admin;
 
 use Orchestra\Story\Model\Content;
-use Orchestra\Support\Facades\Meta;
-use Illuminate\Http\RedirectResponse;
-use Orchestra\Support\Facades\Messages;
 
 class PagesController extends ContentController
 {
@@ -39,9 +36,9 @@ class PagesController extends ContentController
     public function index()
     {
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate();
-        $type     = 'page';
+        $type = 'page';
 
-        Meta::set('title', 'List of Pages');
+        set_meta('title', 'List of Pages');
 
         return view('orchestra/story::api.index', compact('contents', 'type'));
     }
@@ -53,7 +50,7 @@ class PagesController extends ContentController
      */
     public function create()
     {
-        Meta::set('title', 'Write a Page');
+        set_meta('title', 'Write a Page');
 
         $content = new Content;
         $content->setAttribute('type', Content::PAGE);
@@ -74,13 +71,13 @@ class PagesController extends ContentController
      */
     public function edit($id = null)
     {
-        Meta::set('title', 'Write a Page');
+        set_meta('title', 'Write a Page');
 
         $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
 
         return view('orchestra/story::api.editor', [
             'content' => $content,
-            'url'     => resources("storycms.pages/{$content->id}"),
+            'url'     => resources("storycms.pages/{$content->getAttribute('id')}"),
             'method'  => 'PUT',
         ]);
     }
@@ -94,9 +91,9 @@ class PagesController extends ContentController
      */
     public function storeHasSucceed(Content $content, array $input)
     {
-        Messages::add('success', 'Page has been created.');
+        messages('success', 'Page has been created.');
 
-        return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
+        return redirect(resources("storycms.pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -108,23 +105,21 @@ class PagesController extends ContentController
      */
     public function updateHasSucceed(Content $content, array $input)
     {
-        Messages::add('success', 'Page has been updated.');
+        messages('success', 'Page has been updated.');
 
-        return new RedirectResponse(resources("storycms.pages/{$content->id}/edit"));
+        return redirect(resources("storycms.pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
-     * Delete a page.
+     * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @return mixed
      */
-    protected function destroyCallback($content)
+    public function deletionHasSucceed(Content $content)
     {
-        $content->delete();
+        messages('success', 'Page has been deleted.');
 
-        Messages::add('success', 'Page has been deleted.');
-
-        return new RedirectResponse(resources('storycms.pages'));
+        return redirect(resources('storycms.pages'));
     }
 }

@@ -58,14 +58,6 @@ abstract class ContentController extends EditorController implements Listener
     abstract public function create();
 
     /**
-     * Edit a content.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    abstract public function edit($id = null);
-
-    /**
      * Store a content.
      *
      * @return mixed
@@ -74,6 +66,14 @@ abstract class ContentController extends EditorController implements Listener
     {
         return $this->processor->store($this, Input::all());
     }
+
+    /**
+     * Edit a content.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    abstract public function edit($id = null);
 
     /**
      * Update a content.
@@ -87,6 +87,28 @@ abstract class ContentController extends EditorController implements Listener
     }
 
     /**
+     * Delete a content.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function delete($id = null)
+    {
+        return $this->destroy($id);
+    }
+
+    /**
+     * Delete a content.
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        return $this->processor->destroy($this, $id);
+    }
+
+    /**
      * Response when content update has failed validation.
      *
      * @param  \Illuminate\Support\MessageBag|array  $errors
@@ -94,7 +116,7 @@ abstract class ContentController extends EditorController implements Listener
      */
     public function storeHasFailedValidation($errors)
     {
-        return redirect_with_errors(resources("{$this->resource}/{$id}/create"), $errors);
+        return redirect_with_errors(resources("{$this->resource}/create"), $errors);
     }
 
     /**
@@ -128,34 +150,10 @@ abstract class ContentController extends EditorController implements Listener
     abstract public function updateHasSucceed(Content $content, array $input);
 
     /**
-     * Delete a content.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function delete($id = null)
-    {
-        return $this->destroy($id);
-    }
-
-    /**
-     * Delete a content.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function destroy($id)
-    {
-        $content = Content::findOrFail($id);
-
-        return call_user_func([$this, 'destroyCallback'], $content);
-    }
-
-    /**
-     * Delete a content.
+     * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @return mixed
      */
-    abstract protected function destroyCallback($content);
+    abstract public function deletionHasSucceed(Content $content);
 }

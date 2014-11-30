@@ -47,6 +47,15 @@ class Content extends Processor
         return $listener->updateHasSucceed($content, $input);
     }
 
+    public function destroy(Listener $listener, $id)
+    {
+        $content = Eloquent::findOrFail($id);
+
+        $content->delete();
+
+        return $listener->deletionHasSucceed($content);
+    }
+
     protected function saving(Eloquent $content, array $input)
     {
         $content->setAttribute('title', $input['title']);

@@ -1,9 +1,6 @@
 <?php namespace Orchestra\Story\Routing\Admin;
 
 use Orchestra\Story\Model\Content;
-use Orchestra\Support\Facades\Meta;
-use Illuminate\Http\RedirectResponse;
-use Orchestra\Support\Facades\Messages;
 
 class PostsController extends ContentController
 {
@@ -41,7 +38,7 @@ class PostsController extends ContentController
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->post()->paginate();
         $type     = 'post';
 
-        Meta::set('title', 'List of Posts');
+        set_meta('title', 'List of Posts');
 
         return view('orchestra/story::api.index', compact('contents', 'type'));
     }
@@ -53,11 +50,12 @@ class PostsController extends ContentController
      */
     public function create()
     {
-        Meta::set('title', 'Write a Post');
+        $content = new Content;
 
-        $content         = new Content;
-        $content->type   = Content::POST;
-        $content->format = $this->editorFormat;
+        $content->setAttribute('type', Content::POST);
+        $content->setAttribute('format', $this->editorFormat);
+
+        set_meta('title', 'Write a Post');
 
         return view('orchestra/story::api.editor', [
             'content' => $content,
@@ -74,13 +72,13 @@ class PostsController extends ContentController
      */
     public function edit($id = null)
     {
-        Meta::set('title', 'Write a Post');
+        set_meta('title', 'Write a Post');
 
         $content = Content::where('type', 'post')->where('id', $id)->firstOrFail();
 
         return view('orchestra/story::api.editor', [
             'content' => $content,
-            'url'     => resources("storycms.posts/{$content->id}"),
+            'url'     => resources("storycms.posts/{$content->getAttribute('id')}"),
             'method'  => 'PUT',
         ]);
     }
@@ -94,9 +92,9 @@ class PostsController extends ContentController
      */
     public function storeHasSucceed(Content $content, array $input)
     {
-        Messages::add('success', 'Post has been created.');
+        messages('success', 'Post has been created.');
 
-        return new RedirectResponse(resources("storycms.posts/{$content->id}/edit"));
+        return redirect(resources("storycms.posts/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -108,23 +106,21 @@ class PostsController extends ContentController
      */
     public function updateHasSucceed(Content $content, array $input)
     {
-        Messages::add('success', 'Post has been updated.');
+        messages('success', 'Post has been updated.');
 
-        return new RedirectResponse(resources("storycms.posts/{$content->id}/edit"));
+        return redirect(resources("storycms.posts/{$content->getAttribute('id')}/edit"));
     }
 
     /**
-     * Delete a post.
+     * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @return mixed
      */
-    protected function destroyCallback($content)
+    public function deletionHasSucceed(Content $content)
     {
-        $content->delete();
+        messages('success', 'Post has been deleted.');
 
-        Messages::add('success', 'Post has been deleted.');
-
-        return new RedirectResponse(resources('storycms.posts'));
+        return redirect(resources('storycms.posts'));
     }
 }
