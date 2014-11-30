@@ -49,18 +49,29 @@ class StoryServiceProvider extends ServiceProvider
     {
         $path = realpath(__DIR__.'/../');
 
-        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
-        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/views');
-
         $this->mapExtensionConfig();
 
         $this->bootExtensionEvents();
 
         $this->bootExtensionWidgets();
 
+        $this->bootExtensionComponents($path);
+
         $this->bootExtensionRouting($path);
 
         $this->bootExtensionMenuEvents();
+    }
+
+    /**
+     * Boot extension components.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function bootExtensionComponents($path)
+    {
+        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
+        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/views');
     }
 
     /**
