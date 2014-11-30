@@ -40,7 +40,7 @@ class PostsController extends ContentController
 
         set_meta('title', 'List of Posts');
 
-        return view('orchestra/story::api.index', compact('contents', 'type'));
+        return view('orchestra/story::admin.index', compact('contents', 'type'));
     }
 
     /**
@@ -57,7 +57,7 @@ class PostsController extends ContentController
 
         set_meta('title', 'Write a Post');
 
-        return view('orchestra/story::api.editor', [
+        return view('orchestra/story::admin.editor', [
             'content' => $content,
             'url'     => resources('storycms.posts'),
             'method'  => 'POST',
@@ -76,7 +76,7 @@ class PostsController extends ContentController
 
         $content = Content::where('type', 'post')->where('id', $id)->firstOrFail();
 
-        return view('orchestra/story::api.editor', [
+        return view('orchestra/story::admin.editor', [
             'content' => $content,
             'url'     => resources("storycms.posts/{$content->getAttribute('id')}"),
             'method'  => 'PUT',

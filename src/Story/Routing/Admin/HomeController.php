@@ -39,7 +39,7 @@ class HomeController extends EditorController
             return $this->write();
         }
 
-        return view('orchestra/story::api.home');
+        return view('orchestra/story::admin.home');
     }
 
     /**
@@ -49,13 +49,13 @@ class HomeController extends EditorController
      */
     protected function write()
     {
-        Meta::set('title', 'Write a Post');
+        set_meta('title', 'Write a Post');
 
         $content = new Content;
         $content->setAttribute('type', Content::POST);
         $content->setAttribute('format', $this->editorFormat);
 
-        return view('orchestra/story::api.editor', [
+        return view('orchestra/story::admin.editor', [
             'content' => $content,
             'url'     => resources('storycms.posts'),
             'method'  => 'POST',

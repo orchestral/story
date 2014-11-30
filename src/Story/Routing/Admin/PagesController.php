@@ -40,7 +40,7 @@ class PagesController extends ContentController
 
         set_meta('title', 'List of Pages');
 
-        return view('orchestra/story::api.index', compact('contents', 'type'));
+        return view('orchestra/story::admin.index', compact('contents', 'type'));
     }
 
     /**
@@ -56,7 +56,7 @@ class PagesController extends ContentController
         $content->setAttribute('type', Content::PAGE);
         $content->setAttribute('format', $this->editorFormat);
 
-        return view('orchestra/story::api.editor', [
+        return view('orchestra/story::admin.editor', [
             'content' => $content,
             'url'     => resources('storycms.pages'),
             'method'  => 'POST',
@@ -75,7 +75,7 @@ class PagesController extends ContentController
 
         $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
 
-        return view('orchestra/story::api.editor', [
+        return view('orchestra/story::admin.editor', [
             'content' => $content,
             'url'     => resources("storycms.pages/{$content->getAttribute('id')}"),
             'method'  => 'PUT',

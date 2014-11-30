@@ -2,9 +2,6 @@
 
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Orchestra\Support\Facades\Acl;
-use Orchestra\Support\Facades\Meta;
 use Orchestra\Support\Str;
 
 $acl  = app('orchestra.acl')->make('orchestra/story');
