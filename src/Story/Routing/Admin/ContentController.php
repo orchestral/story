@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story\Routing\Api;
+<?php namespace Orchestra\Story\Routing\Admin;
 
 use Carbon\Carbon;
 use Orchestra\Story\Model\Content;

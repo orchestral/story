@@ -52,24 +52,107 @@ class StoryServiceProvider extends ServiceProvider
         $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
         $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/views');
 
-        $this->loadBootstrapFiles($path);
+        $this->mapExtensionConfig();
+
+        $this->bootExtensionEvents();
+
+        $this->bootExtensionWidgets();
+
+        $this->bootExtensionRouting($path);
+
+        $this->bootExtensionMenuEvents();
     }
 
     /**
-     * Boot start up files.
+     * Boot extension events.
      *
-     * @param  string   $path
      * @return void
      */
-    protected function loadBootstrapFiles($path)
+    protected function bootExtensionEvents()
     {
-        include "{$path}/start/global.php";
-        include "{$path}/start/events.php";
-        include "{$path}/filters.php";
-        include "{$path}/resources.php";
+        $app = $this->app;
 
-        if (! $this->app->routesAreCached()) {
-            include "{$path}/routes.php";
-        }
+        $app['orchestra.acl']->make('orchestra/story')->attach($this->app['orchestra.platform.memory']);
+
+        $app['events']->listen(
+            'orchestra.form: extension.orchestra/story',
+            'Orchestra\Story\Event\ExtensionHandler@onFormView'
+        );
+
+        $app['events']->listen('orchestra.validate: extension.orchestra/story', function (& $rules) {
+            $rules['page_permalink'] = ['required'];
+            $rules['post_permalink'] = ['required'];
+        });
+
+        $app['events']->listen('orchestra.story.editor: markdown', function () use ($app) {
+            $asset = $app['orchestra.asset']->container('orchestra/foundation::footer');
+
+            $asset->script('editor', 'packages/orchestra/story/vendor/editor/editor.js');
+            $asset->style('editor', 'packages/orchestra/story/vendor/editor/editor.css');
+            $asset->script('storycms', 'packages/orchestra/story/js/storycms.min.js');
+            $asset->script('storycms.md', 'packages/orchestra/story/js/markdown.min.js', ['editor']);
+        });
+    }
+
+    /**
+     * Boot extension widgets.
+     *
+     * @return void
+     */
+    protected function bootExtensionWidgets()
+    {
+        $app = $this->app;
+
+        $app['view']->composer(
+            'orchestra/foundation::dashboard.index',
+            'Orchestra\Story\Event\DashboardHandler@onDashboardView'
+        );
+
+        $app['events']->listen('orchestra.form: extension.orchestra/story', function () use ($app) {
+            $placeholder = $app['orchestra.widget']->make('placeholder.orchestra.extensions');
+
+            $placeholder->add('permalink')->value(view('orchestra/story::widgets.help'));
+        });
+    }
+
+    /**
+     * Boot extension menu handler.
+     *
+     * @return void
+     */
+    protected function bootExtensionMenuEvents()
+    {
+        $this->app['events']->listen('orchestra.ready: admin', 'Orchestra\Story\StoryMenuHandler');
+    }
+
+    /**
+     * Boot extension routing.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function bootExtensionRouting($path)
+    {
+        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filter\CanManage');
+        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filter\SetEditorFormat');
+
+        include "{$path}/resources.php";
+        include "{$path}/routes.php";
+    }
+
+    /**
+     * Map extension config.
+     *
+     * @return void
+     */
+    protected function mapExtensionConfig()
+    {
+        $this->app['orchestra.extension.config']->map('orchestra/story', [
+            'default_format' => 'orchestra/story::config.default_format',
+            'default_page'   => 'orchestra/story::config.default_page',
+            'per_page'       => 'orchestra/story::config.per_page',
+            'page_permalink' => 'orchestra/story::config.permalink.page',
+            'post_permalink' => 'orchestra/story::config.permalink.post',
+        ]);
     }
 }
