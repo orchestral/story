@@ -39,15 +39,17 @@ class StoryServiceProviderTest extends TestCase
     public function testBootMethod()
     {
         $app = $this->app;
-        $app['orchestra.acl'] = $acl = m::mock('\Orchestra\Auth\Acl\Factory');
-        $app['orchestra.app'] = $orchestra = m::mock('\Orchestra\Foundation\Application');
-        $app['orchestra.memory'] = $memory = m::mock('\Orchestra\Memory\Drivers\Driver');
-        $app['orchestra.extension.config'] = $extconfig = m::mock('\Orchestra\Extension\ConfigManager');
+        $app['orchestra.acl'] = $acl = m::mock('\Orchestra\Contracts\Authorization\Factory');
+        $app['orchestra.app'] = $orchestra = m::mock('\Orchestra\Contracts\Foundation\Foundation');
+        $app['orchestra.platform.memory'] = $memory = m::mock('\Orchestra\Contracts\Memory\Provider');
+        $app['orchestra.extension.config'] = $extconfig = m::mock('\Orchestra\Extension\Config\Repository');
 
-        $orchestra->shouldReceive('memory')->once()->andReturn($memory)
-            ->shouldReceive('group')->once()
+        $orchestra->shouldReceive('group')->once()
                 ->with('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Routing'], m::type('Closure'))
-                ->andReturn(['prefix' => 'cms']);
+                ->andReturn(['prefix' => 'cms'])
+            ->shouldReceive('namespaced')->once()
+                ->with('Orchestra\Story\Routing\Admin', m::type('Closure'))
+                ->andReturnNull();
         $extconfig->shouldReceive('map')->once()->with('orchestra/story', m::type('Array'))->andReturn(null);
 
         $acl->shouldReceive('make')->once()->with('orchestra/story')->andReturn($acl)
