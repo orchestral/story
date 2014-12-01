@@ -22,6 +22,12 @@ Foundation::group('orchestra/story', 'cms', ['namespace' => 'Orchestra\Story\Rou
     $router->get('/', 'HomeController@index');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Backend Routing
+|--------------------------------------------------------------------------
+*/
+
 Foundation::namespaced('Orchestra\Story\Routing\Admin', function (Router $router) {
     $router->group(['prefix' => 'storycms'], function (Router $router) {
         $router->resource('pages', 'PagesController');
