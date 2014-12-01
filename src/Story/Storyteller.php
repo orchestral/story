@@ -53,7 +53,7 @@ class Storyteller
     {
         $format = $this->app['config']->get("orchestra/story::permalink.{$type}");
 
-        if (is_null($format) or ! ($content instanceof Content)) {
+        if (is_null($format) || ! ($content instanceof Content)) {
             return handles("orchestra/story::/");
         }
 

@@ -49,13 +49,13 @@ class StoryServiceProvider extends ServiceProvider
     {
         $path = realpath(__DIR__.'/../');
 
+        $this->bootExtensionComponents($path);
+
         $this->mapExtensionConfig();
 
         $this->bootExtensionEvents();
 
         $this->bootExtensionWidgets();
-
-        $this->bootExtensionComponents($path);
 
         $this->bootExtensionRouting($path);
 
