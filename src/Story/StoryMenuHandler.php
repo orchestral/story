@@ -10,12 +10,14 @@ class StoryMenuHandler
      * @var \Orchestra\Contracts\Authorization\Authorization
      */
     protected $acl;
+
     /**
      * Menu instance.
      *
      * @var \Orchestra\Widget\Handlers\Menu
      */
     protected $menu;
+
     /**
      * Construct a new handler.
      *
@@ -26,6 +28,7 @@ class StoryMenuHandler
         $this->menu = $foundation->menu();
         $this->acl = $foundation->acl();
     }
+
     /**
      * Create a handler for `orchestra.ready: admin` event.
      *
