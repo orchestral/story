@@ -1,6 +1,7 @@
 * text=auto
 
 # Ignore following folder/file.
+/assets             export-ignore
 /build              export-ignore
 /docs               export-ignore
 /editor             export-ignore
