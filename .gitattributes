@@ -4,7 +4,7 @@
 /assets             export-ignore
 /build              export-ignore
 /docs               export-ignore
-/editor             export-ignore
+/resources/editor   export-ignore
 /tests              export-ignore
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
