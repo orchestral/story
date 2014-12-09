@@ -8,17 +8,17 @@ var gulp = require('gulp'),
 
 // Less
 gulp.task('css', function () {
-  return gulp.src('assets/less/**/*.less')
+  return gulp.src('resources/assets/less/**/*.less')
     .pipe(less())
     .pipe(csso())
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('resources/public/css'));
 });
 
 // Coffee
 gulp.task('js', function () {
-  return gulp.src('assets/coffee/**/*.coffee')
+  return gulp.src('resources/assets/coffee/**/*.coffee')
     .pipe(coffee().on('error', gutil.log))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('resources/public/js'));
 });
 
 // Uglify
@@ -30,18 +30,18 @@ gulp.task('minify', function () {
     }
   };
 
-  return gulp.src('public/js/**/*.js')
+  return gulp.src('resources/public/js/**/*.js')
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify(options))
-    .pipe(gulp.dest('public/js'));
+    .pipe(gulp.dest('resources/public/js'));
 });
 
 // Watch any changes.
 gulp.task('watch', function () {
-  gulp.watch('assets/less/**/*.less', ['css']);
-  gulp.watch('assets/coffee/**/*.coffee', ['js']);
-  gulp.watch('public/js/storycms.js', ['minify']);
-  gulp.watch('public/js/markdown.js', ['minify']);
+  gulp.watch('resources/assets/less/**/*.less', ['css']);
+  gulp.watch('resources/assets/coffee/**/*.coffee', ['js']);
+  gulp.watch('resources/public/js/storycms.js', ['minify']);
+  gulp.watch('resources/public/js/markdown.js', ['minify']);
 });
 
 // Default task

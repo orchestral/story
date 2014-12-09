@@ -70,8 +70,8 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionComponents($path)
     {
-        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/config');
-        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/views');
+        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/resources/config');
+        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/resources/views');
     }
 
     /**
@@ -147,7 +147,7 @@ class StoryServiceProvider extends ServiceProvider
         $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filters\CanManage');
         $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filters\SetEditorFormat');
 
-        include "{$path}/routes.php";
+        include "{$path}/src/routes.php";
     }
 
     /**
