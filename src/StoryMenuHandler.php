@@ -42,7 +42,9 @@ class StoryMenuHandler
             return ;
         }
 
-        $this->menu->add('storycms', '^:extensions')
+        $parent = $this->menu->has('extensions') ? '^:extensions' : '<:home';
+
+        $this->menu->add('storycms', $parent)
             ->title('Story CMS')
             ->link(handles('orchestra::storycms'));
     }
