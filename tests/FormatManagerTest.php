@@ -58,8 +58,7 @@ class FormatManagerTest extends \PHPUnit_Framework_TestCase
         $app = $this->app;
         $stub = new FormatManager($app);
 
-        $stub->extend('markup', function () use ($app)
-        {
+        $stub->extend('markup', function () use ($app) {
             return new Markdown($app);
         });
 
