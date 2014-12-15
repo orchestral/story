@@ -1,51 +1,58 @@
 <?php namespace Orchestra\Story;
 
 use Orchestra\Contracts\Auth\Guard;
-use Orchestra\Contracts\Foundation\Foundation;
+use Orchestra\Foundation\Support\MenuHandler;
 
-class StoryMenuHandler
+class StoryMenuHandler extends MenuHandler
 {
     /**
-     * ACL instance.
+     * Get ID.
      *
-     * @var \Orchestra\Contracts\Auth\Guard
+     * @return string
      */
-    protected $auth;
-
-    /**
-     * Menu instance.
-     *
-     * @var \Orchestra\Widget\Handlers\Menu
-     */
-    protected $menu;
-
-    /**
-     * Construct a new handler.
-     *
-     * @param  \Orchestra\Contracts\Foundation\Foundation  $foundation
-     * @param  \Orchestra\Contracts\Auth\Guard  $auth
-     */
-    public function __construct(Foundation $foundation, Guard $auth)
+    protected function getId()
     {
-        $this->menu = $foundation->menu();
-        $this->auth = $auth;
+        return 'storycms';
     }
 
     /**
-     * Create a handler for `orchestra.ready: admin` event.
+     * Get position.
      *
-     * @return void
+     * @return string
      */
-    public function handle()
+    protected function getPosition()
     {
-        if ($this->auth->guest()) {
-            return ;
-        }
+        return $this->menu->has('extensions') ? '^:extensions' : '>:home';
+    }
 
-        $parent = $this->menu->has('extensions') ? '^:extensions' : '>:home';
+    /**
+     * Get the title.
+     *
+     * @return string
+     */
+    protected function getTitle()
+    {
+        return 'Story CMS';
+    }
 
-        $this->menu->add('storycms', $parent)
-            ->title('Story CMS')
-            ->link(handles('orchestra::storycms'));
+    /**
+     * Get the URL.
+     *
+     * @return string
+     */
+    protected function getLink()
+    {
+        return handles('orchestra::storycms');
+    }
+
+    /**
+     * Check whether the menu should be displayed.
+     *
+     * @param  \Orchestra\Contracts\Auth\Guard  $auth
+     * @return bool
+     */
+    public function authorize(Guard $auth)
+    {
+        return ! $auth->guest();
     }
 }
