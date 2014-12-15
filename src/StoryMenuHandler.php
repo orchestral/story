@@ -26,16 +26,6 @@ class StoryMenuHandler extends MenuHandler
     }
 
     /**
-     * Get the title.
-     *
-     * @return string
-     */
-    protected function getTitle()
-    {
-        return 'Story CMS';
-    }
-
-    /**
      * Get the URL.
      *
      * @return string
@@ -43,6 +33,16 @@ class StoryMenuHandler extends MenuHandler
     protected function getLink()
     {
         return handles('orchestra::storycms');
+    }
+
+    /**
+     * Get the title.
+     *
+     * @return string
+     */
+    protected function getTitle()
+    {
+        return 'Story CMS';
     }
 
     /**
