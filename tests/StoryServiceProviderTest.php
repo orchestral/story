@@ -1,9 +1,9 @@
 <?php namespace Orchestra\Story\TestCase;
 
 use Mockery as m;
+use Orchestra\Testing\TestCase;
 use Illuminate\Container\Container;
 use Orchestra\Story\StoryServiceProvider;
-use Orchestra\Foundation\Testing\TestCase;
 
 class StoryServiceProviderTest extends TestCase
 {

@@ -26,7 +26,7 @@
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
 		"orchestra/foundation": "3.0.*",
-		"orchestra/testbench": "3.0.*"
+		"orchestra/testing": "3.0.*"
 	},
 	"extra": {
 		"branch-alias": {
