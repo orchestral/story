@@ -22,7 +22,7 @@ class StoryMenuHandler extends MenuHandler
      *
      * @return string
      */
-    protected function getPosition()
+    public function getPosition()
     {
         return $this->handler->has('extensions') ? '^:extensions' : '>:home';
     }
