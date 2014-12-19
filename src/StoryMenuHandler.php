@@ -6,14 +6,16 @@ use Orchestra\Foundation\Support\MenuHandler;
 class StoryMenuHandler extends MenuHandler
 {
     /**
-     * Get ID.
+     * Menu configuration.
      *
-     * @return string
+     * @var array
      */
-    protected function getId()
-    {
-        return 'storycms';
-    }
+    protected $menu = [
+        'id'    => 'storycms',
+        'title' => 'Story CMS',
+        'link'  => 'orchestra::storycms',
+        'icon'  => null,
+    ];
 
     /**
      * Get position.
@@ -22,27 +24,7 @@ class StoryMenuHandler extends MenuHandler
      */
     protected function getPosition()
     {
-        return $this->menu->has('extensions') ? '^:extensions' : '>:home';
-    }
-
-    /**
-     * Get the URL.
-     *
-     * @return string
-     */
-    protected function getLink()
-    {
-        return handles('orchestra::storycms');
-    }
-
-    /**
-     * Get the title.
-     *
-     * @return string
-     */
-    protected function getTitle()
-    {
-        return 'Story CMS';
+        return $this->handler->has('extensions') ? '^:extensions' : '>:home';
     }
 
     /**
