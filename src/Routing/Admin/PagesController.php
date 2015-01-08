@@ -13,7 +13,7 @@ class PagesController extends ContentController
     {
         parent::setupFilters();
 
-        $this->resource = 'storycms.pages';
+        $this->resource = 'pages';
 
         $this->beforeFilter('orchestra.story.can:create-page', [
             'only' => ['create', 'store'],

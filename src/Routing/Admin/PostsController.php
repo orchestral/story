@@ -13,7 +13,7 @@ class PostsController extends ContentController
     {
         parent::setupFilters();
 
-        $this->resource = 'storycms.posts';
+        $this->resource = 'posts';
 
         $this->beforeFilter('orchestra.story.can:create-post', [
             'only' => ['create', 'store'],
