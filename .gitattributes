@@ -1,9 +1,9 @@
 * text=auto
 
 # Ignore following folder/file.
-/assets             export-ignore
 /build              export-ignore
 /docs               export-ignore
+/resources/assets   export-ignore
 /resources/editor   export-ignore
 /tests              export-ignore
 /.gitattributes     export-ignore
