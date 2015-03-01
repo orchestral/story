@@ -2,7 +2,6 @@
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Support\Facades\ACL;
-use Orchestra\Support\Facades\Meta;
 
 class HomeController extends EditorController
 {
