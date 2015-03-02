@@ -54,6 +54,7 @@ class HomeController extends Controller
      * Show default page.
      *
      * @param  string  $slug
+     *
      * @return mixed
      */
     protected function page($slug)

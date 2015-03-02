@@ -32,6 +32,7 @@ abstract class ContentController extends Controller
      * @param  \Orchestra\Story\Model\Content  $page
      * @param  int  $id
      * @param  string  $slug
+     *
      * @return mixed
      */
     abstract protected function getResponse($page, $id, $slug);
@@ -41,7 +42,9 @@ abstract class ContentController extends Controller
      *
      * @param  int  $id
      * @param  string  $slug
+     *
      * @return \Orchestra\Story\Model\Content
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     abstract protected function getRequestedContent($id, $slug);

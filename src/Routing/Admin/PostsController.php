@@ -50,7 +50,7 @@ class PostsController extends ContentController
      */
     public function create()
     {
-        $content = new Content;
+        $content = new Content();
 
         $content->setAttribute('type', Content::POST);
         $content->setAttribute('format', $this->editorFormat);
@@ -68,6 +68,7 @@ class PostsController extends ContentController
      * Edit a post.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     public function edit($id = null)
@@ -88,6 +89,7 @@ class PostsController extends ContentController
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function storeHasSucceed(Content $content, array $input)
@@ -102,6 +104,7 @@ class PostsController extends ContentController
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function updateHasSucceed(Content $content, array $input)
@@ -115,6 +118,7 @@ class PostsController extends ContentController
      * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
     public function deletionHasSucceed(Content $content)

@@ -31,6 +31,7 @@ class StoryMenuHandler extends MenuHandler
      * Check whether the menu should be displayed.
      *
      * @param  \Orchestra\Contracts\Auth\Guard  $auth
+     *
      * @return bool
      */
     public function authorize(Guard $auth)

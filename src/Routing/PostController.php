@@ -38,6 +38,6 @@ class PostController extends ContentController
             return Content::post()->publish()->where('slug', "_post_/{$slug}")->firstOrFail();
         }
 
-        throw new NotFoundHttpException;
+        throw new NotFoundHttpException();
     }
 }

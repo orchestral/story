@@ -43,7 +43,8 @@ class FormatManager extends Manager
      * Register a custom driver creator Closure.
      *
      * @param  string   $name
-     * @param  Closure  $callback
+     * @param  \Closure $callback
+     *
      * @return $this
      */
     public function extend($name, Closure $callback)
@@ -67,6 +68,7 @@ class FormatManager extends Manager
      * Get available parser, or use the default.
      *
      * @param  string   $name
+     *
      * @return string
      */
     public function get($name)

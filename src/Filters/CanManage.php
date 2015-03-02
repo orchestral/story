@@ -29,7 +29,7 @@ class CanManage
      */
     public function __construct(Foundation $foundation, Factory $acl)
     {
-        $this->acl = $acl->make('orchestra/story');
+        $this->acl        = $acl->make('orchestra/story');
         $this->foundation = $foundation;
     }
 
@@ -39,6 +39,7 @@ class CanManage
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $value
+     *
      * @return mixed
      */
     public function filter(Route $route, Request $request, $value = '')
@@ -52,9 +53,11 @@ class CanManage
 
     /**
      * Can the user take this action.
-     *``
+     *``.
+     *
      * @param  string  $action
      * @param  string  $type
+     *
      * @return bool
      */
     protected function checkUserAuthorization($action, $type)

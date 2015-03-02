@@ -9,7 +9,7 @@ class Markdown extends Parser
      */
     protected function initiate()
     {
-        $this->parser = new ParsedownExtra;
+        $this->parser = new ParsedownExtra();
     }
 
     /**

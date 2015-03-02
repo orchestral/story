@@ -41,7 +41,7 @@ class StoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Boot the service provider
+     * Boot the service provider.
      *
      * @return void
      */
@@ -66,6 +66,7 @@ class StoryServiceProvider extends ServiceProvider
      * Boot extension components.
      *
      * @param  string  $path
+     *
      * @return void
      */
     protected function bootExtensionComponents($path)
@@ -140,6 +141,7 @@ class StoryServiceProvider extends ServiceProvider
      * Boot extension routing.
      *
      * @param  string  $path
+     *
      * @return void
      */
     protected function bootExtensionRouting($path)

@@ -71,6 +71,7 @@ abstract class ContentController extends EditorController implements Listener
      * Edit a content.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     abstract public function edit($id = null);
@@ -79,6 +80,7 @@ abstract class ContentController extends EditorController implements Listener
      * Update a content.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     public function update($id = null)
@@ -90,6 +92,7 @@ abstract class ContentController extends EditorController implements Listener
      * Delete a content.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     public function delete($id = null)
@@ -101,6 +104,7 @@ abstract class ContentController extends EditorController implements Listener
      * Delete a content.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     public function destroy($id)
@@ -112,6 +116,7 @@ abstract class ContentController extends EditorController implements Listener
      * Response when content update has failed validation.
      *
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     public function storeHasFailedValidation($errors)
@@ -124,6 +129,7 @@ abstract class ContentController extends EditorController implements Listener
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     abstract public function storeHasSucceed(Content $content, array $input);
@@ -133,6 +139,7 @@ abstract class ContentController extends EditorController implements Listener
      *
      * @param  int|string  $id
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     public function updateHasFailedValidation($id, $errors)
@@ -145,6 +152,7 @@ abstract class ContentController extends EditorController implements Listener
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     abstract public function updateHasSucceed(Content $content, array $input);
@@ -153,6 +161,7 @@ abstract class ContentController extends EditorController implements Listener
      * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
     abstract public function deletionHasSucceed(Content $content);

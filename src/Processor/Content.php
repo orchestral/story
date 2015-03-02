@@ -17,13 +17,13 @@ class Content extends Processor
     public function store(Listener $listener, array $input)
     {
         $input['slug'] = $this->generateUniqueSlug($input);
-        $validation = $this->validator->on('create')->with($input);
+        $validation    = $this->validator->on('create')->with($input);
 
         if ($validation->fails()) {
             return $listener->storeHasFailedValidation($validation->getMessageBag());
         }
 
-        $content = new Eloquent;
+        $content = new Eloquent();
         $content->setAttribute('user_id', Auth::user()->id);
 
         $this->saving($content, $input);
@@ -34,7 +34,7 @@ class Content extends Processor
     public function update(Listener $listener, $id, array $input)
     {
         $input['slug'] = $this->generateUniqueSlug($input);
-        $validation = $this->validator->on('update')->bind(['id' => $id])->with($input);
+        $validation    = $this->validator->on('update')->bind(['id' => $id])->with($input);
 
         if ($validation->fails()) {
             return $listener->updateHasFailedValidation($id, $validation->getMessageBag());
@@ -74,6 +74,7 @@ class Content extends Processor
      * Generate unique slug.
      *
      * @param  array  $input
+     *
      * @return string
      */
     protected function generateUniqueSlug(array $input)
@@ -85,6 +86,7 @@ class Content extends Processor
      * Determine whether published_at should be updated.
      *
      * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return bool
      */
     protected function updatePublishedAt(Eloquent $content)

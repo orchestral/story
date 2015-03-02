@@ -36,7 +36,7 @@ class PagesController extends ContentController
     public function index()
     {
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate();
-        $type = 'page';
+        $type     = 'page';
 
         set_meta('title', 'List of Pages');
 
@@ -52,7 +52,7 @@ class PagesController extends ContentController
     {
         set_meta('title', 'Write a Page');
 
-        $content = new Content;
+        $content = new Content();
         $content->setAttribute('type', Content::PAGE);
         $content->setAttribute('format', $this->editorFormat);
 
@@ -67,6 +67,7 @@ class PagesController extends ContentController
      * Edit a page.
      *
      * @param  int  $id
+     *
      * @return mixed
      */
     public function edit($id = null)
@@ -87,6 +88,7 @@ class PagesController extends ContentController
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function storeHasSucceed(Content $content, array $input)
@@ -101,6 +103,7 @@ class PagesController extends ContentController
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function updateHasSucceed(Content $content, array $input)
@@ -114,6 +117,7 @@ class PagesController extends ContentController
      * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
     public function deletionHasSucceed(Content $content)

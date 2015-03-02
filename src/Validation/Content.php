@@ -16,7 +16,7 @@ class Content extends Validator
     ];
 
     /**
-     * On create scenario
+     * On create scenario.
      *
      * @return void
      */

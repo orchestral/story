@@ -50,7 +50,7 @@ class HomeController extends EditorController
     {
         set_meta('title', 'Write a Post');
 
-        $content = new Content;
+        $content = new Content();
         $content->setAttribute('type', Content::POST);
         $content->setAttribute('format', $this->editorFormat);
 

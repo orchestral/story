@@ -29,6 +29,7 @@ class SetEditorFormat
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $value
+     *
      * @return mixed
      */
     public function filter(Route $route, Request $request, $value = '')

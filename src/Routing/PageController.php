@@ -38,6 +38,6 @@ class PageController extends ContentController
             return Content::page()->publish()->where('slug', "_page_/{$slug}")->firstOrFail();
         }
 
-        throw new NotFoundHttpException;
+        throw new NotFoundHttpException();
     }
 }

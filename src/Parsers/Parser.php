@@ -38,6 +38,7 @@ abstract class Parser
      * Parse the content.
      *
      * @param  string   $content
+     *
      * @return string
      */
     abstract public function parse($content);

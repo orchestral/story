@@ -8,6 +8,7 @@ interface Content
      * Response when content update has failed validation.
      *
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     public function storeHasFailedValidation($errors);
@@ -17,6 +18,7 @@ interface Content
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function storeHasSucceed(Eloquent $content, array $input);
@@ -26,6 +28,7 @@ interface Content
      *
      * @param  int|string  $id
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     public function updateHasFailedValidation($id, $errors);
@@ -35,6 +38,7 @@ interface Content
      *
      * @param  \Orchestra\Story\Model\Content  $content
      * @param  array  $input
+     *
      * @return mixed
      */
     public function updateHasSucceed(Eloquent $content, array $input);
@@ -43,6 +47,7 @@ interface Content
      * Response when content deletion has succeed.
      *
      * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
     public function deletionHasSucceed(Eloquent $content);

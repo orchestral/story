@@ -32,7 +32,6 @@ return [
     */
     'per_page'  => 10,
 
-
     'permalink' => [
 
         /*

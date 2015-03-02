@@ -28,6 +28,7 @@ class Storyteller
      *
      * @param  string  $type
      * @param  \Orchestra\Story\Model\Content|null  $content
+     *
      * @return string
      */
     public function url($type, $content = null)
@@ -47,6 +48,7 @@ class Storyteller
      *
      * @param  string  $type
      * @param  \Orchestra\Story\Model\Content|null  $content
+     *
      * @return string
      */
     public function permalink($type, $content = null)

@@ -63,6 +63,7 @@ class Content extends Eloquent
      * Query scope for pages.
      *
      * @param  object   $query
+     *
      * @return void
      */
     public function scopePage($query)
@@ -74,6 +75,7 @@ class Content extends Eloquent
      * Query scope for posts.
      *
      * @param  object   $query
+     *
      * @return void
      */
     public function scopePost($query)
@@ -85,6 +87,7 @@ class Content extends Eloquent
      * Query scope for published.
      *
      * @param  object   $query
+     *
      * @return void
      */
     public function scopePublish($query)
@@ -96,6 +99,7 @@ class Content extends Eloquent
      * Query scope for latest published.
      *
      * @param  object   $query
+     *
      * @return void
      */
     public function scopeLatestPublish($query)
@@ -109,6 +113,7 @@ class Content extends Eloquent
      * @param  object       $query
      * @param  string|null  $orderBy
      * @param  int|null     $take
+     *
      * @return void
      */
     public function scopeLatestBy($query, $orderBy = null, $take = null)
@@ -129,6 +134,7 @@ class Content extends Eloquent
      *
      * @param  object     $query
      * @param  int|null   $take
+     *
      * @return void
      */
     public function scopeLatest($query, $take = null)
@@ -144,6 +150,7 @@ class Content extends Eloquent
      * Accessor for title.
      *
      * @param  mixed   $value
+     *
      * @return string
      */
     public function getTitleAttribute($value)
@@ -159,6 +166,7 @@ class Content extends Eloquent
      * Accessor for content.
      *
      * @param  mixed   $value
+     *
      * @return string
      */
     public function getContentAttribute($value)
