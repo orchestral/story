@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story\Routing\Admin;
+<?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Support\Facades\ACL;

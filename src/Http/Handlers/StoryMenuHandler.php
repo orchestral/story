@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story;
+<?php namespace Orchestra\Story\Http\Handlers;
 
 use Orchestra\Contracts\Auth\Guard;
 use Orchestra\Foundation\Support\MenuHandler;

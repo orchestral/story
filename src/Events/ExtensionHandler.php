@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story\Event;
+<?php namespace Orchestra\Story\Events;
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Facades\StoryFormat;

@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Story\Filters;
+<?php namespace Orchestra\Story\Http\Filters;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;

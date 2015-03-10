@@ -134,7 +134,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionMenuEvents()
     {
-        $this->app['events']->listen('orchestra.ready: admin', 'Orchestra\Story\StoryMenuHandler');
+        $this->app['events']->listen('orchestra.ready: admin', 'Orchestra\Story\Http\Handlers\StoryMenuHandler');
     }
 
     /**
@@ -146,8 +146,8 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionRouting($path)
     {
-        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Filters\CanManage');
-        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Filters\SetEditorFormat');
+        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Http\Filters\CanManage');
+        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Http\Filters\SetEditorFormat');
 
         include "{$path}/src/routes.php";
     }

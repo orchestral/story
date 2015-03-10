@@ -1,8 +1,8 @@
-<?php namespace Orchestra\Story\Routing\Admin;
+<?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
 
-class PostsController extends ContentController
+class PagesController extends ContentController
 {
     /**
      * Define filters for current controller.
@@ -13,59 +13,58 @@ class PostsController extends ContentController
     {
         parent::setupFilters();
 
-        $this->resource = 'posts';
+        $this->resource = 'pages';
 
-        $this->beforeFilter('orchestra.story.can:create-post', [
+        $this->beforeFilter('orchestra.story.can:create-page', [
             'only' => ['create', 'store'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:update-post', [
+        $this->beforeFilter('orchestra.story.can:update-page', [
             'only' => ['edit', 'update'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:delete-post', [
+        $this->beforeFilter('orchestra.story.can:delete-page', [
             'only' => ['delete', 'destroy'],
         ]);
     }
 
     /**
-     * List all the posts.
+     * List all the pages.
      *
      * @return mixed
      */
     public function index()
     {
-        $contents = Content::with('author')->latestBy(Content::CREATED_AT)->post()->paginate();
-        $type     = 'post';
+        $contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate();
+        $type     = 'page';
 
-        set_meta('title', 'List of Posts');
+        set_meta('title', 'List of Pages');
 
         return view('orchestra/story::admin.index', compact('contents', 'type'));
     }
 
     /**
-     * Write a post.
+     * Write a page.
      *
      * @return mixed
      */
     public function create()
     {
+        set_meta('title', 'Write a Page');
+
         $content = new Content();
-
-        $content->setAttribute('type', Content::POST);
+        $content->setAttribute('type', Content::PAGE);
         $content->setAttribute('format', $this->editorFormat);
-
-        set_meta('title', 'Write a Post');
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => handles('orchestra::storycms/posts'),
+            'url'     => handles('orchestra::storycms/pages'),
             'method'  => 'POST',
         ]);
     }
 
     /**
-     * Edit a post.
+     * Edit a page.
      *
      * @param  int  $id
      *
@@ -73,13 +72,13 @@ class PostsController extends ContentController
      */
     public function edit($id = null)
     {
-        set_meta('title', 'Write a Post');
+        set_meta('title', 'Write a Page');
 
-        $content = Content::where('type', 'post')->where('id', $id)->firstOrFail();
+        $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
-            'url'     => handles("orchestra::storycms/posts/{$content->getAttribute('id')}"),
+            'url'     => handles("orchestra::storycms/pages/{$content->getAttribute('id')}"),
             'method'  => 'PUT',
         ]);
     }
@@ -94,9 +93,9 @@ class PostsController extends ContentController
      */
     public function storeHasSucceed(Content $content, array $input)
     {
-        messages('success', 'Post has been created.');
+        messages('success', 'Page has been created.');
 
-        return redirect(handles("orchestra::storycms/posts/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -109,9 +108,9 @@ class PostsController extends ContentController
      */
     public function updateHasSucceed(Content $content, array $input)
     {
-        messages('success', 'Post has been updated.');
+        messages('success', 'Page has been updated.');
 
-        return redirect(handles("orchestra::storycms/posts/{$content->getAttribute('id')}/edit"));
+        return redirect(handles("orchestra::storycms/pages/{$content->getAttribute('id')}/edit"));
     }
 
     /**
@@ -123,8 +122,8 @@ class PostsController extends ContentController
      */
     public function deletionHasSucceed(Content $content)
     {
-        messages('success', 'Post has been deleted.');
+        messages('success', 'Page has been deleted.');
 
-        return redirect(handles('orchestra::storycms/posts'));
+        return redirect(handles('orchestra::storycms/pages'));
     }
 }
