@@ -88,7 +88,7 @@ class StoryServiceProvider extends ServiceProvider
 
         $app['events']->listen(
             'orchestra.form: extension.orchestra/story',
-            'Orchestra\Story\Event\ExtensionHandler@onFormView'
+            'Orchestra\Story\Events\ExtensionHandler@onFormView'
         );
 
         $app['events']->listen('orchestra.validate: extension.orchestra/story', function (& $rules) {
@@ -117,7 +117,7 @@ class StoryServiceProvider extends ServiceProvider
 
         $app['view']->composer(
             'orchestra/foundation::dashboard.index',
-            'Orchestra\Story\Event\DashboardHandler@onDashboardView'
+            'Orchestra\Story\Events\DashboardHandler@onDashboardView'
         );
 
         $app['events']->listen('orchestra.form: extension.orchestra/story', function () use ($app) {
