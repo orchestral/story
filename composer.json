@@ -26,9 +26,8 @@
 		"orchestra/foundation": "3.0.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "0.9.*",
-		"orchestra/testing": "3.0.*",
-		"phpspec/phpspec": "~2.1"
+		"phpspec/phpspec": "~2.1@stable",
+		"coduo/phpspec-data-provider-extension": "~1.0"
 	},
 	"extra": {
 		"branch-alias": {

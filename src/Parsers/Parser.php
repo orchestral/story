@@ -12,14 +12,14 @@ abstract class Parser
     /**
      * Parser instance.
      *
-     * @var Object
+     * @var object
      */
     protected $parser;
 
     /**
      * Create a new instance of Storytelling.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application   $app
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      */
     public function __construct($app)
     {
