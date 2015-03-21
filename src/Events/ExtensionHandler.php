@@ -13,7 +13,7 @@ class ExtensionHandler
      *
      * @return void
      */
-    public function onFormView($model, $form)
+    public function handle($model, $form)
     {
         $form->extend(function ($form) use ($model) {
             $form->fieldset('Page Management', function ($fieldset) {

@@ -84,12 +84,9 @@ class StoryServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        $app['orchestra.acl']->make('orchestra/story')->attach($this->app['orchestra.platform.memory']);
+        $app['orchestra.acl']->make('orchestra/story')->attach($app['orchestra.platform.memory']);
 
-        $app['events']->listen(
-            'orchestra.form: extension.orchestra/story',
-            'Orchestra\Story\Events\ExtensionHandler@onFormView'
-        );
+        $app['events']->listen('orchestra.form: extension.orchestra/story', 'Orchestra\Story\Events\ExtensionHandler');
 
         $app['events']->listen('orchestra.validate: extension.orchestra/story', function (& $rules) {
             $rules['page_permalink'] = ['required'];
@@ -115,10 +112,7 @@ class StoryServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        $app['view']->composer(
-            'orchestra/foundation::dashboard.index',
-            'Orchestra\Story\Events\DashboardHandler@onDashboardView'
-        );
+        $app['view']->composer('orchestra/foundation::dashboard.index', 'Orchestra\Story\Composers\Dashboard');
 
         $app['events']->listen('orchestra.form: extension.orchestra/story', function () use ($app) {
             $placeholder = $app['orchestra.widget']->make('placeholder.orchestra.extensions');
