@@ -27,7 +27,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"orchestra/testing": "3.0.*"
+		"orchestra/testing": "3.0.*",
+		"phpspec/phpspec": "~2.1"
 	},
 	"extra": {
 		"branch-alias": {
