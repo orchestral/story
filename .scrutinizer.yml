@@ -4,8 +4,6 @@ filter:
     paths:
         - 'src/*'
     excluded_paths:
-        - 'build/*'
-        - 'src/migrations/*'
         - 'vendor/*'
         - 'tests/*'
 tools:
@@ -14,20 +12,15 @@ tools:
     php_code_sniffer:
         config:
             standard: PSR2
-    php_code_coverage:
-        config_path: phpunit.xml
     php_cpd:
         excluded_dirs:
-            - src/migrations
             - vendor
             - tests
     php_loc:
         excluded_dirs:
-            - src/migrations
             - vendor
             - tests
     php_pdepend:
         excluded_dirs:
-            - src/migrations
             - vendor
             - tests
