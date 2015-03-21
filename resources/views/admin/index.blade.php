@@ -1,8 +1,7 @@
 @extends('orchestra/foundation::layouts.main')
 
 @section('content')
-
-@include('orchestra/story::widgets.menu')
+@include('orchestra/story::widgets.header')
 
 <?php
 
