@@ -9,6 +9,7 @@ class Dashboard
      * Handle pane for dashboard page.
      *
      * @param  \Orchestra\Widget\WidgetManager  $widget
+     *
      * @return void
      */
     public function compose(WidgetManager $widget)
