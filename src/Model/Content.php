@@ -147,38 +147,6 @@ class Content extends Eloquent
     }
 
     /**
-     * Accessor for title.
-     *
-     * @param  mixed   $value
-     *
-     * @return string
-     */
-    public function getTitleAttribute($value)
-    {
-        if (get_magic_quotes_gpc()) {
-            return stripslashes($value);
-        }
-
-        return $value;
-    }
-
-    /**
-     * Accessor for content.
-     *
-     * @param  mixed   $value
-     *
-     * @return string
-     */
-    public function getContentAttribute($value)
-    {
-        if (get_magic_quotes_gpc()) {
-            return stripslashes($value);
-        }
-
-        return $value;
-    }
-
-    /**
      * Accessor for parsed excerpt.
      *
      * @return string
