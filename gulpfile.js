@@ -38,7 +38,7 @@ gulp.task('minify', ['js'], function () {
     }
   };
 
-  return gulp.src(dir.web+'/js/**/*.js')
+  return gulp.src([dir.web+'/js/markdown.js', dir.web+'/js/storycms.js'])
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify(options))
     .pipe(gulp.dest(dir.web+'/js'));

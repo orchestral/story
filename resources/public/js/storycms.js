@@ -1,5 +1,5 @@
 (function() {
-  var $, Javie, dispatcher, root, slugify, story_bootstrap, _;
+  var $, Javie, _, dispatcher, root, slugify, story_bootstrap;
 
   root = this;
 
