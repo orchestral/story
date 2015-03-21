@@ -38,8 +38,7 @@ By default, Story CMS is using Markdown format for post and page, however you ca
 ```php
 use Orchestra\Story\Facades\StoryFormat;
 
-StoryFormat::extend('bbcode', function ()
-{
+StoryFormat::extend('bbcode', function () {
     return new BBCodeParser();
 });
 
@@ -49,8 +48,7 @@ class BBCodeParser extends Orchestra\Story\Parsers\Parser {}
 You can add a new JavaScript text editor using:
 
 ```php
-Event::listen('orchestra.story.editor: bbcode', function ()
-{
+Event::listen('orchestra.story.editor: bbcode', function () {
     // Add asset
 });
 ```
