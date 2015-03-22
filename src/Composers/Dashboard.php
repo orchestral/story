@@ -6,15 +6,30 @@ use Orchestra\Widget\WidgetManager;
 class Dashboard
 {
     /**
-     * Handle pane for dashboard page.
+     * The widget manager implementation.
+     *
+     * @var \Orchestra\Widget\WidgetManager
+     */
+    protected $widget;
+
+    /**
+     * Construct a new composer.
      *
      * @param  \Orchestra\Widget\WidgetManager  $widget
+     */
+    public function __construct(WidgetManager $widget)
+    {
+        $this->widget = $widget;
+    }
+
+    /**
+     * Handle pane for dashboard page.
      *
      * @return void
      */
-    public function compose(WidgetManager $widget)
+    public function compose()
     {
-        $pane = $widget->make('pane.orchestra');
+        $pane = $this->widget->make('pane.orchestra');
 
         $posts = Content::post()->publish()->latest(10)->get();
 
