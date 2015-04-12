@@ -56,7 +56,7 @@ class Storyteller
         $format = $this->app['config']->get("orchestra/story::permalink.{$type}");
 
         if (is_null($format) || ! ($content instanceof Content)) {
-            return handles("orchestra/story::/");
+            return handles('orchestra/story::/');
         }
 
         if (is_null($published = $content->getAttribute('published_at'))) {
