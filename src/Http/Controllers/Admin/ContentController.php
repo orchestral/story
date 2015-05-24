@@ -40,7 +40,7 @@ abstract class ContentController extends EditorController implements Listener
      */
     protected function setupFilters()
     {
-        $this->beforeFilter('orchestra.auth');
+        $this->middleware('orchestra.auth');
     }
 
     /**

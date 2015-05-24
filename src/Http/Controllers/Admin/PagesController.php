@@ -15,15 +15,15 @@ class PagesController extends ContentController
 
         $this->resource = 'pages';
 
-        $this->beforeFilter('orchestra.story.can:create-page', [
+        $this->middleware('orchestra.story.can:create-page', [
             'only' => ['create', 'store'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:update-page', [
+        $this->middleware('orchestra.story.can:update-page', [
             'only' => ['edit', 'update'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:delete-page', [
+        $this->middleware('orchestra.story.can:delete-page', [
             'only' => ['delete', 'destroy'],
         ]);
     }

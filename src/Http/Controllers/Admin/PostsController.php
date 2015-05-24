@@ -15,15 +15,15 @@ class PostsController extends ContentController
 
         $this->resource = 'posts';
 
-        $this->beforeFilter('orchestra.story.can:create-post', [
+        $this->middleware('orchestra.story.can:create-post', [
             'only' => ['create', 'store'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:update-post', [
+        $this->middleware('orchestra.story.can:update-post', [
             'only' => ['edit', 'update'],
         ]);
 
-        $this->beforeFilter('orchestra.story.can:delete-post', [
+        $this->middleware('orchestra.story.can:delete-post', [
             'only' => ['delete', 'destroy'],
         ]);
     }
