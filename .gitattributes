@@ -15,5 +15,5 @@
 /build.xml          export-ignore
 /LICENSE            export-ignore
 /package.json       export-ignore
-/phpspec.yaml       export-ignore
+/phpspec.yml        export-ignore
 /README.md          export-ignore

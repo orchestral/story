@@ -21,9 +21,7 @@ And then run `composer install` to fetch the package.
 
 You could also simplify the above code by using the following command:
 
-```
-composer require "orchestra/story=~3.0"
-```
+	composer require "orchestra/story=~3.0"
 
 ### Setup
 
