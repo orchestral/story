@@ -1,7 +1,6 @@
-<?php namespace Orchestra\Story\Http\Filters;
+<?php namespace Orchestra\Story\Http\Middleware;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Closure;
 use Orchestra\Contracts\Foundation\Foundation;
 use Orchestra\Contracts\Authorization\Factory;
 
@@ -22,7 +21,7 @@ class CanManage
     protected $acl;
 
     /**
-     * Create a new filter instance.
+     * Create a new middleware instance.
      *
      * @param  \Orchestra\Contracts\Foundation\Foundation  $foundation
      * @param  \Orchestra\Contracts\Authorization\Factory  $acl
@@ -34,33 +33,34 @@ class CanManage
     }
 
     /**
-     * Run the request filter.
+     * Handle an incoming request.
      *
-     * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $value
+     * @param  \Closure  $next
+     * @param  string|null  $action
      *
      * @return mixed
      */
-    public function filter(Route $route, Request $request, $value = '')
+    public function handle($request, Closure $next, $action = null)
     {
-        list($action, $type) = explode('-', $value);
+        list($action, $type) = explode('-', $action);
 
-        if (! $this->checkUserAuthorization($action, $type)) {
+        if (! $this->authorize($action, $type)) {
             return redirect(handles("orchestra::storycms/{$type}s"));
         }
+
+        return $next($request);
     }
 
     /**
      * Can the user take this action.
-     *``.
      *
      * @param  string  $action
      * @param  string  $type
      *
      * @return bool
      */
-    protected function checkUserAuthorization($action, $type)
+    protected function authorize($action, $type)
     {
         $acl = $this->acl;
 

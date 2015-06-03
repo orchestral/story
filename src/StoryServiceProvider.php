@@ -1,6 +1,11 @@
 <?php namespace Orchestra\Story;
 
+use Orchestra\Story\Composers\Dashboard;
+use Orchestra\Story\Events\ExtensionHandler;
+use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Support\Providers\ServiceProvider;
+use Orchestra\Story\Http\Handlers\StoryMenuHandler;
+use Orchestra\Story\Http\Middleware\SetEditorFormat;
 
 class StoryServiceProvider extends ServiceProvider
 {
@@ -71,8 +76,8 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionComponents($path)
     {
-        $this->addConfigComponent('orchestra/story', 'orchestra/story', $path.'/resources/config');
-        $this->addViewComponent('orchestra/story', 'orchestra/story', $path.'/resources/views');
+        $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/resources/config");
+        $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/resources/views");
     }
 
     /**
@@ -86,7 +91,7 @@ class StoryServiceProvider extends ServiceProvider
 
         $app['orchestra.acl']->make('orchestra/story')->attach($app['orchestra.platform.memory']);
 
-        $app['events']->listen('orchestra.form: extension.orchestra/story', 'Orchestra\Story\Events\ExtensionHandler');
+        $app['events']->listen('orchestra.form: extension.orchestra/story', ExtensionHandler::class);
 
         $app['events']->listen('orchestra.validate: extension.orchestra/story', function (& $rules) {
             $rules['page_permalink'] = ['required'];
@@ -112,7 +117,7 @@ class StoryServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        $app['view']->composer('orchestra/foundation::dashboard.index', 'Orchestra\Story\Composers\Dashboard');
+        $app['view']->composer('orchestra/foundation::dashboard.index', Dashboard::class);
 
         $app['events']->listen('orchestra.form: extension.orchestra/story', function () use ($app) {
             $placeholder = $app['orchestra.widget']->make('placeholder.orchestra.extensions');
@@ -128,7 +133,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionMenuEvents()
     {
-        $this->app['events']->listen('orchestra.ready: admin', 'Orchestra\Story\Http\Handlers\StoryMenuHandler');
+        $this->app['events']->listen('orchestra.ready: admin', StoryMenuHandler::class);
     }
 
     /**
@@ -140,8 +145,8 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionRouting($path)
     {
-        $this->app['router']->filter('orchestra.story.can', 'Orchestra\Story\Http\Filters\CanManage');
-        $this->app['router']->filter('orchestra.story.editor', 'Orchestra\Story\Http\Filters\SetEditorFormat');
+        $this->app['router']->middleware('orchestra.story.can', CanManage::class);
+        $this->app['router']->middleware('orchestra.story.editor', SetEditorFormat::class);
 
         include "{$path}/src/routes.php";
     }
