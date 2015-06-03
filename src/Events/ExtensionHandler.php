@@ -2,6 +2,7 @@
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Facades\StoryFormat;
+use Illuminate\Contracts\Support\Arrayable;
 
 class ExtensionHandler
 {
@@ -17,10 +18,13 @@ class ExtensionHandler
     {
         $form->extend(function ($form) use ($model) {
             $form->fieldset('Page Management', function ($fieldset) {
-                $pages = array_merge(
-                    ['_posts_' => 'Display Posts'],
-                    Content::page()->publish()->lists('title', 'slug')
-                );
+                $pages = Content::page()->publish()->lists('title', 'slug');
+
+                if ($pages instanceof Arrayable) {
+                    $pages = $pages->toArray();
+                }
+
+                $pages = array_merge(['_posts_' => 'Display Posts'], $pages);
 
                 $fieldset->control('select', 'default_format')
                     ->label('Default Format')

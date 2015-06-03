@@ -1,7 +1,6 @@
-<?php namespace Orchestra\Story\Http\Filters;
+<?php namespace Orchestra\Story\Http\Middleware;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class SetEditorFormat
@@ -14,7 +13,7 @@ class SetEditorFormat
     protected $dispatcher;
 
     /**
-     * Create a new filter instance.
+     * Create a new middleware instance.
      *
      * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
      */
@@ -24,16 +23,18 @@ class SetEditorFormat
     }
 
     /**
-     * Run the request filter.
+     * Handle an incoming request.
      *
-     * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $value
+     * @param  \Closure  $next
+     * @param  string|null  $format
      *
      * @return mixed
      */
-    public function filter(Route $route, Request $request, $value = '')
+    public function handle($request, Closure $next, $format = null)
     {
-        $this->dispatcher->fire("orchestra.story.editor: {$value}");
+        $this->dispatcher->fire("orchestra.story.editor: {$format}");
+
+        return $next($request);
     }
 }
