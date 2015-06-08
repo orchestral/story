@@ -6,11 +6,11 @@ use Orchestra\Support\Facades\ACL;
 class HomeController extends EditorController
 {
     /**
-     * Define filters for current controller.
+     * Define the middleware.
      *
      * @return void
      */
-    protected function setupFilters()
+    protected function setupMiddleware()
     {
         //
     }

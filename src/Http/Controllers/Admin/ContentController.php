@@ -34,11 +34,11 @@ abstract class ContentController extends EditorController implements Listener
     }
 
     /**
-     * Define filters for current controller.
+     * Define the middleware.
      *
      * @return void
      */
-    protected function setupFilters()
+    protected function setupMiddleware()
     {
         $this->middleware('orchestra.auth');
     }
