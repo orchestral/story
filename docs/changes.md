@@ -3,6 +3,13 @@ title: Story Change Log
 
 ---
 
+## Version 3.1 {#v3-1}
+
+### v3.1.0 {#v3-1-0}
+
+* Update support for Orchestra Platform v3.1.
+* Convert filter to middleware.
+
 ## Version 3.0 {#v3-0}
 
 ### v3.0.0 {#v3-0-0}
