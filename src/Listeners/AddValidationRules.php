@@ -6,6 +6,7 @@ class AddValidationRules
      * Handle event.
      *
      * @param  object  $rules
+     *
      * @return void
      */
     public function handle(& $rules)

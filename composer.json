@@ -1,38 +1,38 @@
 {
-	"name": "orchestra/story",
-	"description": "CMS Extension for Orchestra Platform",
-	"keywords": ["orchestra-platform", "orchestral", "laravel", "cms"],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Mior Muhammad Zaki",
-			"email": "crynobone@gmail.com",
-			"homepage": "https://github.com/crynobone"
-		}
-	],
-	"autoload": {
-		"classmap": [
-			"resources/database/migrations"
-		],
-		"psr-4": {
-			"Orchestra\\Story\\" : "src/"
-		}
-	},
-	"require": {
-		"php": ">=5.5.0",
-		"erusev/parsedown": "~1.1",
-		"erusev/parsedown-extra": "~0.2",
-		"orchestra/contracts": "3.1.*",
-		"orchestra/facile": "3.1.*"
-	},
-	"require-dev": {
-		"phpspec/phpspec": "~2.1",
-		"orchestra/foundation": "3.1.*"
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "3.2-dev"
-		}
-	},
-	"minimum-stability": "dev"
+    "name": "orchestra/story",
+    "description": "CMS Extension for Orchestra Platform",
+    "keywords": ["orchestra-platform", "orchestral", "laravel", "cms"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com",
+            "homepage": "https://github.com/crynobone"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "resources/database/migrations"
+        ],
+        "psr-4": {
+            "Orchestra\\Story\\" : "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "erusev/parsedown": "~1.1",
+        "erusev/parsedown-extra": "~0.2",
+        "orchestra/contracts": "3.1.*",
+        "orchestra/facile": "3.1.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1",
+        "orchestra/foundation": "3.1.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.2-dev"
+        }
+    },
+    "minimum-stability": "dev"
 }

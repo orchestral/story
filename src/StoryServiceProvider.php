@@ -25,10 +25,10 @@ class StoryServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'orchestra.ready: admin' => [StoryMenuHandler::class],
-        'orchestra.form: extension.orchestra/story' => [AttachForm::class, AddPlaceholder::class],
+        'orchestra.ready: admin'                        => [StoryMenuHandler::class],
+        'orchestra.form: extension.orchestra/story'     => [AttachForm::class, AddPlaceholder::class],
         'orchestra.validate: extension.orchestra/story' => [AddValidationRules::class],
-        'orchestra.story.editor: markdown' => [AttachMarkdownEditor::class],
+        'orchestra.story.editor: markdown'              => [AttachMarkdownEditor::class],
     ];
 
     /**
@@ -51,7 +51,7 @@ class StoryServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'orchestra.story.can' => CanManage::class,
+        'orchestra.story.can'    => CanManage::class,
         'orchestra.story.editor' => SetEditorFormat::class,
     ];
 
