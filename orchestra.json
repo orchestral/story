@@ -1,14 +1,14 @@
 {
-	"name": "Story CMS",
-	"description": "Story CMS Extension",
-	"author": "Mior Muhammad Zaki",
-	"url": "https://github.com/orchestral/story",
-	"version": "3.1.0@dev",
-	"config": {
-		"handles": "cms"
-	},
-	"provides": [
-		"Orchestra\\Story\\StoryServiceProvider",
-		"Orchestra\\Facile\\FacileServiceProvider"
-	]
+    "name": "Story CMS",
+    "description": "Story CMS Extension",
+    "author": "Mior Muhammad Zaki",
+    "url": "https://github.com/orchestral/story",
+    "version": "3.1.0@dev",
+    "config": {
+        "handles": "cms"
+    },
+    "provides": [
+        "Orchestra\\Story\\StoryServiceProvider",
+        "Orchestra\\Facile\\FacileServiceProvider"
+    ]
 }
