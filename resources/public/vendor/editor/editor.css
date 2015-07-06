@@ -323,6 +323,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
 }
 .editor-toolbar {
   position: relative;
+  padding: 0 8px;
   opacity: 0.6;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -378,8 +379,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}
   margin: 0 6px;
 }
 .editor-toolbar a.icon-fullscreen {
-  position: absolute;
-  right: 0;
+  float: right;
 }
 .editor-statusbar {
   border-top: 1px solid #ece9e9;

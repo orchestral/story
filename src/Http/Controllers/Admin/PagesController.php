@@ -5,13 +5,13 @@ use Orchestra\Story\Model\Content;
 class PagesController extends ContentController
 {
     /**
-     * Define filters for current controller.
+     * Define the middleware.
      *
      * @return void
      */
-    public function setupFilters()
+    protected function setupMiddleware()
     {
-        parent::setupFilters();
+        parent::setupMiddleware();
 
         $this->resource = 'pages';
 

@@ -1,14 +1,60 @@
 <?php namespace Orchestra\Story;
 
+use Illuminate\Routing\Router;
+use Illuminate\Contracts\Http\Kernel;
 use Orchestra\Story\Composers\Dashboard;
-use Orchestra\Story\Events\ExtensionHandler;
+use Orchestra\Story\Listeners\AttachForm;
+use Orchestra\Story\Listeners\AddPlaceholder;
 use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Support\Providers\ServiceProvider;
+use Orchestra\Story\Listeners\AddValidationRules;
 use Orchestra\Story\Http\Handlers\StoryMenuHandler;
+use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
+use Orchestra\Support\Providers\Traits\EventProviderTrait;
+use Orchestra\Support\Providers\Traits\MiddlewareProviderTrait;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 
 class StoryServiceProvider extends ServiceProvider
 {
+    use EventProviderTrait, MiddlewareProviderTrait;
+
+    /**
+     * The event handler mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'orchestra.ready: admin'                        => [StoryMenuHandler::class],
+        'orchestra.form: extension.orchestra/story'     => [AttachForm::class, AddPlaceholder::class],
+        'orchestra.validate: extension.orchestra/story' => [AddValidationRules::class],
+        'orchestra.story.editor: markdown'              => [AttachMarkdownEditor::class],
+    ];
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [];
+
+    /**
+     * The application's middleware stack.
+     *
+     * @var array
+     */
+    protected $middleware = [];
+
+    /**
+     * The application's route middleware.
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [
+        'orchestra.story.can'    => CanManage::class,
+        'orchestra.story.editor' => SetEditorFormat::class,
+    ];
+
     /**
      * Register service provider.
      *
@@ -17,7 +63,6 @@ class StoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerStoryTeller();
-
         $this->registerFormatManager();
     }
 
@@ -48,23 +93,23 @@ class StoryServiceProvider extends ServiceProvider
     /**
      * Boot the service provider.
      *
+     *
+     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Contracts\Http\Kernel  $kernel
+     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router, Kernel $kernel, DispatcherContract $events)
     {
         $path = realpath(__DIR__.'/../');
 
+        $this->registerRouteMiddleware($router, $kernel);
+        $this->registerEventListeners($events);
+
         $this->bootExtensionComponents($path);
-
         $this->mapExtensionConfig();
-
-        $this->bootExtensionEvents();
-
-        $this->bootExtensionWidgets();
-
         $this->bootExtensionRouting($path);
-
-        $this->bootExtensionMenuEvents();
     }
 
     /**
@@ -76,64 +121,15 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionComponents($path)
     {
+        $acl    = $this->app->make('orchestra.acl');
+        $memory = $this->app->make('orchestra.platform.memory');
+        $view   = $this->app->make('view');
+
+        $acl->make('orchestra/story')->attach($memory);
+        $view->composer('orchestra/foundation::dashboard.index', Dashboard::class);
+
         $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/resources/config");
         $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/resources/views");
-    }
-
-    /**
-     * Boot extension events.
-     *
-     * @return void
-     */
-    protected function bootExtensionEvents()
-    {
-        $app = $this->app;
-
-        $app['orchestra.acl']->make('orchestra/story')->attach($app['orchestra.platform.memory']);
-
-        $app['events']->listen('orchestra.form: extension.orchestra/story', ExtensionHandler::class);
-
-        $app['events']->listen('orchestra.validate: extension.orchestra/story', function (& $rules) {
-            $rules['page_permalink'] = ['required'];
-            $rules['post_permalink'] = ['required'];
-        });
-
-        $app['events']->listen('orchestra.story.editor: markdown', function () use ($app) {
-            $asset = $app['orchestra.asset']->container('orchestra/foundation::footer');
-
-            $asset->script('editor', 'packages/orchestra/story/vendor/editor/editor.js');
-            $asset->style('editor', 'packages/orchestra/story/vendor/editor/editor.css');
-            $asset->script('storycms', 'packages/orchestra/story/js/storycms.min.js');
-            $asset->script('storycms.md', 'packages/orchestra/story/js/markdown.min.js', ['editor']);
-        });
-    }
-
-    /**
-     * Boot extension widgets.
-     *
-     * @return void
-     */
-    protected function bootExtensionWidgets()
-    {
-        $app = $this->app;
-
-        $app['view']->composer('orchestra/foundation::dashboard.index', Dashboard::class);
-
-        $app['events']->listen('orchestra.form: extension.orchestra/story', function () use ($app) {
-            $placeholder = $app['orchestra.widget']->make('placeholder.orchestra.extensions');
-
-            $placeholder->add('permalink')->value(view('orchestra/story::widgets.help'));
-        });
-    }
-
-    /**
-     * Boot extension menu handler.
-     *
-     * @return void
-     */
-    protected function bootExtensionMenuEvents()
-    {
-        $this->app['events']->listen('orchestra.ready: admin', StoryMenuHandler::class);
     }
 
     /**
@@ -145,9 +141,6 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function bootExtensionRouting($path)
     {
-        $this->app['router']->middleware('orchestra.story.can', CanManage::class);
-        $this->app['router']->middleware('orchestra.story.editor', SetEditorFormat::class);
-
         include "{$path}/src/routes.php";
     }
 
@@ -158,7 +151,7 @@ class StoryServiceProvider extends ServiceProvider
      */
     protected function mapExtensionConfig()
     {
-        $this->app['orchestra.extension.config']->map('orchestra/story', [
+        $this->app->make('orchestra.extension.config')->map('orchestra/story', [
             'default_format' => 'orchestra/story::config.default_format',
             'default_page'   => 'orchestra/story::config.default_page',
             'per_page'       => 'orchestra/story::config.per_page',

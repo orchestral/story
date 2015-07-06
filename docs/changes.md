@@ -3,6 +3,20 @@ title: Story Change Log
 
 ---
 
+## Version 3.1 {#v3-1}
+
+### v3.1.1 {#v3-1-1}
+
+* Refactor `Orchestra\Story\StoryServiceProvider` and convert events handler to use own class handler.
+* Update Assets:
+  - lepture
+  - marked.js
+
+### v3.1.0 {#v3-1-0}
+
+* Update support for Orchestra Platform v3.1.
+* Convert filter to middleware.
+
 ## Version 3.0 {#v3-0}
 
 ### v3.0.0 {#v3-0-0}

@@ -1,10 +1,10 @@
-<?php namespace Orchestra\Story\Events;
+<?php namespace Orchestra\Story\Listeners;
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Contracts\Support\Arrayable;
 
-class ExtensionHandler
+class AttachForm
 {
     /**
      * Handle on form view.

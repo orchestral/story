@@ -47,6 +47,7 @@ gulp.task('minify', ['js'], function () {
 gulp.task('copy', function () {
   var copy = [
     [dir.editor+'/build/editor.css', dir.web+'/vendor/editor'],
+    [dir.editor+'/build/marked.js', dir.web+'/vendor/editor'],
     [dir.editor+'/build/editor.js', dir.web+'/vendor/editor'],
     [dir.editor+'/build/fonts/*', dir.web+'/vendor/editor/fonts']
   ];

@@ -19,7 +19,7 @@ abstract class EditorController extends Controller
     public function __construct()
     {
         $this->setupFormat();
-        $this->setupFilters();
+        $this->setupMiddleware();
     }
 
     /**
@@ -36,9 +36,9 @@ abstract class EditorController extends Controller
     }
 
     /**
-     * Define filters for current controller.
+     * Define the middleware.
      *
      * @return void
      */
-    abstract protected function setupFilters();
+    abstract protected function setupMiddleware();
 }
