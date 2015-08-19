@@ -1,15 +1,20 @@
 (function() {
-  var $, markdown, root;
+  var $, markdown, mde, root;
 
   root = this;
+
+  mde = root.SimpleMDE;
 
   $ = root.jQuery;
 
   markdown = function($) {
-    var editor, has_textarea;
-    has_textarea = $('textarea').size() > 0;
-    if (has_textarea) {
-      editor = new root.Editor;
+    var editor, has, textarea;
+    textarea = $('textarea');
+    has = textarea.size() > 0;
+    if (has) {
+      editor = new mde({
+        element: textarea[0]
+      });
       editor.render();
     }
     return true;

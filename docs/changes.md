@@ -5,6 +5,8 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.2@dev {#v3-1-2}
+
 ### v3.1.1 {#v3-1-1}
 
 * Refactor `Orchestra\Story\StoryServiceProvider` and convert events handler to use own class handler.

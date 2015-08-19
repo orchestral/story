@@ -15,7 +15,7 @@
     var slug, title;
     title = $('#title');
     slug = $('input[role="slug-editor"]:first');
-    dispatcher.listen('storycms.update: slug', function(string, force) {
+    Javie.on('storycms.update: slug', function(string, force) {
       string = slugify(string);
       if (force == null) {
         force = false;
@@ -26,16 +26,16 @@
     });
     if (slug.val() === '') {
       slug.data('listen', true);
-      dispatcher.fire('storycms.update: slug', [title.val(), true]);
+      Javie.trigger('storycms.update: slug', [title.val(), true]);
     } else {
       slug.data('listen', false);
-      dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+      Javie.trigger('storycms.update: slug', [slug.val(), true]);
     }
     title.on('keyup', function() {
-      dispatcher.fire('storycms.update: slug', [title.val()]);
+      Javie.trigger('storycms.update: slug', [title.val()]);
     });
     slug.on('blur', function() {
-      dispatcher.fire('storycms.update: slug', [slug.val(), true]);
+      Javie.trigger('storycms.update: slug', [slug.val(), true]);
       if (slug.val() === !'') {
         slug.data('listen', false);
       }
