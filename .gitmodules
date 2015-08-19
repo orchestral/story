@@ -1,3 +1,6 @@
 [submodule "editor"]
 	path = resources/editor
 	url = https://github.com/lepture/editor.git
+[submodule "resources/simplemde"]
+	path = resources/simplemde
+	url = git@github.com:NextStepWebs/simplemde-markdown-editor.git
