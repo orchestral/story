@@ -5,6 +5,10 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.2 {#v3-1-2}
+
+* Convert from [Lepture Markdown Editor](github.com/lepture/editor) to [Simple Markdown Editor](https://github.com/NextStepWebs/simplemde-markdown-editor/).
+
 ### v3.1.1 {#v3-1-1}
 
 * Refactor `Orchestra\Story\StoryServiceProvider` and convert events handler to use own class handler.
