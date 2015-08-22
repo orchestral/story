@@ -10,7 +10,6 @@ var gulp = require('gulp'),
 
 dir = {
   asset: 'resources/assets',
-  lepture: 'resources/editor',
   simplemde: 'resources/simplemde',
   web: 'resources/public'
 }
@@ -47,10 +46,6 @@ gulp.task('minify', ['js'], function () {
 
 gulp.task('copy', function () {
   var copy = [
-    [dir.lepture+'/build/editor.css', dir.web+'/vendor/editor'],
-    [dir.lepture+'/build/marked.js', dir.web+'/vendor/editor'],
-    [dir.lepture+'/build/editor.js', dir.web+'/vendor/editor'],
-    [dir.lepture+'/build/fonts/*', dir.web+'/vendor/editor/fonts'],
     [dir.simplemde+'/dist/simplemde.min.css', dir.web+'/vendor/simplemde'],
     [dir.simplemde+'/dist/simplemde.min.js', dir.web+'/vendor/simplemde'],
   ];
