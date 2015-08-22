@@ -31,8 +31,6 @@ matrix:
     - php: 5.5
       env: setup=stable
   allow_failures:
-    - env: setup=lowest
     - env: setup=stable
     - php: 7.0
-    - php: hhvm
   fast_finish: true
