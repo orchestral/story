@@ -5,9 +5,15 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.3 {#v3-1-3}
+
+* Fixes invalid passing by reference usage in `Orchestra\Story\Listeners\AddValidationRules`.
+* Update Assets:
+  - SimpleMDE v1.6.1
+
 ### v3.1.2 {#v3-1-2}
 
-* Convert from [Lepture Markdown Editor](github.com/lepture/editor) to [Simple Markdown Editor](https://github.com/NextStepWebs/simplemde-markdown-editor/).
+* Convert from [Lepture Markdown Editor](github.com/lepture/editor) to [Simple Markdown Editor (SimpleMDE)](https://github.com/NextStepWebs/simplemde-markdown-editor/).
 
 ### v3.1.1 {#v3-1-1}
 
