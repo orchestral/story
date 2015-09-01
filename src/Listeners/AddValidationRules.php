@@ -1,15 +1,17 @@
 <?php namespace Orchestra\Story\Listeners;
 
+use Illuminate\Support\Fluent;
+
 class AddValidationRules
 {
     /**
      * Handle event.
      *
-     * @param  object  $rules
+     * @param  \Illuminate\Support\Fluent  $rules
      *
      * @return void
      */
-    public function handle(& $rules)
+    public function handle(Fluent $rules)
     {
         $rules['page_permalink'] = ['required'];
         $rules['post_permalink'] = ['required'];
