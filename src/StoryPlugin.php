@@ -3,6 +3,7 @@
 use Illuminate\Support\Fluent;
 use Orchestra\Extension\Plugin;
 use Orchestra\Story\Model\Content;
+use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Contracts\Support\Arrayable;
 use Orchestra\Story\Http\Handlers\StoryMenuHandler;
 use Orchestra\Contracts\Html\Form\Builder as FormBuilder;
