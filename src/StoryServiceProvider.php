@@ -25,10 +25,7 @@ class StoryServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'orchestra.ready: admin'                        => [StoryMenuHandler::class],
-        'orchestra.form: extension.orchestra/story'     => [AttachForm::class, AddPlaceholder::class],
-        'orchestra.validate: extension.orchestra/story' => [AddValidationRules::class],
-        'orchestra.story.editor: markdown'              => [AttachMarkdownEditor::class],
+        'orchestra.story.editor: markdown' => [AttachMarkdownEditor::class],
     ];
 
     /**
@@ -108,7 +105,6 @@ class StoryServiceProvider extends ServiceProvider
         $this->registerEventListeners($events);
 
         $this->bootExtensionComponents($path);
-        $this->mapExtensionConfig();
         $this->bootExtensionRouting($path);
     }
 
@@ -142,21 +138,5 @@ class StoryServiceProvider extends ServiceProvider
     protected function bootExtensionRouting($path)
     {
         include "{$path}/src/routes.php";
-    }
-
-    /**
-     * Map extension config.
-     *
-     * @return void
-     */
-    protected function mapExtensionConfig()
-    {
-        $this->app->make('orchestra.extension.config')->map('orchestra/story', [
-            'default_format' => 'orchestra/story::config.default_format',
-            'default_page'   => 'orchestra/story::config.default_page',
-            'per_page'       => 'orchestra/story::config.per_page',
-            'page_permalink' => 'orchestra/story::config.permalink.page',
-            'post_permalink' => 'orchestra/story::config.permalink.post',
-        ]);
     }
 }
