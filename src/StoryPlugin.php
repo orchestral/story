@@ -63,7 +63,7 @@ class StoryPlugin extends Plugin
      *
      * @return void
      */
-    public function form(Fluent $model, FormBuilder $form)
+    protected function form(Fluent $model, FormBuilder $form)
     {
         $form->extend(function ($form) use ($model) {
             $form->fieldset('Page Management', function ($fieldset) {
