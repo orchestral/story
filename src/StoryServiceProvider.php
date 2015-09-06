@@ -3,12 +3,8 @@
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
 use Orchestra\Story\Composers\Dashboard;
-use Orchestra\Story\Listeners\AttachForm;
-use Orchestra\Story\Listeners\AddPlaceholder;
 use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Support\Providers\ServiceProvider;
-use Orchestra\Story\Listeners\AddValidationRules;
-use Orchestra\Story\Http\Handlers\StoryMenuHandler;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
 use Orchestra\Support\Providers\Traits\EventProviderTrait;
