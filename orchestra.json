@@ -10,5 +10,6 @@
     "provides": [
         "Orchestra\\Story\\StoryServiceProvider",
         "Orchestra\\Facile\\FacileServiceProvider"
-    ]
+    ],
+    "plugin": "Orchestra\\Story\\StoryPlugin"
 }

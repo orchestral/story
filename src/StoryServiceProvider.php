@@ -3,12 +3,8 @@
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Http\Kernel;
 use Orchestra\Story\Composers\Dashboard;
-use Orchestra\Story\Listeners\AttachForm;
-use Orchestra\Story\Listeners\AddPlaceholder;
 use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Support\Providers\ServiceProvider;
-use Orchestra\Story\Listeners\AddValidationRules;
-use Orchestra\Story\Http\Handlers\StoryMenuHandler;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
 use Orchestra\Support\Providers\Traits\EventProviderTrait;
@@ -25,10 +21,7 @@ class StoryServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'orchestra.ready: admin'                        => [StoryMenuHandler::class],
-        'orchestra.form: extension.orchestra/story'     => [AttachForm::class, AddPlaceholder::class],
-        'orchestra.validate: extension.orchestra/story' => [AddValidationRules::class],
-        'orchestra.story.editor: markdown'              => [AttachMarkdownEditor::class],
+        'orchestra.story.editor: markdown' => [AttachMarkdownEditor::class],
     ];
 
     /**
@@ -108,7 +101,6 @@ class StoryServiceProvider extends ServiceProvider
         $this->registerEventListeners($events);
 
         $this->bootExtensionComponents($path);
-        $this->mapExtensionConfig();
         $this->bootExtensionRouting($path);
     }
 
@@ -142,21 +134,5 @@ class StoryServiceProvider extends ServiceProvider
     protected function bootExtensionRouting($path)
     {
         include "{$path}/src/routes.php";
-    }
-
-    /**
-     * Map extension config.
-     *
-     * @return void
-     */
-    protected function mapExtensionConfig()
-    {
-        $this->app->make('orchestra.extension.config')->map('orchestra/story', [
-            'default_format' => 'orchestra/story::config.default_format',
-            'default_page'   => 'orchestra/story::config.default_page',
-            'per_page'       => 'orchestra/story::config.per_page',
-            'page_permalink' => 'orchestra/story::config.permalink.page',
-            'post_permalink' => 'orchestra/story::config.permalink.post',
-        ]);
     }
 }

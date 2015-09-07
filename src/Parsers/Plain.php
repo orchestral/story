@@ -5,14 +5,6 @@ class Plain extends Parser
     /**
      * {@inheritdoc}
      */
-    protected function initiate()
-    {
-        //
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function parse($content)
     {
         return $content;
