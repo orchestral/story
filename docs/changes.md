@@ -5,6 +5,12 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.4 {#v3-1-4}
+
+* Add `Orchestra\Story\StoryPlugin`.
+* Update Assets:
+  - SimpleMDE v1.7.0
+
 ### v3.1.3 {#v3-1-3}
 
 * Fixes invalid passing by reference usage in `Orchestra\Story\Listeners\AddValidationRules`.
