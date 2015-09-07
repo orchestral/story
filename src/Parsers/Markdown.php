@@ -5,11 +5,15 @@ use ParsedownExtra;
 class Markdown extends Parser
 {
     /**
-     * {@inheritdoc}
+     * Initiate parser.
+     *
+     * @param  \ParsedownExtra  $parser
+     *
+     * @return void
      */
-    protected function initiate()
+    public function initiate(ParsedownExtra $parser)
     {
-        $this->parser = new ParsedownExtra();
+        $this->parser = $parser;
     }
 
     /**

@@ -24,15 +24,11 @@ abstract class Parser
     public function __construct($app)
     {
         $this->app = $app;
-        $this->initiate();
-    }
 
-    /**
-     * Initiate a the parser.
-     *
-     * @return void
-     */
-    abstract protected function initiate();
+        if (method_exists($this, 'initiate')) {
+            $app->call([$this, 'initiate']);
+        }
+    }
 
     /**
      * Parse the content.
