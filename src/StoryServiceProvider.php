@@ -56,6 +56,7 @@ class StoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerStoryTeller();
+
         $this->registerFormatManager();
     }
 
@@ -105,8 +106,6 @@ class StoryServiceProvider extends ServiceProvider
 
     /**
      * Boot extension routing.
-     *
-     * @param  string  $path
      *
      * @return void
      */
