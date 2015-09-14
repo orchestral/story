@@ -1,19 +1,33 @@
 <?php namespace Orchestra\Story;
 
-use Illuminate\Routing\Router;
-use Illuminate\Contracts\Http\Kernel;
 use Orchestra\Story\Composers\Dashboard;
 use Orchestra\Story\Http\Middleware\CanManage;
-use Orchestra\Support\Providers\ServiceProvider;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
-use Orchestra\Support\Providers\Traits\EventProviderTrait;
-use Orchestra\Support\Providers\Traits\MiddlewareProviderTrait;
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Orchestra\Foundation\Support\Providers\ExtensionRouteServiceProvider as ServiceProvider;
 
 class StoryServiceProvider extends ServiceProvider
 {
-    use EventProviderTrait, MiddlewareProviderTrait;
+    /**
+     * The application or extension namespace.
+     *
+     * @var string|null
+     */
+    protected $namespace = 'Orchestra\Story\Http\Controllers';
+
+    /**
+     * The application or extension group namespace.
+     *
+     * @var string|null
+     */
+    protected $routeGroup = 'orchestra/story';
+
+    /**
+     * The fallback route prefix.
+     *
+     * @var string
+     */
+    protected $routePrefix = 'cms';
 
     /**
      * The event handler mappings for the application.
@@ -23,20 +37,6 @@ class StoryServiceProvider extends ServiceProvider
     protected $listen = [
         'orchestra.story.editor: markdown' => [AttachMarkdownEditor::class],
     ];
-
-    /**
-     * The subscriber classes to register.
-     *
-     * @var array
-     */
-    protected $subscribe = [];
-
-    /**
-     * The application's middleware stack.
-     *
-     * @var array
-     */
-    protected $middleware = [];
 
     /**
      * The application's route middleware.
@@ -84,35 +84,14 @@ class StoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Boot the service provider.
-     *
-     *
-     * @param  \Illuminate\Routing\Router  $router
-     * @param  \Illuminate\Contracts\Http\Kernel  $kernel
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-     *
-     * @return void
-     */
-    public function boot(Router $router, Kernel $kernel, DispatcherContract $events)
-    {
-        $path = realpath(__DIR__.'/../');
-
-        $this->registerRouteMiddleware($router, $kernel);
-        $this->registerEventListeners($events);
-
-        $this->bootExtensionComponents($path);
-        $this->bootExtensionRouting($path);
-    }
-
-    /**
      * Boot extension components.
      *
-     * @param  string  $path
-     *
      * @return void
      */
-    protected function bootExtensionComponents($path)
+    protected function bootExtensionComponents()
     {
+        $path = realpath(__DIR__.'/../resources');
+
         $acl    = $this->app->make('orchestra.acl');
         $memory = $this->app->make('orchestra.platform.memory');
         $view   = $this->app->make('view');
@@ -120,8 +99,8 @@ class StoryServiceProvider extends ServiceProvider
         $acl->make('orchestra/story')->attach($memory);
         $view->composer('orchestra/foundation::dashboard.index', Dashboard::class);
 
-        $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/resources/config");
-        $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/resources/views");
+        $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/config");
+        $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/views");
     }
 
     /**
@@ -131,8 +110,11 @@ class StoryServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootExtensionRouting($path)
+    protected function loadRoutes()
     {
-        include "{$path}/src/routes.php";
+        $path = realpath(__DIR__);
+
+        $this->loadFrontendRoutesFrom("{$path}/Http/routes.php");
+        $this->loadBackendRoutesFrom("{$path}/Http/backend.php", "{$this->namespace}\Admin");
     }
 }
