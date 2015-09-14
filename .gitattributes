@@ -5,6 +5,7 @@
 /resources/assets export-ignore
 /resources/editor export-ignore
 /resources/simplemde export-ignore
+/tests export-ignore
 /.coveralls.yml export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
