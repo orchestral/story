@@ -115,7 +115,8 @@ class StoryServiceProvider extends ServiceProvider
 
         $this->afterExtensionLoaded(function () use ($path) {
             $this->loadFrontendRoutesFrom("{$path}/Http/frontend.php");
-            $this->loadBackendRoutesFrom("{$path}/Http/backend.php", "{$this->namespace}\Admin");
         });
+
+        $this->loadBackendRoutesFrom("{$path}/Http/backend.php", "{$this->namespace}\Admin");
     }
 }
