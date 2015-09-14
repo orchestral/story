@@ -144,7 +144,6 @@ class Content extends Processor
                 # next;
             case $published->toDateTimeString() === $start->toDateTimeString():
                 return true;
-                break;
             default:
                 return false;
         }
