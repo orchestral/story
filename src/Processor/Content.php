@@ -9,11 +9,24 @@ use Orchestra\Story\Contracts\Listener\Content as Listener;
 
 class Content extends Processor
 {
+    /**
+     * Construct a new processor.
+     *
+     * @param  \Orchestra\Story\Validation\Content  $validator
+     */
     public function __construct(Validator $validator)
     {
         $this->validator = $validator;
     }
 
+    /**
+     * Store new content.
+     *
+     * @param  \Orchestra\Story\Contracts\Listener\Content  $listener
+     * @param  array  $input
+     *
+     * @return mixed
+     */
     public function store(Listener $listener, array $input)
     {
         $input['slug'] = $this->generateUniqueSlug($input);
@@ -31,6 +44,15 @@ class Content extends Processor
         return $listener->storeHasSucceed($content, $input);
     }
 
+    /**
+     * Update a content.
+     *
+     * @param  \Orchestra\Story\Contracts\Listener\Content  $listener
+     * @param  int  $id
+     * @param  array  $input
+     *
+     * @return mixed
+     */
     public function update(Listener $listener, $id, array $input)
     {
         $input['slug'] = $this->generateUniqueSlug($input);
@@ -47,6 +69,14 @@ class Content extends Processor
         return $listener->updateHasSucceed($content, $input);
     }
 
+    /**
+     * Destroy a content.
+     *
+     * @param  \Orchestra\Story\Contracts\Listener\Content  $listener
+     * @param  int  $id
+     *
+     * @return mixed
+     */
     public function destroy(Listener $listener, $id)
     {
         $content = Eloquent::findOrFail($id);
@@ -56,6 +86,14 @@ class Content extends Processor
         return $listener->deletionHasSucceed($content);
     }
 
+    /**
+     * Saving content.
+     *
+     * @param  \Orchestra\Story\Model\Content  $content
+     * @param  array  $input
+     *
+     * @return void
+     */
     protected function saving(Eloquent $content, array $input)
     {
         $content->setAttribute('title', $input['title']);
@@ -106,7 +144,6 @@ class Content extends Processor
                 # next;
             case $published->toDateTimeString() === $start->toDateTimeString():
                 return true;
-                break;
             default:
                 return false;
         }

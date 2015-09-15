@@ -15,13 +15,6 @@ class Content extends Eloquent
     protected $table = 'story_contents';
 
     /**
-     * The class name to be used in polymorphic relations.
-     *
-     * @var string
-     */
-    protected $morphClass = 'Content';
-
-    /**
      * Available status type.
      */
     const STATUS_DRAFT   = 'draft';

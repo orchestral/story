@@ -5,6 +5,17 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.5 {#v3-1-5}
+
+* `Orchestra\Story\StoryServiceProvider` should utilize the new `Orchestra\Foundation\Support\Providers\ModuleServiceProvider`.
+* Remove `Orchestra\Story\Model\Content::$morphClass` property.
+
+### v3.1.4 {#v3-1-4}
+
+* Add `Orchestra\Story\StoryPlugin`.
+* Update Assets:
+  - SimpleMDE v1.7.0
+
 ### v3.1.3 {#v3-1-3}
 
 * Fixes invalid passing by reference usage in `Orchestra\Story\Listeners\AddValidationRules`.
