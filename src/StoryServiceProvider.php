@@ -4,9 +4,9 @@ use Orchestra\Story\Composers\Dashboard;
 use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
-use Orchestra\Foundation\Support\Providers\ExtensionRouteServiceProvider as ServiceProvider;
+use Orchestra\Foundation\Support\Providers\ModuleServiceProvider;
 
-class StoryServiceProvider extends ServiceProvider
+class StoryServiceProvider extends ModuleServiceProvider
 {
     /**
      * The application or extension namespace.
