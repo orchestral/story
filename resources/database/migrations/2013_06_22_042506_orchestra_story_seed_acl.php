@@ -16,7 +16,7 @@ class OrchestraStorySeedAcl extends Migration
     {
         $admin  = Role::admin();
         $member = Role::member();
-        $acl    = Acl::make('orchestra/story');
+        $acl    = ACL::make('orchestra/story');
 
         $acl->roles()->attach([$member->name, $admin->name]);
         $acl->actions()->attach([
