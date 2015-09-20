@@ -5,7 +5,7 @@
 use Orchestra\Support\Str;
 use Orchestra\Story\Model\Content; ?>
 
-@can('create', Content::class, $type)
+@can('create', $contents->first())
 	@set_meta('header::add-button', true)
 @endcan
 
