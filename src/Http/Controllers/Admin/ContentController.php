@@ -36,16 +36,6 @@ abstract class ContentController extends EditorController implements Listener
     }
 
     /**
-     * Define the middleware.
-     *
-     * @return void
-     */
-    protected function setupMiddleware()
-    {
-        $this->middleware('orchestra.auth');
-    }
-
-    /**
      * List all the contents.
      *
      * @return mixed

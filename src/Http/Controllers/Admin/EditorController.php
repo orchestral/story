@@ -31,6 +31,7 @@ abstract class EditorController extends Controller
     {
         $this->editorFormat = StoryFormat::get(Input::get('format'));
 
+        $this->middleware('orchestra.auth');
         $this->middleware("orchestra.story.editor:{$this->editorFormat}");
     }
 }

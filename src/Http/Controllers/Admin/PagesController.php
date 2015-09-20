@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
+use Illuminate\Support\Facades\Gate;
 
 class PagesController extends ContentController
 {
@@ -29,6 +30,7 @@ class PagesController extends ContentController
 
         return view('orchestra/story::admin.index', [
             'contents' => $contents,
+            'create'   => Gate::allows('create', Content::newPageInstance()),
             'type'     => 'page',
         ]);
     }
