@@ -2,7 +2,6 @@
 
 use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;
-use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
