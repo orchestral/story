@@ -21,7 +21,6 @@ abstract class EditorController extends Controller
         $this->setupMiddleware();
     }
 
-
     /**
      * Define the middleware.
      *

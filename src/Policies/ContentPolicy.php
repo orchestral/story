@@ -13,6 +13,14 @@ class ContentPolicy extends Policy
      */
     protected $name = 'orchestra/story';
 
+    /**
+     * Create content policy.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
+     * @return bool
+     */
     public function create(Authenticatable $user, Content $content)
     {
         $type = $content->type;
@@ -20,6 +28,14 @@ class ContentPolicy extends Policy
         return $this->can("create {$type}") || $this->can("manage {$type}");
     }
 
+    /**
+     * Update content policy.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
+     * @return bool
+     */
     public function update(Authenticatable $user, Content $content)
     {
         $type  = $content->type;
@@ -28,6 +44,14 @@ class ContentPolicy extends Policy
         return ($this->can("manage {$content->type}") || ($owner && $this->can("update {$content->type}")));
     }
 
+    /**
+     * Delete content policy.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
+     * @return bool
+     */
     public function delete(Authenticatable $user, Content $content)
     {
         $type  = $content->type;
@@ -36,6 +60,14 @@ class ContentPolicy extends Policy
         return ($this->can("manage {$content->type}") || ($owner && $this->can("delete {$content->type}")));
     }
 
+    /**
+     * Manage content policy.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
+     * @return bool
+     */
     public function manage(Authenticatable $user, Content $content)
     {
         $type = $content->type;

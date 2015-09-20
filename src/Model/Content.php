@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story\Model;
 
+use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;
 use Illuminate\Support\Facades\Config;
 use Orchestra\Story\Facades\StoryFormat;
@@ -33,6 +34,20 @@ class Content extends Eloquent
     const PUBLISHED_AT = 'published_at';
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['slug'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['url'];
+
+    /**
      * Get the attributes that should be converted to dates.
      *
      * @return array
@@ -49,7 +64,7 @@ class Content extends Eloquent
      */
     public function author()
     {
-        return $this->belongsTo(Config::get('auth.model', 'User'), 'user_id');
+        return $this->belongsTo(config('auth.model', User::class), 'user_id');
     }
 
     /**
@@ -178,7 +193,17 @@ class Content extends Eloquent
     }
 
     /**
-     * Accessor for link.
+     * Accessor for url.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->url();
+    }
+
+    /**
+     * Post/Page URL.
      *
      * @return string
      */
@@ -189,6 +214,11 @@ class Content extends Eloquent
         return Story::permalink($type, $this);
     }
 
+    /**
+     * Edit URL.
+     *
+     * @return string
+     */
     public function editUrl()
     {
         $id   = $this->getKey();
@@ -197,6 +227,11 @@ class Content extends Eloquent
         return handles("orchestra::storycms/{$type}s/{$id}/edit");
     }
 
+    /**
+     * Delete URL.
+     *
+     * @return string
+     */
     public function deleteUrl()
     {
         $id   = $this->getKey();
@@ -205,6 +240,11 @@ class Content extends Eloquent
         return handles("orchestra::storycms/{$type}s/{$id}/edit");
     }
 
+    /**
+     * Create new post instance.
+     *
+     * @return $this
+     */
     public static function newPostInstance()
     {
         $model = new static();
@@ -213,6 +253,11 @@ class Content extends Eloquent
         return $model;
     }
 
+    /**
+     * Create new page instance.
+     *
+     * @return $this
+     */
     public static function newPageInstance()
     {
         $model = new static();
