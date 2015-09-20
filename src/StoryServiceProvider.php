@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Story;
 
 use Orchestra\Story\Composers\Dashboard;
-use Orchestra\Story\Http\Middleware\CanManage;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;
 use Orchestra\Story\Http\Middleware\SetEditorFormat;
 use Orchestra\Foundation\Support\Providers\ModuleServiceProvider;
@@ -44,7 +43,6 @@ class StoryServiceProvider extends ModuleServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'orchestra.story.can'    => CanManage::class,
         'orchestra.story.editor' => SetEditorFormat::class,
     ];
 

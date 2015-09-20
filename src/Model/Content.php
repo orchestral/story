@@ -174,8 +174,34 @@ class Content extends Eloquent
      */
     public function getLinkAttribute()
     {
+        return $this->url();
+    }
+
+    /**
+     * Accessor for link.
+     *
+     * @return string
+     */
+    public function url()
+    {
         $type = $this->attributes['type'];
 
         return Story::permalink($type, $this);
+    }
+
+    public function editUrl()
+    {
+        $id   = $this->getKey();
+        $type = $this->attributes['type'];
+
+        return handles("orchestra::storycms/{$type}s/{$id}/edit");
+    }
+
+    public function deleteUrl()
+    {
+        $id   = $this->getKey();
+        $type = $this->attributes['type'];
+
+        return handles("orchestra::storycms/{$type}s/{$id}/edit");
     }
 }

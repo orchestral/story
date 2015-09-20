@@ -10,7 +10,7 @@
 				<i class="icon-calendar"></i>{!! $post->published_at->format('M d, Y') !!}
 			</span>&nbsp;
 			<strong>
-				<a href="{!! $post->link !!}">{!! $post->title !!}</a>
+				<a href="{!! $post->url() !!}">{!! $post->title !!}</a>
 			</strong>
 		</li>
 	@endforeach

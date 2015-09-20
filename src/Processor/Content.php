@@ -39,6 +39,8 @@ class Content extends Processor
         $content = new Eloquent();
         $content->setAttribute('user_id', Auth::user()->id);
 
+        $listener->authorize('create', $content);
+
         $this->saving($content, $input);
 
         return $listener->storeHasSucceed($content, $input);
@@ -64,6 +66,8 @@ class Content extends Processor
 
         $content = Eloquent::findOrFail($id);
 
+        $listener->authorize('update', $content);
+
         $this->saving($content, $input);
 
         return $listener->updateHasSucceed($content, $input);
@@ -80,6 +84,8 @@ class Content extends Processor
     public function destroy(Listener $listener, $id)
     {
         $content = Eloquent::findOrFail($id);
+
+        $listener->authorize('delete', $content);
 
         $content->delete();
 

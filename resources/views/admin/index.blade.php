@@ -1,18 +1,16 @@
 @extends('orchestra/foundation::layouts.main')
 
-@section('content')
-@include('orchestra/story::widgets.header')
-
 <?php
 
 use Orchestra\Support\Str;
+use Orchestra\Story\Model\Content; ?>
 
-$acl  = app('orchestra.acl')->make('orchestra/story');
-$auth = app('auth')->user();
+@can('create', Content::class, $type)
+	@set_meta('header::add-button', true)
+@endcan
 
-if ($acl->can("create {$type}") or $acl->can("manage {$type}")) :
-	set_meta('header::add-button', true);
-endif; ?>
+@section('content')
+@include('orchestra/story::widgets.header')
 
 <div class="row">
 	<div class="twelve columns white rounded box">
@@ -25,24 +23,17 @@ endif; ?>
 				</tr>
 			</thead>
 			<tbody>
-			@if ($contents->isEmpty())
-				<tr>
-					<td colspan="5">No records at the moment.</td>
-				</tr>
-			@else
-			@foreach ($contents as $content)
-				<? $owner = ($content->user_id === $auth->id); ?>
-				<? $status = Str::title($content->status); ?>
+			@forelse($contents as $content)
 				<tr>
 					<td>
 						<strong>
-							@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("update {$content->type}")))
-							<a href="{!! handles("orchestra::storycms/{$type}s/{$content->id}/edit") !!}">
+							@can('update', $content)
+							<a href="{!! $content->editUrl() !!}">
 								{{ $content->title }}
 							</a>
 							@else
 							{{ $content->title }}
-							@endif
+							@endcan
 						</strong>
 						<br>
 						<span class="meta">
@@ -53,16 +44,19 @@ endif; ?>
 					<td>{{ $content->author->fullname }}</td>
 					<td>
 						<div class="btn-group">
-						@if ($acl->can("manage {$content->type}") or ($owner and $acl->can("delete {$content->type}")))
-							<a href="{!! handles("orchestra::storycms/{$type}s/{$content->id}/delete") !!}" class="btn btn-mini btn-danger">
+						@can('delete', $content)
+							<a href="{!! $content->deleteUrl() !!}" class="btn btn-mini btn-danger">
 								Delete
 							</a>
-						@endif
+						@endcan
 						</div>
 					</td>
 				</tr>
-			@endforeach
-			@endif
+			@empty
+				<tr>
+					<td colspan="5">No records at the moment.</td>
+				</tr>
+			@endforelse
 			</tbody>
 		</table>
 

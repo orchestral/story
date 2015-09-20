@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
-use Orchestra\Support\Facades\ACL;
 
 class HomeController extends EditorController
 {
@@ -20,22 +19,10 @@ class HomeController extends EditorController
      *
      * @return mixed
      */
-    public function getIndex()
-    {
-        return $this->show();
-    }
-
-    /**
-     * Show Dashboard.
-     *
-     * @return mixed
-     */
     public function show()
     {
-        $acl = Acl::make('orchestra/story');
-
-        if ($acl->can('create post') or $acl->can('manage post')) {
-            return $this->write();
+        if (Gate::can('create', Content::class)) {
+            return $this->writePost();
         }
 
         return view('orchestra/story::admin.home');
@@ -46,7 +33,7 @@ class HomeController extends EditorController
      *
      * @return mixed
      */
-    protected function write()
+    protected function writePost()
     {
         set_meta('title', 'Write a Post');
 

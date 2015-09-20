@@ -14,8 +14,8 @@
 				<description>
 					{!! htmlspecialchars($post->body) !!}
 				</description>
-				<link>{!! $post->link !!}</link>
-				<guid isPermaLink="true">{!! $post->link !!}</guid>
+				<link>{!! $post->url() !!}</link>
+				<guid isPermaLink="true">{!! $post->url() !!}</guid>
 				<pubDate>{!! $post->published_at->toATOMString() !!}</pubDate>
 			</item>
 		@endforeach
