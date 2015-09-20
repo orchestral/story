@@ -1,6 +1,8 @@
 <?php namespace Orchestra\Story\Policies;
 
+use Orchestra\Story\Model\Content;
 use Orchestra\Authorization\Policy;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class ContentPolicy extends Policy
 {

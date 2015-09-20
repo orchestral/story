@@ -2,10 +2,13 @@
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Processor\Content as Processor;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Orchestra\Story\Contracts\Listener\Content as Listener;
 
 abstract class ContentController extends EditorController implements Listener
 {
+    use AuthorizesRequests;
+
     /**
      * Current Resource.
      *

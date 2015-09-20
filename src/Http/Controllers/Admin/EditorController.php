@@ -14,14 +14,21 @@ abstract class EditorController extends Controller
     protected $editorFormat;
 
     /**
+     * Define middleware for the controller.
+     */
+    public function __construct()
+    {
+        $this->setupMiddleware();
+    }
+
+
+    /**
      * Define the middleware.
      *
      * @return void
      */
     protected function setupMiddleware()
     {
-        parent::setupMiddleware();
-
         $this->editorFormat = StoryFormat::get(Input::get('format'));
 
         $this->middleware("orchestra.story.editor:{$this->editorFormat}");
