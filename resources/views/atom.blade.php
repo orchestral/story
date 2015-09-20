@@ -12,7 +12,7 @@
 			<item>
 				<title>{!! $post->title !!}</title>
 				<description>
-					{!! htmlspecialchars($post->body) !!}
+					<![CDATA[{!! htmlspecialchars($post->body) !!}]]>
 				</description>
 				<link>{!! $post->url() !!}</link>
 				<guid isPermaLink="true">{!! $post->url() !!}</guid>
