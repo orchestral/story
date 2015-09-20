@@ -37,14 +37,14 @@ class Content extends Eloquent
      *
      * @var array
      */
-    protected $hidden = ['slug'];
+    protected $hidden = ['slug', 'content'];
 
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
-    protected $appends = ['url'];
+    protected $appends = ['url', 'excerpt', 'body'];
 
     /**
      * Get the attributes that should be converted to dates.
