@@ -204,4 +204,20 @@ class Content extends Eloquent
 
         return handles("orchestra::storycms/{$type}s/{$id}/edit");
     }
+
+    public static function newPostInstance()
+    {
+        $model = new static();
+        $model->setAttribute('type', static::POST);
+
+        return $model;
+    }
+
+    public static function newPageInstance()
+    {
+        $model = new static();
+        $model->setAttribute('type', static::PAGE);
+
+        return $model;
+    }
 }

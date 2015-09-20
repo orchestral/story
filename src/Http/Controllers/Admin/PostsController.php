@@ -40,9 +40,7 @@ class PostsController extends ContentController
      */
     public function create()
     {
-        $content = new Content();
-
-        $content->setAttribute('type', Content::POST);
+        $content = Content::newPostInstance();
         $content->setAttribute('format', $this->editorFormat);
 
         $this->authorize('create', $content);
@@ -67,7 +65,7 @@ class PostsController extends ContentController
     {
         set_meta('title', 'Write a Post');
 
-        $content = Content::where('type', 'post')->where('id', $id)->firstOrFail();
+        $content = Content::post()->where('id', $id)->firstOrFail();
 
         $this->authorize('update', $content);
 

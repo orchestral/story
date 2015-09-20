@@ -12,27 +12,26 @@ class HomeController extends EditorController
      */
     public function show()
     {
-        $content = new Content();
-        $content->setAttribute('type', Content::POST);
+        $content = Content::newPostInstance();
 
         if (Gate::denies('create', $content)) {
             return view('orchestra/story::admin.home');
         }
 
-        return $this->writePost();
+        return $this->writePost($content);
     }
 
     /**
      * Write a post.
      *
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
-    protected function writePost()
+    protected function writePost(Content $content)
     {
         set_meta('title', 'Write a Post');
 
-        $content = new Content();
-        $content->setAttribute('type', Content::POST);
         $content->setAttribute('format', $this->editorFormat);
 
         return view('orchestra/story::admin.editor', [

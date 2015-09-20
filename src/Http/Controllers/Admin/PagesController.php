@@ -42,8 +42,7 @@ class PagesController extends ContentController
     {
         set_meta('title', 'Write a Page');
 
-        $content = new Content();
-        $content->setAttribute('type', Content::PAGE);
+        $content = Content::newPageInstance();
         $content->setAttribute('format', $this->editorFormat);
 
         $this->authorize('create', $content);
@@ -66,7 +65,7 @@ class PagesController extends ContentController
     {
         set_meta('title', 'Write a Page');
 
-        $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
+        $content = Content::page()->where('id', $id)->firstOrFail();
 
         $this->authorize('update', $content);
 
