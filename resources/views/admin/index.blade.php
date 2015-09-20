@@ -1,13 +1,8 @@
 @extends('orchestra/foundation::layouts.main')
 
-<?php
+#{{ use Orchestra\Support\Str }}
 
-use Orchestra\Support\Str;
-use Orchestra\Story\Model\Content; ?>
-
-@can('create', $contents->first())
-	@set_meta('header::add-button', true)
-@endcan
+@set_meta('header::add-button', $create)
 
 @section('content')
 @include('orchestra/story::widgets.header')
