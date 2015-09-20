@@ -11,8 +11,10 @@ class ContentPolicy extends Policy
      */
     protected $name = 'orchestra/story';
 
-    public function create(Authenticatable $user, Content $content, $type = 'post')
+    public function create(Authenticatable $user, Content $content)
     {
+        $type = $content->type;
+
         return $this->can("create {$type}") || $this->can("manage {$type}");
     }
 
