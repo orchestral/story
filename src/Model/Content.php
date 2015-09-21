@@ -1,12 +1,15 @@
 <?php namespace Orchestra\Story\Model;
 
+use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;
-use Illuminate\Support\Facades\Config;
+use Orchestra\Model\Traits\OwnedByTrait;
 use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent
 {
+    use OwnedByTrait;
+
     /**
      * The database table used by the model.
      *
@@ -33,6 +36,20 @@ class Content extends Eloquent
     const PUBLISHED_AT = 'published_at';
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = ['slug', 'content'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['url', 'excerpt', 'body'];
+
+    /**
      * Get the attributes that should be converted to dates.
      *
      * @return array
@@ -49,7 +66,7 @@ class Content extends Eloquent
      */
     public function author()
     {
-        return $this->belongsTo(Config::get('auth.model', 'User'), 'user_id');
+        return $this->belongsTo(config('auth.model', User::class), 'user_id');
     }
 
     /**
@@ -174,8 +191,80 @@ class Content extends Eloquent
      */
     public function getLinkAttribute()
     {
+        return $this->url();
+    }
+
+    /**
+     * Accessor for url.
+     *
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->url();
+    }
+
+    /**
+     * Post/Page URL.
+     *
+     * @return string
+     */
+    public function url()
+    {
         $type = $this->attributes['type'];
 
         return Story::permalink($type, $this);
+    }
+
+    /**
+     * Edit URL.
+     *
+     * @return string
+     */
+    public function editUrl()
+    {
+        $id   = $this->getKey();
+        $type = $this->attributes['type'];
+
+        return handles("orchestra::storycms/{$type}s/{$id}/edit");
+    }
+
+    /**
+     * Delete URL.
+     *
+     * @return string
+     */
+    public function deleteUrl()
+    {
+        $id   = $this->getKey();
+        $type = $this->attributes['type'];
+
+        return handles("orchestra::storycms/{$type}s/{$id}/edit");
+    }
+
+    /**
+     * Create new post instance.
+     *
+     * @return $this
+     */
+    public static function newPostInstance()
+    {
+        $model = new static();
+        $model->setAttribute('type', static::POST);
+
+        return $model;
+    }
+
+    /**
+     * Create new page instance.
+     *
+     * @return $this
+     */
+    public static function newPageInstance()
+    {
+        $model = new static();
+        $model->setAttribute('type', static::PAGE);
+
+        return $model;
     }
 }

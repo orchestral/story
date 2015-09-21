@@ -1,30 +1,10 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
-use Orchestra\Support\Facades\ACL;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends EditorController
 {
-    /**
-     * Define the middleware.
-     *
-     * @return void
-     */
-    protected function setupMiddleware()
-    {
-        //
-    }
-
-    /**
-     * Show Dashboard.
-     *
-     * @return mixed
-     */
-    public function getIndex()
-    {
-        return $this->show();
-    }
-
     /**
      * Show Dashboard.
      *
@@ -32,26 +12,26 @@ class HomeController extends EditorController
      */
     public function show()
     {
-        $acl = Acl::make('orchestra/story');
+        $content = Content::newPostInstance();
 
-        if ($acl->can('create post') or $acl->can('manage post')) {
-            return $this->write();
+        if (Gate::denies('create', $content)) {
+            return view('orchestra/story::admin.home');
         }
 
-        return view('orchestra/story::admin.home');
+        return $this->writePost($content);
     }
 
     /**
      * Write a post.
      *
+     * @param  \Orchestra\Story\Model\Content  $content
+     *
      * @return mixed
      */
-    protected function write()
+    protected function writePost(Content $content)
     {
         set_meta('title', 'Write a Post');
 
-        $content = new Content();
-        $content->setAttribute('type', Content::POST);
         $content->setAttribute('format', $this->editorFormat);
 
         return view('orchestra/story::admin.editor', [

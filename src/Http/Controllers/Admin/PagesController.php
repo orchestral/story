@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
+use Illuminate\Support\Facades\Gate;
 
 class PagesController extends ContentController
 {
@@ -14,18 +15,6 @@ class PagesController extends ContentController
         parent::setupMiddleware();
 
         $this->resource = 'pages';
-
-        $this->middleware('orchestra.story.can:create-page', [
-            'only' => ['create', 'store'],
-        ]);
-
-        $this->middleware('orchestra.story.can:update-page', [
-            'only' => ['edit', 'update'],
-        ]);
-
-        $this->middleware('orchestra.story.can:delete-page', [
-            'only' => ['delete', 'destroy'],
-        ]);
     }
 
     /**
@@ -36,11 +25,14 @@ class PagesController extends ContentController
     public function index()
     {
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->page()->paginate();
-        $type     = 'page';
 
         set_meta('title', 'List of Pages');
 
-        return view('orchestra/story::admin.index', compact('contents', 'type'));
+        return view('orchestra/story::admin.index', [
+            'contents' => $contents,
+            'create'   => Gate::allows('create', Content::newPageInstance()),
+            'type'     => 'page',
+        ]);
     }
 
     /**
@@ -52,9 +44,10 @@ class PagesController extends ContentController
     {
         set_meta('title', 'Write a Page');
 
-        $content = new Content();
-        $content->setAttribute('type', Content::PAGE);
+        $content = Content::newPageInstance();
         $content->setAttribute('format', $this->editorFormat);
+
+        $this->authorize('create', $content);
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,
@@ -74,7 +67,9 @@ class PagesController extends ContentController
     {
         set_meta('title', 'Write a Page');
 
-        $content = Content::where('type', 'page')->where('id', $id)->firstOrFail();
+        $content = Content::page()->where('id', $id)->firstOrFail();
+
+        $this->authorize('update', $content);
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,

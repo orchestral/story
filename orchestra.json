@@ -9,6 +9,7 @@
     },
     "provides": [
         "Orchestra\\Story\\StoryServiceProvider",
+        "Orchestra\\Story\\AuthServiceProvider",
         "Orchestra\\Facile\\FacileServiceProvider"
     ],
     "plugin": "Orchestra\\Story\\StoryPlugin"

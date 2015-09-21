@@ -34,7 +34,7 @@
 			<button type="submit" name="status" value="publish" class="btn btn-primary">Save as Publish</button>
 			<button type="submit" name="status" value="draft" class="btn">Save as Draft</button>
 			@if ($content->status === 'publish')
-			<a href="{!! $content->link !!}" target="_blank" class="btn btn-link">View Post</a>
+			<a href="{!! $content->url() !!}" target="_blank" class="btn btn-link">View Post</a>
 			@endif
 		</div>
 	</fieldset>

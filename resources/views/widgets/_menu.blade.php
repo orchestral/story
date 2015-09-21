@@ -1,8 +1,10 @@
+@inject('foundation', 'orchestra.app')
+
 <ul class="nav navbar-nav">
-	<li class="{!! app('request')->is('*storycms/posts*') ? 'active' : '' !!}">
+	<li class="{!! $foundation->is('orchestra::storycms/posts*') ? 'active' : '' !!}">
 		<a href="{!! handles('orchestra::storycms/posts') !!}">Posts</a>
 	</li>
-	<li class="{!! app('request')->is('*storycms/pages*') ? 'active' : '' !!}">
+	<li class="{!! $foundation->is('orchestra::storycms/pages*') ? 'active' : '' !!}">
 		<a href="{!! handles('orchestra::storycms/pages') !!}">Pages</a>
 	</li>
 </ul>

@@ -5,6 +5,18 @@ use Orchestra\Story\Model\Content as Eloquent;
 interface Content
 {
     /**
+     * Authorize a given action against a set of arguments.
+     *
+     * @param  mixed  $ability
+     * @param  mixed|array  $arguments
+     *
+     * @return void
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function authorize($ability, $arguments = []);
+
+    /**
      * Response when content update has failed validation.
      *
      * @param  \Illuminate\Support\MessageBag|array  $errors

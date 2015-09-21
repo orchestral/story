@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Story\Model\Content;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends ContentController
 {
@@ -14,18 +15,6 @@ class PostsController extends ContentController
         parent::setupMiddleware();
 
         $this->resource = 'posts';
-
-        $this->middleware('orchestra.story.can:create-post', [
-            'only' => ['create', 'store'],
-        ]);
-
-        $this->middleware('orchestra.story.can:update-post', [
-            'only' => ['edit', 'update'],
-        ]);
-
-        $this->middleware('orchestra.story.can:delete-post', [
-            'only' => ['delete', 'destroy'],
-        ]);
     }
 
     /**
@@ -36,11 +25,14 @@ class PostsController extends ContentController
     public function index()
     {
         $contents = Content::with('author')->latestBy(Content::CREATED_AT)->post()->paginate();
-        $type     = 'post';
 
         set_meta('title', 'List of Posts');
 
-        return view('orchestra/story::admin.index', compact('contents', 'type'));
+        return view('orchestra/story::admin.index', [
+            'contents' => $contents,
+            'create'   => Gate::allows('create', Content::newPostInstance()),
+            'type'     => 'post',
+        ]);
     }
 
     /**
@@ -50,10 +42,10 @@ class PostsController extends ContentController
      */
     public function create()
     {
-        $content = new Content();
-
-        $content->setAttribute('type', Content::POST);
+        $content = Content::newPostInstance();
         $content->setAttribute('format', $this->editorFormat);
+
+        $this->authorize('create', $content);
 
         set_meta('title', 'Write a Post');
 
@@ -75,7 +67,9 @@ class PostsController extends ContentController
     {
         set_meta('title', 'Write a Post');
 
-        $content = Content::where('type', 'post')->where('id', $id)->firstOrFail();
+        $content = Content::post()->where('id', $id)->firstOrFail();
+
+        $this->authorize('update', $content);
 
         return view('orchestra/story::admin.editor', [
             'content' => $content,

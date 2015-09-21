@@ -14,25 +14,11 @@ abstract class EditorController extends Controller
     protected $editorFormat;
 
     /**
-     * Define filter for the controller.
+     * Define middleware for the controller.
      */
     public function __construct()
     {
-        $this->setupFormat();
         $this->setupMiddleware();
-    }
-
-    /**
-     * Setup content format type.
-     *
-     * @return void
-     */
-    protected function setupFormat()
-    {
-        $format = StoryFormat::get(Input::get('format'));
-
-        $this->middleware("orchestra.story.editor:{$format}");
-        $this->editorFormat = $format;
     }
 
     /**
@@ -40,5 +26,11 @@ abstract class EditorController extends Controller
      *
      * @return void
      */
-    abstract protected function setupMiddleware();
+    protected function setupMiddleware()
+    {
+        $this->editorFormat = StoryFormat::get(Input::get('format'));
+
+        $this->middleware('orchestra.auth');
+        $this->middleware("orchestra.story.editor:{$this->editorFormat}");
+    }
 }

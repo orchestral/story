@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Story\Processor;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Orchestra\Foundation\Processor\Processor;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Orchestra\Story\Model\Content as Eloquent;
 use Orchestra\Story\Validation\Content as Validator;
 use Orchestra\Story\Contracts\Listener\Content as Listener;
@@ -10,13 +10,22 @@ use Orchestra\Story\Contracts\Listener\Content as Listener;
 class Content extends Processor
 {
     /**
+     * The authenticatable user implementation.
+     *
+     * @var \Illuminate\Contracts\Auth\Authenticatable
+     */
+    protected $user;
+
+    /**
      * Construct a new processor.
      *
      * @param  \Orchestra\Story\Validation\Content  $validator
+     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      */
-    public function __construct(Validator $validator)
+    public function __construct(Validator $validator, Authenticatable $user)
     {
         $this->validator = $validator;
+        $this->user      = $user;
     }
 
     /**
@@ -37,7 +46,10 @@ class Content extends Processor
         }
 
         $content = new Eloquent();
-        $content->setAttribute('user_id', Auth::user()->id);
+        $content->setAttribute('type', $input['type']);
+        $content->setAttribute('user_id', $this->user->id);
+
+        $listener->authorize('create', $content);
 
         $this->saving($content, $input);
 
@@ -64,6 +76,8 @@ class Content extends Processor
 
         $content = Eloquent::findOrFail($id);
 
+        $listener->authorize('update', $content);
+
         $this->saving($content, $input);
 
         return $listener->updateHasSucceed($content, $input);
@@ -80,6 +94,8 @@ class Content extends Processor
     public function destroy(Listener $listener, $id)
     {
         $content = Eloquent::findOrFail($id);
+
+        $listener->authorize('delete', $content);
 
         $content->delete();
 
@@ -99,7 +115,6 @@ class Content extends Processor
         $content->setAttribute('title', $input['title']);
         $content->setAttribute('content', $input['content']);
         $content->setAttribute('slug', $input['slug']);
-        $content->setAttribute('type', $input['type']);
         $content->setAttribute('format', $input['format']);
         $content->setAttribute('status', $input['status']);
 

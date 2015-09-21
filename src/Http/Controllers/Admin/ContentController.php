@@ -1,12 +1,15 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Orchestra\Story\Model\Content;
-use Illuminate\Support\Facades\Input;
 use Orchestra\Story\Processor\Content as Processor;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Orchestra\Story\Contracts\Listener\Content as Listener;
 
 abstract class ContentController extends EditorController implements Listener
 {
+    use AuthorizesRequests;
+
     /**
      * Current Resource.
      *
@@ -34,16 +37,6 @@ abstract class ContentController extends EditorController implements Listener
     }
 
     /**
-     * Define the middleware.
-     *
-     * @return void
-     */
-    protected function setupMiddleware()
-    {
-        $this->middleware('orchestra.auth');
-    }
-
-    /**
      * List all the contents.
      *
      * @return mixed
@@ -60,11 +53,13 @@ abstract class ContentController extends EditorController implements Listener
     /**
      * Store a content.
      *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
-        return $this->processor->store($this, Input::all());
+        return $this->processor->store($this, $request->all());
     }
 
     /**
@@ -79,13 +74,14 @@ abstract class ContentController extends EditorController implements Listener
     /**
      * Update a content.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      *
      * @return mixed
      */
-    public function update($id = null)
+    public function update(Request $request, $id = null)
     {
-        return $this->processor->update($this, $id, Input::all());
+        return $this->processor->update($this, $id, $request->all());
     }
 
     /**
