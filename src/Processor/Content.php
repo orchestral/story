@@ -10,6 +10,13 @@ use Orchestra\Story\Contracts\Listener\Content as Listener;
 class Content extends Processor
 {
     /**
+     * The authenticatable user implementation.
+     *
+     * @var \Illuminate\Contracts\Auth\Authenticatable
+     */
+    protected $user;
+
+    /**
      * Construct a new processor.
      *
      * @param  \Orchestra\Story\Validation\Content  $validator
