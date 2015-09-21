@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Story\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Orchestra\Story\Model\Content;
 use Orchestra\Story\Processor\Content as Processor;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
