@@ -23,7 +23,7 @@ class ContentPolicy extends Policy
      */
     public function create(Authenticatable $user, Content $content)
     {
-        $type = $content->type;
+        $type = $content->getAttribute('type');
 
         return $this->can("create {$type}") || $this->can("manage {$type}");
     }
@@ -38,10 +38,10 @@ class ContentPolicy extends Policy
      */
     public function update(Authenticatable $user, Content $content)
     {
-        $type  = $content->type;
-        $owner = $user->id == $content->user_id;
+        $type  = $content->getAttribute('type');
+        $owner = $content->ownedBy($user);
 
-        return ($this->can("manage {$content->type}") || ($owner && $this->can("update {$content->type}")));
+        return ($this->can("manage {$type}") || ($owner && $this->can("update {$type}")));
     }
 
     /**
@@ -54,10 +54,10 @@ class ContentPolicy extends Policy
      */
     public function delete(Authenticatable $user, Content $content)
     {
-        $type  = $content->type;
-        $owner = $user->id == $content->user_id;
+        $type  = $content->getAttribute('type');
+        $owner = $content->ownedBy($user);
 
-        return ($this->can("manage {$content->type}") || ($owner && $this->can("delete {$content->type}")));
+        return ($this->can("manage {$type}") || ($owner && $this->can("delete {$type}")));
     }
 
     /**
@@ -70,7 +70,7 @@ class ContentPolicy extends Policy
      */
     public function manage(Authenticatable $user, Content $content)
     {
-        $type = $content->type;
+        $type = $content->getAttribute('type');
 
         return $this->can("manage {$type}");
     }

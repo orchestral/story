@@ -24,7 +24,8 @@
         "erusev/parsedown-extra": "~0.2",
         "orchestra/contracts": "~3.1.0",
         "orchestra/extension": "~3.1.8",
-        "orchestra/facile": "~3.1.0"
+        "orchestra/facile": "~3.1.0",
+        "orchestra/model": "~3.1.3"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.1",

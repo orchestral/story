@@ -2,11 +2,14 @@
 
 use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;
+use Orchestra\Model\Traits\OwnedByTrait;
 use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent
 {
+    use OwnedByTrait;
+
     /**
      * The database table used by the model.
      *
