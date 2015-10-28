@@ -20,9 +20,9 @@ class Content extends Processor
      * Construct a new processor.
      *
      * @param  \Orchestra\Story\Validation\Content  $validator
-     * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+     * @param  \Illuminate\Contracts\Auth\Authenticatable|null  $user
      */
-    public function __construct(Validator $validator, Authenticatable $user)
+    public function __construct(Validator $validator, Authenticatable $user = null)
     {
         $this->validator = $validator;
         $this->user      = $user;
