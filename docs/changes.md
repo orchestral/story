@@ -5,6 +5,12 @@ title: Story Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.7 {#v3-1-7}
+
+* Allow authenticatable to be `null` in `Orchestra\Story\Processor\Content`.
+* Update Assets:
+  - SimpleMDE v1.8.0
+
 ### v3.1.6 {#v3-1-6}
 
 * Add `Orchestra\Story\AuthServiceProvider` to support policies handling.
