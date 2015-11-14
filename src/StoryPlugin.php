@@ -68,7 +68,7 @@ class StoryPlugin extends Plugin
     {
         $form->extend(function ($form) use ($model) {
             $form->fieldset('Page Management', function ($fieldset) {
-                $pages = Content::page()->publish()->lists('title', 'slug');
+                $pages = Content::page()->publish()->pluck('title', 'slug');
 
                 if ($pages instanceof Arrayable) {
                     $pages = $pages->toArray();
