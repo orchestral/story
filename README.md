@@ -6,8 +6,8 @@ Content Management System for Orchestra Platform, based on [Cello CMS](https://g
 [![Latest Stable Version](https://img.shields.io/github/release/orchestral/story.svg?style=flat-square)](https://packagist.org/packages/orchestra/story)
 [![Total Downloads](https://img.shields.io/packagist/dt/orchestra/story.svg?style=flat-square)](https://packagist.org/packages/orchestra/story)
 [![MIT License](https://img.shields.io/packagist/l/orchestra/story.svg?style=flat-square)](https://packagist.org/packages/orchestra/story)
-[![Build Status](https://img.shields.io/travis/orchestral/story/3.1.svg?style=flat-square)](https://travis-ci.org/orchestral/story)
-[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/story/3.1.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/story/)
+[![Build Status](https://img.shields.io/travis/orchestral/story/3.2.svg?style=flat-square)](https://travis-ci.org/orchestral/story)
+[![Scrutinizer Quality Score](https://img.shields.io/scrutinizer/g/orchestral/story/3.2.svg?style=flat-square)](https://scrutinizer-ci.com/g/orchestral/story/)
 
 ## Installation
 
