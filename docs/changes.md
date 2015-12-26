@@ -3,6 +3,23 @@ title: Story Change Log
 
 ---
 
+## Version 3.2 {#v3-2}
+
+### v3.2.0 {#v3-2-0}
+
+* Update support for Orchestra Platform v3.2.
+* Add `Orchestra\Story\StoryPlugin`.
+* Add `Orchestra\Story\AuthServiceProvider` to support policies handling.
+* Add `Orchestra\Story\Policies\ContentPolicy` policy class.
+* Add `Orchestra\Story\Model\Content::newPostInstance()` and `Orchestra\Story\Model\Content::newPageInstance()` static methods.
+* Add `Orchestra\Story\Model\Content::url()`, `Orchestra\Story\Model\Content::editUrl()` and `Orchestra\Story\Model\Content::deleteUrl()` methods.
+* Remove `Orchestra\Story\Http\Middleware\CanManage` middleware class.
+* Use `Orchestra\Support\Facades\ACL` instead of deprecated `Acl` aliases.
+* `Orchestra\Story\StoryServiceProvider` should utilize the new `Orchestra\Foundation\Support\Providers\ModuleServiceProvider`.
+* Remove `Orchestra\Story\Model\Content::$morphClass` property.
+* Update Assets:
+  - SimpleMDE v1.9.1.
+
 ## Version 3.1 {#v3-1}
 
 ### v3.1.7 {#v3-1-7}
