@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Contracts\Listener;
+<?php
+
+namespace Orchestra\Story\Contracts\Listener;
 
 use Orchestra\Story\Model\Content as Eloquent;
 

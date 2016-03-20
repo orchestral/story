@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Composers;
+<?php
+
+namespace Orchestra\Story\Composers;
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Widget\WidgetManager;

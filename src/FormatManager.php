@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story;
+<?php
+
+namespace Orchestra\Story;
 
 use Closure;
 use Orchestra\Support\Str;

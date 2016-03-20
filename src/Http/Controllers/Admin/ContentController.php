@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Http\Controllers\Admin;
+<?php
+
+namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Orchestra\Story\Model\Content;

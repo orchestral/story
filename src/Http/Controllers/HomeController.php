@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Http\Controllers;
+<?php
+
+namespace Orchestra\Story\Http\Controllers;
 
 use Orchestra\Routing\Controller;
 use Orchestra\Story\Model\Content;

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Listeners;
+<?php
+
+namespace Orchestra\Story\Listeners;
 
 use Orchestra\Asset\Factory;
 

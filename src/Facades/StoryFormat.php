@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Facades;
+<?php
+
+namespace Orchestra\Story\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

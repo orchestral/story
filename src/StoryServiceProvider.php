@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story;
+<?php
+
+namespace Orchestra\Story;
 
 use Orchestra\Story\Composers\Dashboard;
 use Orchestra\Story\Listeners\AttachMarkdownEditor;

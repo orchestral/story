@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Policies;
+<?php
+
+namespace Orchestra\Story\Policies;
 
 use Orchestra\Story\Model\Content;
 use Orchestra\Authorization\Policy;

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Http\Controllers\Admin;
+<?php
+
+namespace Orchestra\Story\Http\Controllers\Admin;
 
 use Orchestra\Routing\Controller;
 use Illuminate\Support\Facades\Input;

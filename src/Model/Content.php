@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Model;
+<?php
+
+namespace Orchestra\Story\Model;
 
 use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story;
+<?php
+
+namespace Orchestra\Story;
 
 use Illuminate\Support\Fluent;
 use Orchestra\Extension\Plugin;

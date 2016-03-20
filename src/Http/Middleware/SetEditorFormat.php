@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Http\Middleware;
+<?php
+
+namespace Orchestra\Story\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Events\Dispatcher;

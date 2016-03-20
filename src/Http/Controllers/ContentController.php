@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Http\Controllers;
+<?php
+
+namespace Orchestra\Story\Http\Controllers;
 
 use Illuminate\Support\Arr;
 use Orchestra\Routing\Controller;

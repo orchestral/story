@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Processor;
+<?php
+
+namespace Orchestra\Story\Processor;
 
 use Carbon\Carbon;
 use Orchestra\Foundation\Processor\Processor;

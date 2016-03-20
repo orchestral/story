@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story;
+<?php
+
+namespace Orchestra\Story;
 
 use Carbon\Carbon;
 use Orchestra\Story\Model\Content;

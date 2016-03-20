@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Story\Parsers;
+<?php
+
+namespace Orchestra\Story\Parsers;
 
 class Plain extends Parser
 {
