@@ -18,6 +18,7 @@ class StoryMenuHandler extends MenuHandler
         'link'  => '#!',
         'icon'  => 'book',
         'with'  => [
+            WriteMenuHandler::class,
             PostMenuHandler::class,
             PageMenuHandler::class,
         ],
