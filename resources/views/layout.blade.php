@@ -15,7 +15,7 @@
 				@yield('content')
 			</div>
 			<footer>
-				<p>Powered by Story</p>
+				<p>Powered by Story CMS</p>
 			</footer>
 		</div>
 	</body>
