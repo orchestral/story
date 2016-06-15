@@ -15,8 +15,12 @@ class StoryMenuHandler extends MenuHandler
     protected $menu = [
         'id'    => 'storycms',
         'title' => 'Story CMS',
-        'link'  => 'orchestra::storycms',
+        'link'  => '#!',
         'icon'  => 'book',
+        'with'  => [
+            PostMenuHandler::class,
+            PageMenuHandler::class,
+        ],
     ];
 
     /**
