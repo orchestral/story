@@ -1,6 +1,8 @@
 @extends('orchestra/foundation::layouts.page')
 
-#{{ use Orchestra\Support\Str }}
+@php
+use Orchestra\Support\Str;
+@endphp
 
 @set_meta('header::add-button', $create)
 
@@ -85,7 +87,7 @@
   var app = new App({
     data: {
       sidebar: {
-        active: 'story'
+        active: 'storycms-{{ $type }}s'
       }
     }
   }).$mount('body')

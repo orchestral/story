@@ -47,7 +47,7 @@
   var app = new App({
     data: {
       sidebar: {
-        active: 'story'
+        active: 'storycms-write'
       }
     }
   }).$mount('body')
