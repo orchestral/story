@@ -25,11 +25,11 @@ class StoryPlugin extends Plugin
      * @var array
      */
     protected $config = [
-        'default_format' => 'orchestra/story::config.default_format',
-        'default_page'   => 'orchestra/story::config.default_page',
-        'per_page'       => 'orchestra/story::config.per_page',
-        'page_permalink' => 'orchestra/story::config.permalink.page',
-        'post_permalink' => 'orchestra/story::config.permalink.post',
+        'default_format' => 'orchestra/story::default_format',
+        'default_page'   => 'orchestra/story::default_page',
+        'per_page'       => 'orchestra/story::per_page',
+        'page_permalink' => 'orchestra/story::permalink.page',
+        'post_permalink' => 'orchestra/story::permalink.post',
     ];
 
     /**
