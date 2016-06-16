@@ -1,5 +1,5 @@
 import MDE from './vendor/simplemde'
-import $ from './vendor/simplemde'
+import $ from './vendor/jquery'
 
 class Bootstrap {
   markdown() {
