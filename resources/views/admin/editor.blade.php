@@ -45,15 +45,12 @@
 <script>
   var app
 
-  app = new App({
+  app = Platform.make('app', {
     data: {
       content: {!! $content->makeVisible('slug')->toJson() !!},
       sluggable: true,
       title: '',
-      slug: '',
-      sidebar: {
-        active: 'storycms-write'
-      }
+      slug: ''
     },
 
     ready: function() {
@@ -90,6 +87,6 @@
         this.sluggable = false
       }
     }
-  }).$mount('body')
+  }).nav('storycms-write').$mount('body')
 </script>
 @endpush

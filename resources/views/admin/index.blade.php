@@ -84,12 +84,6 @@ use Orchestra\Support\Str;
 
 @push('orchestra.footer')
 <script>
-  var app = new App({
-    data: {
-      sidebar: {
-        active: 'storycms-{{ $type }}s'
-      }
-    }
-  }).$mount('body')
+  var app = Platform.make('app').nav('storycms-{{ $type }}s').$mount('body')
 </script>
 @endpush
