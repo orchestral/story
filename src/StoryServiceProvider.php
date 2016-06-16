@@ -95,10 +95,8 @@ class StoryServiceProvider extends ModuleServiceProvider
 
         $acl    = $this->app->make('orchestra.acl');
         $memory = $this->app->make('orchestra.platform.memory');
-        $view   = $this->app->make('view');
 
         $acl->make('orchestra/story')->attach($memory);
-        $view->composer('orchestra/foundation::dashboard.index', Dashboard::class);
 
         $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/config");
         $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/views");

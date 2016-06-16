@@ -43,50 +43,6 @@
 
 @push('orchestra.footer')
 <script>
-  var app
-
-  app = Platform.make('app', {
-    data: {
-      content: {!! $content->makeVisible('slug')->toJson() !!},
-      sluggable: true,
-      title: '',
-      slug: ''
-    },
-
-    ready: function() {
-      this.sluggable = ! this.$get('content.id') > 0
-      this.title = this.$get('content.title')
-      this.slug = this.slugify(this.$get('content.slug') || '', '-')
-    },
-
-    methods: {
-      slugify: function(string, separator) {
-        if (string == '') {
-          return string
-        }
-
-        return string.toLowerCase()
-          .replace(/^(_post_\/|_page_\/)/g, '')
-          .replace(/[^\w\.]+/g, separator)
-          .replace(/\s+/g, separator)
-      },
-
-      updateFromTitle: function() {
-        if (this.slug == '' || this.sluggable == true) {
-          this.slug = this.slugify(this.title, '-')
-        }
-      },
-
-      updateFromSlug: function() {
-        if (this.slug == '') {
-          this.slug = this.slugify(this.title, '-')
-        } else {
-          this.slug = this.slugify(this.slug, '-')
-        }
-
-        this.sluggable = false
-      }
-    }
-  }).nav('storycms-write').$mount('body')
+  var app = Platform.make('storycms').nav('storycms-write').$mount('body')
 </script>
 @endpush
