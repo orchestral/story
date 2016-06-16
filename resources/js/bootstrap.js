@@ -18,5 +18,8 @@ class Bootstrap {
   }
 }
 
-(new Bootstrap())
-  .markdown()
+$(() => {
+  (new Bootstrap())
+    .markdown()
+})
+

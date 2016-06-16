@@ -34,7 +34,6 @@ class AttachMarkdownEditor
 
         $asset->script('simplemde', 'packages/orchestra/story/js/simplemde.js');
         $asset->style('simplemde', 'packages/orchestra/story/css/simplemde.css');
-        $asset->script('storycms', 'packages/orchestra/story/js/story.js');
-        $asset->script('storycms.md', 'packages/orchestra/story/js/markdown.js', ['simplemde']);
+        $asset->script('storycms', 'packages/orchestra/story/js/story.js', ['orchestra']);
     }
 }
