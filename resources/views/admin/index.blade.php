@@ -57,18 +57,15 @@ use Orchestra\Support\Str;
           </tbody>
         </table>
 
-
         <div class="row">
           <div class="col-sm-5 col-xs-12 sm-text">
-            @if($contents->total() > 0)
-            Showing
+          @if($contents->total() > 0)
             @if($contents->firstItem() !== $contents->lastItem())
-            {{ $contents->firstItem() }} to {{ $contents->lastItem() }}
+            {{ trans('orchestra/foundation::label.paginations.multiple', array_only($contents->toArray(), ['from', 'to', 'total'])) }}
             @else
-            {{ $contents->lastItem() }}
+            {{ trans('orchestra/foundation::label.paginations.single', array_only($contents->toArray(), ['from', 'total'])) }}
             @endif
-            of {{ $contents->total() }} entries
-            @endif
+          @endif
           </div>
           @if($contents->hasPages())
           <div class="col-sm-7 col-xs-12">
