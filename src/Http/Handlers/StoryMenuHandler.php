@@ -15,8 +15,13 @@ class StoryMenuHandler extends MenuHandler
     protected $menu = [
         'id'    => 'storycms',
         'title' => 'Story CMS',
-        'link'  => 'orchestra::storycms',
-        'icon'  => null,
+        'link'  => '#!',
+        'icon'  => 'book',
+        'with'  => [
+            WriteMenuHandler::class,
+            PostMenuHandler::class,
+            PageMenuHandler::class,
+        ],
     ];
 
     /**
@@ -26,7 +31,7 @@ class StoryMenuHandler extends MenuHandler
      */
     public function getPositionAttribute()
     {
-        return $this->handler->has('extensions') ? '^:extensions' : '>:home';
+        return $this->handler->has('extensions') ? '>:extensions' : '>:home';
     }
 
     /**
