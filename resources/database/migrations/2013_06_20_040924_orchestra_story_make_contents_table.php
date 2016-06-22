@@ -25,7 +25,7 @@ class OrchestraStoryMakeContentsTable extends Migration
             $table->string('format')->default($format);
             $table->string('type')->default(Content::POST);
             $table->string('status')->default(Content::STATUS_DRAFT);
-\
+
             $table->nullableTimestamps();
             $table->datetime('published_at')->nullable();
             $table->softDeletes();
