@@ -40,8 +40,7 @@ class Dashboard
         }
 
         $pane->add('story-latest-posts')
-            ->attributes(['class' => 'six columns widget'])
             ->title('Latest Post')
-            ->content(view('orchestra/story::widgets.latest-posts')->with('posts', $posts));
+            ->content(view('orchestra/story::widgets.latest-posts')->with('posts', $posts)->render());
     }
 }

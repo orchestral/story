@@ -72,11 +72,7 @@ class StoryPlugin extends Plugin
             $form->fieldset('Page Management', function ($fieldset) {
                 $pages = Content::page()->publish()->pluck('title', 'slug');
 
-                if ($pages instanceof Arrayable) {
-                    $pages = $pages->toArray();
-                }
-
-                $pages = array_merge(['_posts_' => 'Display Posts'], $pages);
+                $pages->prepend('Display Posts', '_posts_');
 
                 $fieldset->control('select', 'default_format')
                     ->label('Default Format')

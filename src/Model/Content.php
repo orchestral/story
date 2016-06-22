@@ -4,13 +4,13 @@ namespace Orchestra\Story\Model;
 
 use Orchestra\Model\User;
 use Orchestra\Story\Facades\Story;
-use Orchestra\Model\Traits\OwnedByTrait;
+use Orchestra\Model\Traits\OwnedBy;
 use Orchestra\Story\Facades\StoryFormat;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Content extends Eloquent
 {
-    use OwnedByTrait;
+    use OwnedBy;
 
     /**
      * The database table used by the model.
@@ -52,6 +52,13 @@ class Content extends Eloquent
     protected $appends = ['url', 'excerpt', 'body'];
 
     /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = ['author'];
+
+    /**
      * Get the attributes that should be converted to dates.
      *
      * @return array
@@ -80,7 +87,7 @@ class Content extends Eloquent
      */
     public function scopePage($query)
     {
-        $query->with('author')->where('type', '=', self::PAGE);
+        $query->where('type', '=', self::PAGE);
     }
 
     /**
@@ -92,7 +99,7 @@ class Content extends Eloquent
      */
     public function scopePost($query)
     {
-        $query->with('author')->where('type', '=', self::POST);
+        $query->where('type', '=', self::POST);
     }
 
     /**
