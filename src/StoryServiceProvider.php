@@ -102,6 +102,10 @@ class StoryServiceProvider extends ModuleServiceProvider
 
         $this->addConfigComponent('orchestra/story', 'orchestra/story', "{$path}/config");
         $this->addViewComponent('orchestra/story', 'orchestra/story', "{$path}/views");
+
+        $this->loadMigrationsFrom([
+            "{$path}/database/migrations",
+        ]);
     }
 
     /**
