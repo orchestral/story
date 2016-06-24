@@ -18,8 +18,4 @@ class Bootstrap {
   }
 }
 
-$(() => {
-  (new Bootstrap())
-    .markdown()
-})
-
+export default Bootstrap

@@ -1,5 +1,7 @@
 const Platform = window.Platform
 
+import Bootstrap from './bootstrap'
+
 Platform.extend('app', 'storycms', {
   data() {
     return {
@@ -8,6 +10,13 @@ Platform.extend('app', 'storycms', {
       title: '',
       slug: ''
     }
+  },
+
+  created() {
+    $(() => {
+      (new Bootstrap())
+        .markdown()
+    })
   },
 
   ready() {
@@ -46,4 +55,3 @@ Platform.extend('app', 'storycms', {
   }
 })
 
-require('./bootstrap')
