@@ -3,6 +3,7 @@
 namespace Orchestra\Story\Http\Controllers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Orchestra\Routing\Controller;
 
 abstract class ContentController extends Controller
@@ -10,11 +11,12 @@ abstract class ContentController extends Controller
     /**
      * Show the content.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function show()
+    public function show(Request $request)
     {
-        $params = app('router')->current()->parameters();
+        $params = $request->route()->parameters();
         $id     = Arr::get($params, 'id');
         $slug   = Arr::get($params, 'slug');
 
