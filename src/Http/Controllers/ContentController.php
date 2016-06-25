@@ -14,7 +14,7 @@ abstract class ContentController extends Controller
      */
     public function show()
     {
-        $params = static::$router->current()->parameters();
+        $params = app('router')->current()->parameters();
         $id     = Arr::get($params, 'id');
         $slug   = Arr::get($params, 'slug');
 
