@@ -11,22 +11,7 @@ var dir, elixir = require('laravel-elixir');
  |
  */
 
-dir = {
-  asset: {
-    css: './resources/public/css',
-    img: './resources/public/img',
-    js: './resources/public/js'
-  },
-  build: {
-    less: './resources/assets/less',
-    simplemde: './resources/simplemde'
-  },
-  js: './resources/js'
-}
-
-elixir.config.js.browserify.transformers.push({
-  name: 'vueify'
-})
+dir = require('./paths.js')
 
 elixir.config.sourcemaps = false
 
@@ -36,5 +21,5 @@ elixir(function(mix) {
 
   mix.less('story.less', dir.asset.css+'/story.css')
 
-  mix.browserify('story.js', dir.asset.js+'/story.js', dir.js)
+  mix.webpack('story.js', dir.asset.js+'/story.js', dir.js)
 });

@@ -3,7 +3,7 @@
 # Ignore following folder/file.
 /docs export-ignore
 /resources/assets export-ignore
-/resources/editor export-ignore
+/resources/js export-ignore
 /resources/simplemde export-ignore
 /tests export-ignore
 /.coveralls.yml export-ignore
@@ -17,5 +17,6 @@
 /gulpfile.js export-ignore
 /LICENSE export-ignore
 /package.json export-ignore
+/paths.json export-ignore
 /phpunit.xml export-ignore
 /README.md export-ignore
